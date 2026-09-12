@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Library</title><style>/* Press theme. Default: true black, warm off-white type, hairline rules, one brass accent.
+   Add class "light" to .press for the off-white variant. Nothing moves; nothing glows. */
+.press{
+  --bg:#000000;--panel:#0b0b0b;--panel-2:#111111;--line:#1f1f1f;--line-2:#2c2c2c;
+  --ink:#d9d5cd;--bright:#f4f1ea;--muted:#8f8b83;--faint:#5f5c56;
+  --accent:#c9b592;          /* brass: labels, links, active contents */
+  --accent-2:#a9b4c4;        /* cool slate: numerals, blockquote bar, interpretation */
+  --warm:#d1a24f;            /* amber: speculation, late-arriving cost */
+  --rose:#c98a8a;
+  --sel:#c9b592;--sel-ink:#000;
+  --serif:"Newsreader","Charter","Iowan Old Style","Cambria","Georgia","Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Cascadia Code","JetBrains Mono","Consolas",ui-monospace,monospace;
+  --col:44rem;--toc:15rem;
+  color-scheme:dark;
+  background:var(--bg);
+  color:var(--ink);
+  font:1.125rem/1.72 var(--serif);
+  margin:0;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.press.light{
+  --bg:#f7f5f0;--panel:#f1eee7;--panel-2:#ebe7de;--line:#e0dcd2;--line-2:#cfc9bc;
+  --ink:#2a2823;--bright:#141310;--muted:#6e6a61;--faint:#9a958a;
+  --accent:#8a7248;--accent-2:#5f6f85;--warm:#a8761f;--rose:#a85d5d;
+  --sel:#141310;--sel-ink:#f7f5f0;
+  color-scheme:light;
+}
+body.press{margin:0}
+.press *{box-sizing:border-box}
+.press a{color:var(--bright);text-decoration:none;border-bottom:1px solid var(--accent)}
+.press a:hover{color:var(--accent)}
+.press ::selection{background:var(--sel);color:var(--sel-ink)}
+.press :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+
+/* reading progress */
+.press .progress{position:fixed;inset:0 0 auto 0;height:1px;background:transparent;z-index:30}
+.press .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .1s linear}
+
+/* page column */
+.press .page{max-width:var(--col);margin:0 auto;padding:5rem 1.4rem 7rem}
+@media(min-width:1180px){
+  .press .page{margin-left:calc(50% - var(--col)/2 + 3rem)}
+}
+
+/* masthead */
+.press .masthead{margin:0 0 3.5rem}
+.press .eyebrow{font:500 .7rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
+.press h1{font:400 clamp(2.2rem,5.2vw,3.6rem)/1.08 var(--serif);letter-spacing:-.02em;color:var(--bright);margin:0 0 1.2rem;text-wrap:balance}
+.press .standfirst{font:italic 1.3rem/1.5 var(--serif);color:var(--muted);margin:0 0 1.4rem;text-wrap:pretty}
+.press .meta{font:.76rem/1.5 var(--sans);color:var(--faint);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+
+/* headings */
+.press h2{font:500 .74rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin:4rem 0 1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);scroll-margin-top:2.5rem}
+.press h3{font:400 1.55rem/1.3 var(--serif);color:var(--bright);margin:2.6rem 0 1rem;letter-spacing:-.01em;text-wrap:balance;scroll-margin-top:2.5rem}
+.press h4{font:600 1.05rem/1.4 var(--sans);color:var(--bright);margin:2rem 0 .8rem}
+
+/* prose */
+.press p{margin:0 0 1.35rem;text-wrap:pretty}
+.press strong{color:var(--bright);font-weight:600}
+.press em{color:var(--ink)}
+.press code{font:.86em var(--mono);background:var(--panel-2);padding:.1em .4em;border-radius:3px}
+.press pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1rem 1.2rem;overflow:auto;font:.85rem/1.55 var(--mono);margin:0 0 1.5rem}
+.press pre code{background:none;padding:0;font-size:inherit}
+.press hr{border:0;height:1px;background:var(--line);margin:3rem 0}
+.press ul,.press ol{margin:0 0 1.5rem;padding-left:1.4rem}
+.press li{margin:0 0 .55rem;padding-left:.2rem}
+.press li::marker{color:var(--accent);font-family:var(--sans);font-size:.9em}
+.press blockquote{margin:2.2rem 0;padding:.2rem 0 .2rem 1.4rem;border-left:1px solid var(--accent-2);color:var(--bright);font-size:1.16rem;line-height:1.6}
+.press blockquote p:last-child{margin-bottom:0}
+
+/* tables */
+.press .table-wrap{overflow:auto;margin:1.8rem 0;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.press table{border-collapse:collapse;width:100%;font:.9rem/1.55 var(--sans);font-variant-numeric:tabular-nums}
+.press th,.press td{padding:.8rem .9rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.press th{color:var(--accent);font-weight:600;background:var(--panel-2)}
+.press tbody tr:last-child td{border-bottom:0}
+
+/* figures */
+.press article{counter-reset:fig}
+.press .figure{margin:2.6rem 0;padding:1.4rem 1.4rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:6px;counter-increment:fig}
+.press .figure .svg{margin:0 0 .6rem}
+.press .figure svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.press figcaption{font:.84rem/1.55 var(--sans);color:var(--muted);padding-top:.7rem;border-top:1px solid var(--line)}
+.press figcaption::before{content:"Figure " counter(fig) " · ";color:var(--accent);font-weight:600;letter-spacing:.04em}
+.press pre.mermaid{background:var(--panel);text-align:center}
+
+/* concept card */
+.press .concept{margin:2.2rem 0;padding:1.2rem 1.4rem 1rem;border-left:2px solid var(--accent);background:var(--panel);border-radius:0 4px 4px 0}
+.press .concept-title{font:600 .7rem/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.press .concept-title::before{content:"Concept · ";color:var(--faint)}
+.press .concept p{font-size:1.02rem;line-height:1.62}
+.press .concept p:last-child{margin-bottom:0}
+
+/* callouts with epistemic labels */
+.press .callout{margin:2rem 0;padding:1.05rem 1.3rem .9rem;border-radius:4px;border:1px solid var(--line);background:var(--panel);font-size:1.02rem;line-height:1.62}
+.press .callout::before{content:attr(data-label);display:block;font:600 .68rem/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+.press .callout p:last-child{margin-bottom:0}
+.press .callout.evidence{border-left:2px solid var(--accent)}
+.press .callout.evidence::before{color:var(--accent)}
+.press .callout.interpretation{border-left:2px solid var(--accent-2)}
+.press .callout.interpretation::before{color:var(--accent-2)}
+.press .callout.speculation{border-left:2px solid var(--warm)}
+.press .callout.speculation::before{color:var(--warm)}
+.press .callout.aside,.press .callout.note{border-style:dashed;color:var(--muted);background:none}
+@media(min-width:1500px){
+  .press .callout.aside{float:right;width:17rem;margin:.3rem -19rem 1.2rem 1.6rem;font-size:.92rem;line-height:1.55;border:0;border-left:1px solid var(--line-2);border-radius:0;padding:.2rem 0 .2rem 1rem}
+}
+
+/* displayed rule / formula */
+.press .rule{margin:2.6rem 0;padding:1.6rem 1.4rem;text-align:center;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.press .rule p{font:italic 1.32rem/1.45 var(--serif);color:var(--bright);margin:0;text-wrap:balance}
+.press .rule p + p{margin-top:.6rem;font:.9rem/1.5 var(--sans);color:var(--muted);font-style:normal}
+
+/* questions */
+.press .questions{margin-top:4rem;padding:2rem 1.6rem 1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.press .questions h2{margin:0 0 1.4rem;padding:0;border:0}
+.press .questions ol{list-style:none;padding:0;counter-reset:q}
+.press .questions li{counter-increment:q;position:relative;padding-left:3rem;margin-bottom:1.3rem;font-size:1.04rem;line-height:1.6}
+.press .questions li::before{content:counter(q,decimal-leading-zero);position:absolute;left:0;top:.05rem;font:400 1.6rem/1 var(--serif);color:var(--accent-2);font-variant-numeric:tabular-nums}
+.press .questions li:last-child{margin-bottom:0}
+
+/* contents */
+.press .toc-toggle{position:fixed;top:1rem;right:1rem;z-index:25;font:600 .7rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--bg);border:1px solid var(--line-2);border-radius:999px;padding:.6rem .95rem;cursor:pointer}
+.press .toc-toggle:hover{border-color:var(--accent);color:var(--bright)}
+.press .toc{display:none;position:fixed;top:3.6rem;right:1rem;z-index:24;width:min(22rem,calc(100vw - 2rem));max-height:calc(100vh - 5rem);overflow:auto;padding:1rem 1.2rem 1.1rem;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;box-shadow:0 30px 80px #0009}
+.press.light .toc{box-shadow:0 20px 60px #0002}
+.press .toc.open{display:block}
+.press .toc-label{font:600 .66rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem}
+.press .toc a{display:block;font:.86rem/1.4 var(--sans);color:var(--muted);border:0;padding:.42rem 0 .42rem .8rem;border-left:1px solid transparent;margin-left:-.05rem}
+.press .toc a.lvl3{padding-left:1.8rem;font-size:.8rem}
+.press .toc a:hover{color:var(--bright)}
+.press .toc a.active{color:var(--bright);border-left-color:var(--accent)}
+@media(min-width:1180px){
+  .press .toc-toggle{display:none}
+  .press .toc{display:block;position:fixed;top:5.4rem;left:calc(50% - var(--col)/2 - var(--toc) - 1.5rem);right:auto;width:var(--toc);max-height:calc(100vh - 8rem);padding:0 0 0 .2rem;background:none;border:0;box-shadow:none}
+  .press .toc a{border-left:1px solid var(--line)}
+}
+
+/* colophon */
+.press .colophon{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);font:.74rem/1.5 var(--sans);color:var(--faint);letter-spacing:.08em}
+
+/* library */
+.press.library .cards{display:grid;gap:1rem;margin-bottom:3rem}
+.press.library .card{display:block;padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:inherit}
+.press.library .card:hover{border-color:var(--accent)}
+.press.library .card h2{font:400 1.5rem/1.25 var(--serif);color:var(--bright);text-transform:none;letter-spacing:-.01em;margin:.2rem 0 .6rem;padding:0;border:0}
+.press.library .card p{color:var(--muted);font-size:1rem;margin-bottom:.8rem}
+.press.library .card .eyebrow{margin-bottom:.2rem}
+.press.library .concept-row{font:.92rem/1.7 var(--sans);color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--line)}
+.press.library .concept-row b{color:var(--bright);margin-right:.6rem}
+
+/* small screens */
+@media(max-width:640px){
+  .press{font-size:1.05rem;line-height:1.68}
+  .press .page{padding:4rem 1.1rem 5rem}
+  .press .figure{padding:1rem 1rem .8rem;margin:2rem -.3rem}
+  .press .figure .svg{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .press .figure svg{min-width:34rem}
+  .press .questions{padding:1.5rem 1.1rem 1rem}
+  .press blockquote{font-size:1.08rem}
+}
+
+/* print: light and complete */
+@media print{
+  .press{background:#fff;color:#111;font-size:11pt;line-height:1.5;--bright:#000;--muted:#444;--faint:#666;--accent:#6b5a38;--accent-2:#45526a;--warm:#8a6118;--line:#ccc;--line-2:#bbb;--panel:#f6f6f6;--panel-2:#eee}
+  .press .progress,.press .toc,.press .toc-toggle{display:none!important}
+  .press .page{max-width:none;margin:0;padding:0}
+  .press h2,.press h3{break-after:avoid}
+  .press .figure,.press .concept,.press .callout,.press blockquote,.press .questions li{break-inside:avoid}
+  .press a{color:inherit;border:0}
+}
+@media(prefers-reduced-motion:reduce){.press .progress i{transition:none}}
+</style></head>
+<body class="press library"><main class="page">
+<header class="masthead"><div class="eyebrow">Library · 1 reading</div><h1>Library</h1></header>
+<section class="cards"><a class="card" href="2026-09-12-legibility.html"><div class="eyebrow">Daily Reading · Day 1 · 2026-09-12</div><h2>Legibility: How Maps Remake the Territory</h2><p>Every powerful organisation has to see the world before it can act on it, and it can only see what it has simplified. This is about what happens next, when the simplification is strong enough to redraw the thing it was describing.</p><div class="meta">5,592 words · about 24 min</div></a></section>
+<section class="concept-index"><h2 id="concepts">Concept index</h2><div class="concept-row"><b>Campbell&#x27;s law</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>dispersed knowledge</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>feedback loops</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>Goodhart&#x27;s law</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>high modernism</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>legibility</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>metis</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>reversibility</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div></section>
+</main></body></html>
