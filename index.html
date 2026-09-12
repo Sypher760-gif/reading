@@ -140,6 +140,32 @@ body.press{margin:0}
   .press .toc a{border-left:1px solid var(--line)}
 }
 
+/* audio player: sits under the masthead, sticks to the top while scrolling */
+.press .player{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.6rem;margin:0 0 2.5rem;padding:.7rem 0;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:.78rem/1 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.press .player button{appearance:none;border:1px solid var(--line-2);background:none;color:var(--ink);border-radius:999px;width:2.3rem;height:2.3rem;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:0 0 auto}
+.press .player button:hover{border-color:var(--accent);color:var(--bright)}
+.press .player button svg{width:1rem;height:1rem;fill:currentColor;display:block}
+.press .player .p-play{width:2.7rem;height:2.7rem;border-color:var(--accent);color:var(--bright)}
+.press .player .p-play .i-pause{display:none}
+.press .player.playing .p-play .i-play{display:none}
+.press .player.playing .p-play .i-pause{display:block}
+.press .player .p-skip{position:relative}
+.press .player .p-skip svg{width:1.35rem;height:1.35rem}
+.press .player .p-skip span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 .5rem/1 var(--sans);color:currentColor;padding-top:.1rem}
+.press .player .p-time{flex:0 0 auto;min-width:2.6rem;text-align:center;letter-spacing:.02em}
+.press .player .p-range{flex:1 1 auto;appearance:none;height:2px;background:var(--line-2);border-radius:2px;outline:0;margin:0 .2rem;cursor:pointer;min-width:4rem}
+.press .player .p-range::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range:focus-visible{outline:1px solid var(--accent);outline-offset:6px}
+.press .player .p-label{flex:0 0 auto;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;color:var(--accent);margin-right:.2rem}
+.press .player.error{color:var(--faint)}
+@media(max-width:640px){
+  .press .player{gap:.45rem;margin:0 -.2rem 2rem}
+  .press .player .p-label{display:none}
+  .press .player .p-time{min-width:2.3rem;font-size:.72rem}
+}
+@media print{.press .player{display:none!important}}
+
 /* colophon */
 .press .colophon{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);font:.74rem/1.5 var(--sans);color:var(--faint);letter-spacing:.08em}
 
@@ -177,6 +203,6 @@ body.press{margin:0}
 </style></head>
 <body class="press library"><main class="page">
 <header class="masthead"><div class="eyebrow">Library · 1 reading</div><h1>Library</h1></header>
-<section class="cards"><a class="card" href="2026-09-12-legibility.html"><div class="eyebrow">Daily Reading · Day 1 · 2026-09-12</div><h2>Legibility: How Maps Remake the Territory</h2><p>Every powerful organisation has to see the world before it can act on it, and it can only see what it has simplified. This is about what happens next, when the simplification is strong enough to redraw the thing it was describing.</p><div class="meta">5,592 words · about 24 min</div></a></section>
+<section class="cards"><a class="card" href="2026-09-12-legibility.html"><div class="eyebrow">Daily Reading · Day 1 · 2026-09-12</div><h2>Legibility: How Maps Remake the Territory</h2><p>Every powerful organisation has to see the world before it can act on it, and it can only see what it has simplified. This is about what happens next, when the simplification is strong enough to redraw the thing it was describing.</p><div class="meta">5,592 words · about 24 min · audio 35 min</div></a></section>
 <section class="concept-index"><h2 id="concepts">Concept index</h2><div class="concept-row"><b>Campbell&#x27;s law</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>dispersed knowledge</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>feedback loops</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>Goodhart&#x27;s law</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>high modernism</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>legibility</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>metis</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div><div class="concept-row"><b>reversibility</b> <a href="2026-09-12-legibility.html">Legibility: How Maps Remake the Territory</a></div></section>
 </main></body></html>

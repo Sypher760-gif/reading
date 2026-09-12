@@ -141,6 +141,32 @@ body.press{margin:0}
   .press .toc a{border-left:1px solid var(--line)}
 }
 
+/* audio player: sits under the masthead, sticks to the top while scrolling */
+.press .player{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.6rem;margin:0 0 2.5rem;padding:.7rem 0;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:.78rem/1 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.press .player button{appearance:none;border:1px solid var(--line-2);background:none;color:var(--ink);border-radius:999px;width:2.3rem;height:2.3rem;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:0 0 auto}
+.press .player button:hover{border-color:var(--accent);color:var(--bright)}
+.press .player button svg{width:1rem;height:1rem;fill:currentColor;display:block}
+.press .player .p-play{width:2.7rem;height:2.7rem;border-color:var(--accent);color:var(--bright)}
+.press .player .p-play .i-pause{display:none}
+.press .player.playing .p-play .i-play{display:none}
+.press .player.playing .p-play .i-pause{display:block}
+.press .player .p-skip{position:relative}
+.press .player .p-skip svg{width:1.35rem;height:1.35rem}
+.press .player .p-skip span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 .5rem/1 var(--sans);color:currentColor;padding-top:.1rem}
+.press .player .p-time{flex:0 0 auto;min-width:2.6rem;text-align:center;letter-spacing:.02em}
+.press .player .p-range{flex:1 1 auto;appearance:none;height:2px;background:var(--line-2);border-radius:2px;outline:0;margin:0 .2rem;cursor:pointer;min-width:4rem}
+.press .player .p-range::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range:focus-visible{outline:1px solid var(--accent);outline-offset:6px}
+.press .player .p-label{flex:0 0 auto;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;color:var(--accent);margin-right:.2rem}
+.press .player.error{color:var(--faint)}
+@media(max-width:640px){
+  .press .player{gap:.45rem;margin:0 -.2rem 2rem}
+  .press .player .p-label{display:none}
+  .press .player .p-time{min-width:2.3rem;font-size:.72rem}
+}
+@media print{.press .player{display:none!important}}
+
 /* colophon */
 .press .colophon{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);font:.74rem/1.5 var(--sans);color:var(--faint);letter-spacing:.08em}
 
@@ -182,6 +208,7 @@ body.press{margin:0}
 <nav class="toc" id="toc" aria-label="Contents"><div class="toc-label">Contents</div><a class="lvl2" href="#1-the-forest-that-became-a-spreadsheet">1. The forest that became a spreadsheet</a><a class="lvl2" href="#2-scott-s-word-for-it">2. Scott&#x27;s word for it</a><a class="lvl2" href="#3-the-recipe-for-disaster">3. The recipe for disaster</a><a class="lvl2" href="#4-metis-the-knowledge-the-map-leaves-out">4. Metis: the knowledge the map leaves out</a><a class="lvl2" href="#5-the-same-discovery-from-the-opposite-direction">5. The same discovery from the opposite direction</a><a class="lvl2" href="#6-where-the-idea-breaks-down">6. Where the idea breaks down</a><a class="lvl2" href="#7-the-pattern-in-your-own-hands">7. The pattern in your own hands</a><a class="lvl2" href="#8-a-note-on-the-future">8. A note on the future</a></nav>
 <main class="page">
 <header class="masthead"><div class="eyebrow">Daily Reading · Day 1 · 2026-09-12</div><h1>Legibility: How Maps Remake the Territory</h1><p class="standfirst">Every powerful organisation has to see the world before it can act on it, and it can only see what it has simplified. This is about what happens next, when the simplification is strong enough to redraw the thing it was describing.</p><div class="meta">5,592 words · about 24 min</div></header>
+<div class="player" id="player" data-src="audio/2026-09-12-legibility.mp3" data-series="Daily Reading" role="group" aria-label="Audio version"><span class="p-label">Listen · about 35 min</span><button class="p-skip p-back" type="button" aria-label="Back 15 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="currentColor"/></svg><span>15</span></button><button class="p-play" type="button" aria-label="Play"><svg viewBox="0 0 16 16" class="i-play" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg><svg viewBox="0 0 16 16" class="i-pause" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg></button><button class="p-skip p-fwd" type="button" aria-label="Forward 15 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1l5 5-5 5V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="currentColor"/></svg><span>15</span></button><span class="p-time p-cur">0:00</span><input class="p-range" type="range" min="0" max="100" step="0.5" value="0" aria-label="Position"><span class="p-time p-dur">–:––</span></div>
 <article class="article" id="article">
 <p>The idea comes from a book about states, but once you have it you will notice it in forests, cities, hospitals, schools, companies, and in any system run from a dashboard, including your own.</p>
 <h2 id="1-the-forest-that-became-a-spreadsheet">1. The forest that became a spreadsheet</h2>
@@ -440,10 +467,9 @@ body.press{margin:0}
 </article>
 <footer class="colophon"><a href="index.html">Library</a> · Legibility: How Maps Remake the Territory · 2026-09-12</footer>
 </main>
-<script type="application/json" id="press-meta">{"title": "Legibility: How Maps Remake the Territory", "standfirst": "Every powerful organisation has to see the world before it can act on it, and it can only see what it has simplified. This is about what happens next, when the simplification is strong enough to redraw the thing it was describing.", "date": "2026-09-12", "series": "Daily Reading", "day": "1", "concepts": ["legibility", "metis", "high modernism", "Goodhart's law", "Campbell's law", "dispersed knowledge", "feedback loops", "reversibility"], "words": 5592, "minutes": 24}</script>
-<script>/* Press reader: progress bar, contents drawer, active-section highlight. No motion, no dependencies. */
+<script type="application/json" id="press-meta">{"title": "Legibility: How Maps Remake the Territory", "standfirst": "Every powerful organisation has to see the world before it can act on it, and it can only see what it has simplified. This is about what happens next, when the simplification is strong enough to redraw the thing it was describing.", "date": "2026-09-12", "series": "Daily Reading", "day": "1", "concepts": ["legibility", "metis", "high modernism", "Goodhart's law", "Campbell's law", "dispersed knowledge", "feedback loops", "reversibility"], "words": 5592, "minutes": 24, "audio": "audio/2026-09-12-legibility.mp3", "audio_minutes": 35}</script>
+<script>/* Press reader: progress bar, contents drawer, active-section highlight, audio player. No dependencies. */
 (function () {
-  var root = document.querySelector('.press') || document.body;
   var fill = document.getElementById('progress-fill');
   var toc = document.getElementById('toc');
   var toggle = document.getElementById('toc-toggle');
@@ -498,6 +524,86 @@ body.press{margin:0}
   window.addEventListener('resize', onScroll);
   progress();
   active();
+
+  /* ---------------- audio player ---------------- */
+  var player = document.getElementById('player');
+  if (!player) return;
+  var src = player.getAttribute('data-src');
+  var audio = new Audio();
+  audio.preload = 'metadata';
+  audio.src = src;
+  var key = 'press-audio:' + src;
+  var playBtn = player.querySelector('.p-play');
+  var backBtn = player.querySelector('.p-back');
+  var fwdBtn = player.querySelector('.p-fwd');
+  var range = player.querySelector('.p-range');
+  var cur = player.querySelector('.p-cur');
+  var dur = player.querySelector('.p-dur');
+  var seeking = false;
+
+  function fmt(s) {
+    if (!isFinite(s)) return '–:––';
+    s = Math.floor(s);
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    var mm = (h ? String(m).padStart(2, '0') : String(m));
+    return (h ? h + ':' : '') + mm + ':' + String(sec).padStart(2, '0');
+  }
+  function setPlaying(on) {
+    player.classList.toggle('playing', on);
+    playBtn.setAttribute('aria-label', on ? 'Pause' : 'Play');
+  }
+  function skip(delta) {
+    if (!isFinite(audio.duration)) return;
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + delta));
+  }
+
+  audio.addEventListener('loadedmetadata', function () {
+    range.max = audio.duration;
+    dur.textContent = fmt(audio.duration);
+    try {
+      var p = parseFloat(localStorage.getItem(key));
+      if (p > 5 && p < audio.duration - 10) { audio.currentTime = p; range.value = p; cur.textContent = fmt(p); }
+    } catch (e) {}
+  });
+  audio.addEventListener('timeupdate', function () {
+    if (!seeking) { range.value = audio.currentTime; cur.textContent = fmt(audio.currentTime); }
+    try { localStorage.setItem(key, String(audio.currentTime)); } catch (e) {}
+  });
+  audio.addEventListener('play', function () { setPlaying(true); });
+  audio.addEventListener('pause', function () { setPlaying(false); });
+  audio.addEventListener('ended', function () {
+    setPlaying(false);
+    try { localStorage.removeItem(key); } catch (e) {}
+  });
+  audio.addEventListener('error', function () {
+    player.classList.add('error');
+    dur.textContent = 'audio unavailable';
+  });
+
+  playBtn.addEventListener('click', function () { audio.paused ? audio.play() : audio.pause(); });
+  backBtn.addEventListener('click', function () { skip(-15); });
+  fwdBtn.addEventListener('click', function () { skip(15); });
+  range.addEventListener('input', function () { seeking = true; cur.textContent = fmt(parseFloat(range.value)); });
+  range.addEventListener('change', function () { audio.currentTime = parseFloat(range.value); seeking = false; });
+
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === ' ' || e.key === 'k') { e.preventDefault(); playBtn.click(); }
+    else if (e.key === 'j') skip(-15);
+    else if (e.key === 'l') skip(15);
+  });
+
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: document.title, artist: player.getAttribute('data-series') || 'Reading' });
+      navigator.mediaSession.setActionHandler('play', function () { audio.play(); });
+      navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
+      navigator.mediaSession.setActionHandler('seekbackward', function () { skip(-15); });
+      navigator.mediaSession.setActionHandler('seekforward', function () { skip(15); });
+      navigator.mediaSession.setActionHandler('seekto', function (d) { if (d.seekTime != null) audio.currentTime = d.seekTime; });
+    } catch (e) {}
+  }
 })();
 </script>
 </body></html>
