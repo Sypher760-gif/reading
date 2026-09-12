@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Examination: Thirteen Centuries of Choosing Rulers by Test</title>
+<style>/* Press theme. Default: true black, warm off-white type, hairline rules, one brass accent.
+   Add class "light" to .press for the off-white variant. Nothing moves; nothing glows. */
+.press{
+  --bg:#000000;--panel:#0b0b0b;--panel-2:#111111;--line:#1f1f1f;--line-2:#2c2c2c;
+  --ink:#d9d5cd;--bright:#f4f1ea;--muted:#8f8b83;--faint:#5f5c56;
+  --accent:#c9b592;          /* brass: labels, links, active contents */
+  --accent-2:#a9b4c4;        /* cool slate: numerals, blockquote bar, interpretation */
+  --warm:#d1a24f;            /* amber: speculation, late-arriving cost */
+  --rose:#c98a8a;
+  --sel:#c9b592;--sel-ink:#000;
+  --serif:"Newsreader","Charter","Iowan Old Style","Cambria","Georgia","Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Cascadia Code","JetBrains Mono","Consolas",ui-monospace,monospace;
+  --col:44rem;--toc:15rem;
+  color-scheme:dark;
+  background:var(--bg);
+  color:var(--ink);
+  font:1.125rem/1.72 var(--serif);
+  margin:0;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.press.light{
+  --bg:#f7f5f0;--panel:#f1eee7;--panel-2:#ebe7de;--line:#e0dcd2;--line-2:#cfc9bc;
+  --ink:#2a2823;--bright:#141310;--muted:#6e6a61;--faint:#9a958a;
+  --accent:#8a7248;--accent-2:#5f6f85;--warm:#a8761f;--rose:#a85d5d;
+  --sel:#141310;--sel-ink:#f7f5f0;
+  color-scheme:light;
+}
+body.press{margin:0}
+.press *{box-sizing:border-box}
+.press a{color:var(--bright);text-decoration:none;border-bottom:1px solid var(--accent)}
+.press a:hover{color:var(--accent)}
+.press ::selection{background:var(--sel);color:var(--sel-ink)}
+.press :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+
+/* reading progress */
+.press .progress{position:fixed;inset:0 0 auto 0;height:1px;background:transparent;z-index:30}
+.press .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .1s linear}
+
+/* page column */
+.press .page{max-width:var(--col);margin:0 auto;padding:5rem 1.4rem 7rem}
+@media(min-width:1180px){
+  .press .page{margin-left:calc(50% - var(--col)/2 + 3rem)}
+}
+
+/* masthead */
+.press .masthead{margin:0 0 3.5rem}
+.press .eyebrow{font:500 .7rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
+.press h1{font:400 clamp(2.2rem,5.2vw,3.6rem)/1.08 var(--serif);letter-spacing:-.02em;color:var(--bright);margin:0 0 1.2rem;text-wrap:balance}
+.press .standfirst{font:italic 1.3rem/1.5 var(--serif);color:var(--muted);margin:0 0 1.4rem;text-wrap:pretty}
+.press .meta{font:.76rem/1.5 var(--sans);color:var(--faint);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+
+/* headings */
+.press h2{font:500 .74rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin:4rem 0 1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);scroll-margin-top:2.5rem}
+.press h3{font:400 1.55rem/1.3 var(--serif);color:var(--bright);margin:2.6rem 0 1rem;letter-spacing:-.01em;text-wrap:balance;scroll-margin-top:2.5rem}
+.press h4{font:600 1.05rem/1.4 var(--sans);color:var(--bright);margin:2rem 0 .8rem}
+
+/* prose */
+.press p{margin:0 0 1.35rem;text-wrap:pretty}
+.press strong{color:var(--bright);font-weight:600}
+.press em{color:var(--ink)}
+.press code{font:.86em var(--mono);background:var(--panel-2);padding:.1em .4em;border-radius:3px}
+.press pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1rem 1.2rem;overflow:auto;font:.85rem/1.55 var(--mono);margin:0 0 1.5rem}
+.press pre code{background:none;padding:0;font-size:inherit}
+.press hr{border:0;height:1px;background:var(--line);margin:3rem 0}
+.press ul,.press ol{margin:0 0 1.5rem;padding-left:1.4rem}
+.press li{margin:0 0 .55rem;padding-left:.2rem}
+.press li::marker{color:var(--accent);font-family:var(--sans);font-size:.9em}
+.press blockquote{margin:2.2rem 0;padding:.2rem 0 .2rem 1.4rem;border-left:1px solid var(--accent-2);color:var(--bright);font-size:1.16rem;line-height:1.6}
+.press blockquote p:last-child{margin-bottom:0}
+
+/* tables */
+.press .table-wrap{overflow:auto;margin:1.8rem 0;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.press table{border-collapse:collapse;width:100%;font:.9rem/1.55 var(--sans);font-variant-numeric:tabular-nums}
+.press th,.press td{padding:.8rem .9rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.press th{color:var(--accent);font-weight:600;background:var(--panel-2)}
+.press tbody tr:last-child td{border-bottom:0}
+
+/* figures */
+.press article{counter-reset:fig}
+.press .figure{margin:2.6rem 0;padding:1.4rem 1.4rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:6px;counter-increment:fig}
+.press .figure .svg{margin:0 0 .6rem}
+.press .figure svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.press figcaption{font:.84rem/1.55 var(--sans);color:var(--muted);padding-top:.7rem;border-top:1px solid var(--line)}
+.press figcaption::before{content:"Figure " counter(fig) " · ";color:var(--accent);font-weight:600;letter-spacing:.04em}
+.press pre.mermaid{background:var(--panel);text-align:center}
+
+/* concept card */
+.press .concept{margin:2.2rem 0;padding:1.2rem 1.4rem 1rem;border-left:2px solid var(--accent);background:var(--panel);border-radius:0 4px 4px 0}
+.press .concept-title{font:600 .7rem/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.press .concept-title::before{content:"Concept · ";color:var(--faint)}
+.press .concept p{font-size:1.02rem;line-height:1.62}
+.press .concept p:last-child{margin-bottom:0}
+
+/* callouts with epistemic labels */
+.press .callout{margin:2rem 0;padding:1.05rem 1.3rem .9rem;border-radius:4px;border:1px solid var(--line);background:var(--panel);font-size:1.02rem;line-height:1.62}
+.press .callout::before{content:attr(data-label);display:block;font:600 .68rem/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+.press .callout p:last-child{margin-bottom:0}
+.press .callout.evidence{border-left:2px solid var(--accent)}
+.press .callout.evidence::before{color:var(--accent)}
+.press .callout.interpretation{border-left:2px solid var(--accent-2)}
+.press .callout.interpretation::before{color:var(--accent-2)}
+.press .callout.speculation{border-left:2px solid var(--warm)}
+.press .callout.speculation::before{color:var(--warm)}
+.press .callout.aside,.press .callout.note{border-style:dashed;color:var(--muted);background:none}
+@media(min-width:1500px){
+  .press .callout.aside{float:right;width:17rem;margin:.3rem -19rem 1.2rem 1.6rem;font-size:.92rem;line-height:1.55;border:0;border-left:1px solid var(--line-2);border-radius:0;padding:.2rem 0 .2rem 1rem}
+}
+
+/* displayed rule / formula */
+.press .rule{margin:2.6rem 0;padding:1.6rem 1.4rem;text-align:center;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.press .rule p{font:italic 1.32rem/1.45 var(--serif);color:var(--bright);margin:0;text-wrap:balance}
+.press .rule p + p{margin-top:.6rem;font:.9rem/1.5 var(--sans);color:var(--muted);font-style:normal}
+
+/* questions */
+.press .questions{margin-top:4rem;padding:2rem 1.6rem 1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.press .questions h2{margin:0 0 1.4rem;padding:0;border:0}
+.press .questions ol{list-style:none;padding:0;counter-reset:q}
+.press .questions li{counter-increment:q;position:relative;padding-left:3rem;margin-bottom:1.3rem;font-size:1.04rem;line-height:1.6}
+.press .questions li::before{content:counter(q,decimal-leading-zero);position:absolute;left:0;top:.05rem;font:400 1.6rem/1 var(--serif);color:var(--accent-2);font-variant-numeric:tabular-nums}
+.press .questions li:last-child{margin-bottom:0}
+
+/* contents */
+.press .toc-toggle{position:fixed;top:1rem;right:1rem;z-index:25;font:600 .7rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--bg);border:1px solid var(--line-2);border-radius:999px;padding:.6rem .95rem;cursor:pointer}
+.press .toc-toggle:hover{border-color:var(--accent);color:var(--bright)}
+.press .toc{display:none;position:fixed;top:3.6rem;right:1rem;z-index:24;width:min(22rem,calc(100vw - 2rem));max-height:calc(100vh - 5rem);overflow:auto;padding:1rem 1.2rem 1.1rem;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;box-shadow:0 30px 80px #0009}
+.press.light .toc{box-shadow:0 20px 60px #0002}
+.press .toc.open{display:block}
+.press .toc-label{font:600 .66rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem}
+.press .toc a{display:block;font:.86rem/1.4 var(--sans);color:var(--muted);border:0;padding:.42rem 0 .42rem .8rem;border-left:1px solid transparent;margin-left:-.05rem}
+.press .toc a.lvl3{padding-left:1.8rem;font-size:.8rem}
+.press .toc a:hover{color:var(--bright)}
+.press .toc a.active{color:var(--bright);border-left-color:var(--accent)}
+@media(min-width:1180px){
+  .press .toc-toggle{display:none}
+  .press .toc{display:block;position:fixed;top:5.4rem;left:calc(50% - var(--col)/2 - var(--toc) - 1.5rem);right:auto;width:var(--toc);max-height:calc(100vh - 8rem);padding:0 0 0 .2rem;background:none;border:0;box-shadow:none}
+  .press .toc a{border-left:1px solid var(--line)}
+}
+
+/* audio player: sits under the masthead, sticks to the top while scrolling */
+.press .player{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.6rem;margin:0 0 2.5rem;padding:.7rem 0;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:.78rem/1 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.press .player button{appearance:none;border:1px solid var(--line-2);background:none;color:var(--ink);border-radius:999px;width:2.3rem;height:2.3rem;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:0 0 auto}
+.press .player button:hover{border-color:var(--accent);color:var(--bright)}
+.press .player button svg{width:1rem;height:1rem;fill:currentColor;display:block}
+.press .player .p-play{width:2.7rem;height:2.7rem;border-color:var(--accent);color:var(--bright)}
+.press .player .p-play .i-pause{display:none}
+.press .player.playing .p-play .i-play{display:none}
+.press .player.playing .p-play .i-pause{display:block}
+.press .player .p-skip{position:relative}
+.press .player .p-skip svg{width:1.35rem;height:1.35rem}
+.press .player .p-skip span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 .5rem/1 var(--sans);color:currentColor;padding-top:.1rem}
+.press .player .p-time{flex:0 0 auto;min-width:2.6rem;text-align:center;letter-spacing:.02em}
+.press .player .p-range{flex:1 1 auto;appearance:none;height:2px;background:var(--line-2);border-radius:2px;outline:0;margin:0 .2rem;cursor:pointer;min-width:4rem}
+.press .player .p-range::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range:focus-visible{outline:1px solid var(--accent);outline-offset:6px}
+.press .player .p-label{flex:0 0 auto;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;color:var(--accent);margin-right:.2rem}
+.press .player.error{color:var(--faint)}
+@media(max-width:640px){
+  .press .player{gap:.45rem;margin:0 -.2rem 2rem}
+  .press .player .p-label{display:none}
+  .press .player .p-time{min-width:2.3rem;font-size:.72rem}
+}
+@media print{.press .player{display:none!important}}
+
+/* colophon */
+.press .colophon{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);font:.74rem/1.5 var(--sans);color:var(--faint);letter-spacing:.08em}
+
+/* library */
+.press.library .cards{display:grid;gap:1rem;margin-bottom:3rem}
+.press.library .card{display:block;padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:inherit}
+.press.library .card:hover{border-color:var(--accent)}
+.press.library .card h2{font:400 1.5rem/1.25 var(--serif);color:var(--bright);text-transform:none;letter-spacing:-.01em;margin:.2rem 0 .6rem;padding:0;border:0}
+.press.library .card p{color:var(--muted);font-size:1rem;margin-bottom:.8rem}
+.press.library .card .eyebrow{margin-bottom:.2rem}
+.press.library .concept-row{font:.92rem/1.7 var(--sans);color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--line)}
+.press.library .concept-row b{color:var(--bright);margin-right:.6rem}
+
+/* small screens */
+@media(max-width:640px){
+  .press{font-size:1.05rem;line-height:1.68}
+  .press .page{padding:4rem 1.1rem 5rem}
+  .press .figure{padding:1rem 1rem .8rem;margin:2rem -.3rem}
+  .press .figure .svg{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .press .figure svg{min-width:34rem}
+  .press .questions{padding:1.5rem 1.1rem 1rem}
+  .press blockquote{font-size:1.08rem}
+}
+
+/* print: light and complete */
+@media print{
+  .press{background:#fff;color:#111;font-size:11pt;line-height:1.5;--bright:#000;--muted:#444;--faint:#666;--accent:#6b5a38;--accent-2:#45526a;--warm:#8a6118;--line:#ccc;--line-2:#bbb;--panel:#f6f6f6;--panel-2:#eee}
+  .press .progress,.press .toc,.press .toc-toggle{display:none!important}
+  .press .page{max-width:none;margin:0;padding:0}
+  .press h2,.press h3{break-after:avoid}
+  .press .figure,.press .concept,.press .callout,.press blockquote,.press .questions li{break-inside:avoid}
+  .press a{color:inherit;border:0}
+}
+@media(prefers-reduced-motion:reduce){.press .progress i{transition:none}}
+</style></head>
+<body class="press">
+<div class="progress" aria-hidden="true"><i id="progress-fill"></i></div>
+<button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc">Contents</button>
+<nav class="toc" id="toc" aria-label="Contents"><div class="toc-label">Contents</div><a class="lvl2" href="#1-twenty-thousand-cells">1. Twenty thousand cells</a><a class="lvl2" href="#2-the-problem-before-the-test">2. The problem before the test</a><a class="lvl2" href="#3-the-song-build-the-machine">3. The Song build the machine</a><a class="lvl2" href="#4-the-ladder">4. The ladder</a><a class="lvl2" href="#5-what-the-test-measured-and-what-that-did-to-the-test">5. What the test measured, and what that did to the test</a><a class="lvl2" href="#6-the-scandal-of-1397-and-the-invention-of-quotas">6. The scandal of 1397 and the invention of quotas</a><a class="lvl2" href="#7-what-the-machine-made">7. What the machine made</a><a class="lvl2" href="#8-the-men-the-ladder-dropped">8. The men the ladder dropped</a><a class="lvl2" href="#9-six-years-from-abolition-to-revolution">9. Six years from abolition to revolution</a><a class="lvl2" href="#10-the-idea-travels">10. The idea travels</a><a class="lvl2" href="#11-where-the-lens-breaks-and-what-to-keep">11. Where the lens breaks, and what to keep</a></nav>
+<main class="page">
+<header class="masthead"><div class="eyebrow">Daily Reading · Day 2 · 2026-09-12</div><h1>The Examination: Thirteen Centuries of Choosing Rulers by Test</h1><p class="standfirst">For thirteen hundred years China filled its government by written examination, the longest experiment in fairness any state has run. It created a class, held an empire together, turned its failures into rebels, and left its fingerprints on every standardised test you have ever sat.</p><div class="meta">6,055 words · about 26 min</div></header>
+<div class="player" id="player" data-src="audio/2026-09-12-examination.mp3" data-series="Daily Reading" role="group" aria-label="Audio version"><span class="p-label">Listen · about 38 min</span><button class="p-skip p-back" type="button" aria-label="Back 15 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="currentColor"/></svg><span>15</span></button><button class="p-play" type="button" aria-label="Play"><svg viewBox="0 0 16 16" class="i-play" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg><svg viewBox="0 0 16 16" class="i-pause" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg></button><button class="p-skip p-fwd" type="button" aria-label="Forward 15 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1l5 5-5 5V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="currentColor"/></svg><span>15</span></button><span class="p-time p-cur">0:00</span><input class="p-range" type="range" min="0" max="100" step="0.5" value="0" aria-label="Position"><span class="p-time p-dur">–:––</span></div>
+<article class="article" id="article">
+<p>The first reading was about what happens when a state simplifies a forest so that it can be counted. This one is about what happens when a state does the same thing to people, and keeps doing it for thirteen centuries.</p>
+<h2 id="1-twenty-thousand-cells">1. Twenty thousand cells</h2>
+<p>In the autumn of a Qing examination year, in the eighth month of the lunar calendar, some twenty thousand men filed through the gates of the Jiangnan Examination Hall in Nanjing. The hall was not a building so much as a town: rows upon rows of brick cells, each about a metre wide and a little deeper than it was wide, open at the front, arranged in long alleys under the sky. By the 1860s there were more than twenty thousand of them. Each candidate carried his own food, a small stove, brushes, an ink-stone, and bedding. At the gate he was searched, sometimes stripped, because the temptation to smuggle in notes was enormous and the penalties for being caught were worse. Museums still hold undershirts on which entire classical texts have been copied in characters the size of grains of rice.</p>
+<p>Inside the cell were two boards. Slotted high, they made a desk and a seat. Slotted low, they made a bed. The candidate stayed there for the session, roughly three days and two nights, and the provincial examination had three sessions, so he was inside the hall for the better part of nine days. It rained on him. He cooked for himself. He relieved himself in a bucket. If he died, and every generation some did, his body was wrapped and passed out over the wall, because the gates were not opened until the session ended. Men of seventy sat beside men of twenty. All of them were competing for perhaps one place in a hundred, and the man who won that place had earned the right to travel to Beijing the following spring and do it again, against the winners from every other province, for one place in twenty or thirty.</p>
+<p>This looks like cruelty, and it was, but it served an idea that most of the people in those cells believed in: that the right to govern should be earned by demonstrated ability, tested under conditions identical for everyone, and judged by people who did not know whose paper they were reading. The examination system, the <em>keju</em>, was the machinery that idea became. It ran from 605 to 1905, longer than most states have existed. To understand how it lasted, and what it did to the people under it, start with the problem it solved.</p>
+<h2 id="2-the-problem-before-the-test">2. The problem before the test</h2>
+<p>Every state faces the same question: who gets to run it? You can hand office to those born to it, sell it, give it to those a powerful person vouches for, vote on it, or make people prove themselves in a contest. Every answer has a failure mode.</p>
+<p>Early imperial China had tried the third answer. From 134 BC the Han emperors asked provincial officials to recommend men who were "filial and incorrupt", and the recommended men were brought to the capital and given posts. This is a sensible system if the recommenders are honest and know their districts. It relies, in the language of the first reading, on local knowledge: on someone who has watched a young man for years and can vouch for his character. Its weakness is obvious. Recommenders recommend their relatives, their clients, and the sons of people they want to please. After the Han fell, the Wei dynasty in 220 tried to fix this with a formal grading scheme: "impartial judges" in each district ranked local families' sons into nine grades, and the grades determined the offices they could hold. Within a century the judges were all drawn from the great families and the grades had become hereditary. A bitter saying from the period sums it up: no poor family in the upper ranks, no great clan in the lower.</p>
+<aside class="concept" id="concept-the-civil-service-examination">
+<div class="concept-title">The civil service examination</div>
+<p>The Chinese system, from 605 to 1905, of selecting government officials by written tests on a fixed canon of classical texts, open in principle to almost any adult male, graded anonymously, and organised in a ladder of increasingly selective levels whose degrees carried legal privileges whether or not the holder ever took office. Known in Chinese as the <em>keju</em>, "selection by categories".</p>
+</aside>
+<p>Now put this in the terms from the first reading. The state wanted to see talent, and talent is one of the least legible things there is. It lives in particular people in particular places and can be judged only by those who know them, which is precisely the metis-like knowledge that recommendation tried to tap and that patronage corrupted. The examination was a legibility device. It replaced "who do the locals say is able?" with "who can write the best answer to the same question, on the same day, under the same conditions, judged by strangers?" It made talent countable by making everyone produce the same kind of object. And, exactly as with the forest, the question that would haunt the next thirteen centuries was whether the thing being measured survived being made measurable.</p>
+<p>The first examinations were held under the short-lived Sui dynasty; the year usually given is 605. The Tang dynasty that followed kept them, but as a minor channel. Family and recommendation still supplied most officials, candidates were expected to circulate their writings to influential patrons before the test, and names were not concealed, so the examiners knew whose paper they held. A few dozen men a year received the highest degree, the <em>jinshi</em>, "presented scholar". The Empress Wu, who ruled in her own name from 690 to 705, expanded the examinations, and the standard interpretation is that she did so to build a class of officials who owed their position to her and not to the old aristocratic clans of the northwest. It was the Song dynasty, after 960, that turned the minor channel into the machine.</p>
+<h2 id="3-the-song-build-the-machine">3. The Song build the machine</h2>
+<p>The Song founders had watched the Tang collapse in a chaos of military governors and had every reason to want a civilian government loyal to the throne. They also inherited a country in which the old aristocracy had been physically destroyed, in part by a rebel named Huang Chao, of whom more later. So they enlarged the examinations enormously, passing hundreds of candidates in a sitting where the Tang had passed dozens, and they set about making the test proof against the corruption that had killed recommendation.</p>
+<p>The mechanisms they built are worth looking at closely because they are the same ones every serious examination uses today. From 992 the candidate's name on his paper was pasted over before grading. From 1015 the paper was not even given to the graders: clerks copied the whole thing out in red ink, so that the graders could not recognise a candidate's handwriting, and proofreaders checked the copy against the original. Several graders read each paper independently. The examiners were sequestered in the hall for the duration and forbidden to contact anyone outside. Relatives of examiners sat a separate examination. Local quotas fixed how many could pass from each prefecture, so that a province with better schools could not simply take everything.</p>
+<figure id="figure-1" class="figure" data-n="1">
+<div class="svg"><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Six-step chain from candidate paper to ranked list, with name sealed, copy in red ink, proofreading, independent graders, and names revealed only at the end">
+  <defs>
+    <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--faint)"/></marker>
+  </defs>
+  <g font-size="13" fill="var(--ink)">
+    <g transform="translate(20,30)">
+      <rect width="200" height="64" rx="10" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <text x="14" y="26" font-weight="600" fill="var(--accent)">1. Paper written</text>
+      <text x="14" y="48">Name and lineage on the cover.</text>
+    </g>
+    <line x1="220" y1="62" x2="258" y2="62" stroke="var(--faint)" marker-end="url(#ar2)"/>
+    <g transform="translate(260,30)">
+      <rect width="200" height="64" rx="10" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <text x="14" y="26" font-weight="600" fill="var(--accent)">2. Name sealed</text>
+      <text x="14" y="48">Cover pasted shut, number assigned.</text>
+    </g>
+    <line x1="460" y1="62" x2="498" y2="62" stroke="var(--faint)" marker-end="url(#ar2)"/>
+    <g transform="translate(500,30)">
+      <rect width="200" height="64" rx="10" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <text x="14" y="26" font-weight="600" fill="var(--accent)">3. Copied in red</text>
+      <text x="14" y="48">Clerk recopies; handwriting gone.</text>
+    </g>
+    <path d="M600 94 L600 118 L120 118 L120 140" fill="none" stroke="var(--faint)" marker-end="url(#ar2)"/>
+    <g transform="translate(20,142)">
+      <rect width="200" height="64" rx="10" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <text x="14" y="26" font-weight="600" fill="var(--accent)">4. Proofread</text>
+      <text x="14" y="48">Copy checked against original.</text>
+    </g>
+    <line x1="220" y1="174" x2="258" y2="174" stroke="var(--faint)" marker-end="url(#ar2)"/>
+    <g transform="translate(260,142)">
+      <rect width="200" height="64" rx="10" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <text x="14" y="26" font-weight="600" fill="var(--accent)">5. Graded blind</text>
+      <text x="14" y="48">Several readers, locked in the hall.</text>
+    </g>
+    <line x1="460" y1="174" x2="498" y2="174" stroke="var(--faint)" marker-end="url(#ar2)"/>
+    <g transform="translate(500,142)">
+      <rect width="200" height="64" rx="10" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <text x="14" y="26" font-weight="600" fill="var(--accent)">6. Names opened</text>
+      <text x="14" y="48">Only after the ranking is fixed.</text>
+    </g>
+    <text x="360" y="262" text-anchor="middle" fill="var(--faint)" font-style="italic">Original papers stay sealed; the graders never touch them.</text>
+  </g>
+</svg></div>
+<figcaption>The Song anonymisation chain. The grader never sees the name, the handwriting, or the original paper. Every step exists because someone once cheated at that step.</figcaption>
+</figure>
+<aside class="concept" id="concept-anonymisation">
+<div class="concept-title">Anonymisation</div>
+<p>The set of procedures that separate a piece of work from the identity of its maker before it is judged: sealed names, recopying, independent readers, sequestered judges. Its purpose is to make favouritism mechanically impossible rather than merely forbidden. Its side effect is that anything the judges could only have known by knowing the candidate is discarded along with the name.</p>
+</aside>
+<p>Two other things happened in the Song that made the machine self-sustaining. Printing, which had existed for centuries, became cheap enough that the classics, commentaries, and eventually collections of model examination answers could be bought by any family with modest means. And the number of candidates exploded. By the thirteenth century, on the historian John Chaffee's estimate, something like four hundred thousand men were sitting the lowest-level examinations in each three-year cycle, for a few hundred final degrees. The pass rates at the bottom fell to a fraction of one per cent. The examination had become what it would remain: not so much a test as a lottery in which the tickets were years of a life.</p>
+<h2 id="4-the-ladder">4. The ladder</h2>
+<p>The system reached its mature form under the Ming, from 1368, and the Qing kept it with small changes until the end. It is easiest to picture as a ladder with three main rungs and a landing at the top.</p>
+<p>At the bottom were the qualifying examinations at county and prefectural level. A boy started as a "child student" whatever his age, and if he passed he became a licentiate, a <em>shengyuan</em>, popularly a <em>xiucai</em>, "flowering talent". This first degree qualified you for nothing except the next examination, and it still mattered: a licentiate was exempt from forced labour and corporal punishment, wore distinctive dress, and was addressed differently by magistrates. He had joined the gentry. He had to re-sit periodic tests to keep the status, and a man could remain a licentiate all his life.</p>
+<p>Every three years, in the autumn, the licentiates of each province gathered in the provincial capital for the examination described at the start of this piece. Those who passed became <em>juren</em>, "recommended men", the second degree. The title was for life, it made a man eligible for minor office, and it was rare: through most of the Qing the provincial pass rate was one or two per cent, in the largest provinces less.</p>
+<p>The following spring the <em>juren</em> of the whole empire travelled to Beijing for the metropolitan examination, and those who passed it went to the palace examination, presided over in theory by the emperor himself. Nobody failed the palace examination; it existed to rank. The candidates emerged as <em>jinshi</em>, the third degree, and the top three had names known to every schoolboy in China: the first was the <em>zhuangyuan</em>, the "top of the list". A <em>jinshi</em> was assured an official career. In the Qing the metropolitan examination produced somewhere between one hundred and four hundred of them each cycle, typically around three hundred. For an empire whose population passed three hundred million in the nineteenth century, that is roughly one new <em>jinshi</em> per year for every three million people.</p>
+<figure id="figure-2" class="figure" data-n="2">
+<div class="svg"><svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Funnel of four tiers: millions of candidates, about one million licentiates, about eighteen thousand juren, about two and a half thousand jinshi">
+  <g font-size="13" fill="var(--ink)">
+    <rect x="40" y="20" width="640" height="56" rx="8" fill="var(--panel-2)" stroke="var(--line-2)"/>
+    <text x="60" y="44" font-weight="600">Candidates</text>
+    <text x="60" y="64" fill="var(--faint)">Millions of boys and men studying for the qualifying tests; no fixed count.</text>
+    <text x="660" y="52" text-anchor="end" fill="var(--faint)">county and prefectural exams</text>
+
+    <line x1="360" y1="76" x2="360" y2="92" stroke="var(--faint)"/>
+    <rect x="110" y="94" width="500" height="56" rx="8" fill="var(--panel-2)" stroke="var(--line-2)"/>
+    <text x="130" y="118" font-weight="600">Licentiates, <tspan font-style="italic">shengyuan</tspan></text>
+    <text x="130" y="138" fill="var(--faint)">about 1.1 million living; gentry status, no office</text>
+    <text x="590" y="126" text-anchor="end" fill="var(--accent)">provincial exam: ~1 to 2 in 100 pass</text>
+
+    <line x1="360" y1="150" x2="360" y2="166" stroke="var(--faint)"/>
+    <rect x="180" y="168" width="360" height="56" rx="8" fill="var(--panel-2)" stroke="var(--line-2)"/>
+    <text x="200" y="192" font-weight="600">Recommended men, <tspan font-style="italic">juren</tspan></text>
+    <text x="200" y="212" fill="var(--faint)">about 18,000 living; eligible for minor office</text>
+
+    <line x1="360" y1="224" x2="360" y2="240" stroke="var(--faint)"/>
+    <rect x="250" y="242" width="220" height="56" rx="8" fill="var(--panel-2)" stroke="var(--accent)"/>
+    <text x="270" y="266" font-weight="600" fill="var(--accent)">Presented scholars, <tspan font-style="italic">jinshi</tspan></text>
+    <text x="270" y="286" fill="var(--faint)">about 2,500 living; ~300 per cycle</text>
+
+    <text x="360" y="336" text-anchor="middle" fill="var(--faint)" font-style="italic">Each cycle was three years. A man could climb one rung per cycle at best, and most never left the first.</text>
+  </g>
+</svg></div>
+<figcaption>The Ming and Qing ladder. Approximate numbers of living degree-holders in the early nineteenth century, from Chang Chung-li's estimates, and the rough odds at each rung.</figcaption>
+</figure>
+<aside class="concept" id="concept-the-examination-ladder">
+<div class="concept-title">The examination ladder</div>
+<p>A selection system arranged as successive, increasingly selective tests, in which each level confers a status that is valuable in itself even if the next level is never reached. The structure recruits far more people than it will ever promote, and it holds them by paying partial rewards along the way.</p>
+</aside>
+<p>The mid-nineteenth-century numbers, as estimated by the historian Chang Chung-li in the 1950s, give the shape of the thing: on the order of 1.1 million living licentiates, around eighteen thousand <em>juren</em>, and perhaps two and a half thousand <em>jinshi</em> at any one time. Treat these as careful estimates rather than counts, but the proportions are not in doubt. The ladder had a very wide bottom, a very narrow top, and a mass of men in between who had spent decades on it.</p>
+<h2 id="5-what-the-test-measured-and-what-that-did-to-the-test">5. What the test measured, and what that did to the test</h2>
+<p>Here is where the story turns, and where it joins the pattern from the first reading.</p>
+<p>A test needs content. Through the Tang and early Song the content had varied: poetry, essays on policy questions, commentary on the classics, sometimes law and mathematics. In 1313 the Mongol Yuan dynasty, restoring the examinations after a long suspension, fixed the curriculum on the Four Books of the Confucian canon, read through the commentaries of the twelfth-century philosopher Zhu Xi. The Ming and Qing kept this. For the last six centuries of the system, a candidate's central task was to write about passages from the Analects, the Mencius, the Great Learning, and the Doctrine of the Mean, interpreted the way one man had interpreted them, and to do so in a fixed form.</p>
+<p>That form was the eight-legged essay, which took its final shape in the late fifteenth century. It opened with two sentences that "broke open" the topic, followed by a sentence that carried it forward, then a preliminary discussion, and then the legs: four pairs of parallel passages, each pair built as a matched antithesis, developing the theme, and a conclusion. Total length was capped, by the eighteenth century at seven hundred characters. The candidate was required to write in the voice of the sage, as if Confucius himself were explaining the passage, and so could cite no history later than the classics and could offer no opinion of his own. Everything, from the number of sections to the rhetorical shape of each, was prescribed.</p>
+<aside class="concept" id="concept-the-eight-legged-essay">
+<div class="concept-title">The eight-legged essay</div>
+<p>The prescribed form of the main examination essay from the late fifteenth century to 1901: a fixed sequence of opening, development, four antithetical paired sections, and conclusion, on a passage from the Four Books, written in the persona of the sage, with a strict length limit. It made thousands of papers comparable, and it made the ability to produce it the thing the empire actually selected for.</p>
+</aside>
+<p>It is easy to mock this and many did at the time, but consider the examiners' problem. A provincial hall held ten or twenty thousand candidates, each producing several essays in each of three sessions, and the papers had to be graded in a few weeks by a small board locked in the hall. A free-form essay is slow to judge and impossible to compare across graders. A fixed form can be checked for its parts, its parallelism, its correct use of the commentary, and two graders working from a red-ink copy will agree about it far more often. The eight-legged essay was the examination hall's answer to the same pressure that gave the Prussian foresters the standard tree. It made the papers legible.</p>
+<p>The consequences followed on schedule. Once the form was fixed it could be practised, then taught, then sold. From the sixteenth century the book trade was full of printed collections of prize-winning essays, guides to breaking open a topic, and lists of the passages most likely to be set, and candidates learned to reproduce the form without ever reading the classics through. The seventeenth-century scholar Gu Yanwu, one of the most serious minds of his age, wrote that the harm done by the eight-legged essay was equal to the burning of the books under the First Emperor, and the men it destroyed exceeded the scholars that Emperor had buried. That is a Goodhart's law statement, from about 1660, three centuries before Goodhart. The measure had become the target and had ceased to measure anything except the ability to hit it.</p>
+<aside class="callout interpretation" data-label="Interpretation">
+<p>Whether the examination ever measured administrative ability, even before the form hardened, is a matter of interpretation. The strongest modern reading, associated with Benjamin Elman, is that it never did and was never quite meant to: what it tested was mastery of a shared elite culture, and what it produced was a class of men who spoke the same language, held the same texts sacred, and could therefore be trusted to serve the same throne. The knowledge that actually ran a county, how to assess a tax, dredge a canal, or settle a land dispute, was not on the syllabus at all.</p>
+</aside>
+<p>That last point reconnects with the first reading's distinction between formal and practical knowledge. A newly posted magistrate, fresh from the palace examination, arrived in a county where he could not speak the dialect, did not know the families, and had never administered anything. The real work was done by the yamen clerks, hereditary local men who kept the registers and knew every field and feud, and by private secretaries the magistrate hired with his own money. The clerks were untested, barely paid, legally despised, and indispensable. All the metis of Chinese government lived in a stratum the examination did not touch, while the examination produced a stratum with the authority and none of the local knowledge. Every large organisation has a version of this split. The Chinese version lasted six hundred years.</p>
+<h2 id="6-the-scandal-of-1397-and-the-invention-of-quotas">6. The scandal of 1397 and the invention of quotas</h2>
+<p>In the spring of 1397 the metropolitan examination in Nanjing produced fifty-two new <em>jinshi</em>, and every one of them came from the south. Northern candidates protested. The Hongwu Emperor, founder of the Ming and a man not known for patience, ordered a re-reading of the papers. The re-readers reported that the grading had been correct: the southern papers really were better, which was not surprising, since the south was richer, more urban, more literate, and had more and better schools. The emperor was not interested in whether the grading was correct. He had the chief examiner, a scholar of eighty-five, sent into exile, had several of the re-readers executed on the grounds that they had colluded, personally re-graded the papers, and issued a second list of sixty-one names, all northerners. The year went into the records as the year of the Southern List and the Northern List.</p>
+<p>Thirty years later the court turned the emperor's fury into a rule. From 1427 the <em>jinshi</em> degrees were split by region, roughly sixty per cent to the south and forty to the north, later refined to fifty-five, thirty-five, and ten for a central zone. The provincial examinations had their own quotas, fixed by province, and the Qing added separate lists for Manchu and Mongol bannermen. None of this was hidden. The rationale was stated openly and it is worth stating again, because it is the argument that every modern quota debate repeats: a government that governs the whole country must be seen to come from the whole country. A bureaucracy staffed entirely from the lower Yangzi would have been, in the eyes of a northern peasant, a foreign occupation with better handwriting.</p>
+<aside class="concept" id="concept-quotas-as-legitimacy">
+<div class="concept-title">Quotas as legitimacy</div>
+<p>The practice of reserving places in a selection system by region or group, even at the cost of passing weaker candidates, in order to bind every part of a polity to the centre. It trades some measured merit for the consent of those who would otherwise see the system as belonging to someone else. The Ming regional lists of 1427 are one of the earliest explicit versions.</p>
+</aside>
+<p>Notice what had happened. The examination's whole claim was that it selected on merit, without regard to who you were. The quota said that where you were from would decide how hard your path was. Both were true at once, and the system carried the contradiction for five hundred years, because the people running it understood something pure meritocrats forget: a selection system is not only a filter but a story the state tells about why its officials deserve to rule, and the story has to be believed in the places they rule. Merit is one ingredient of that belief. Representation is another. The 1397 emperor, in his brutal way, had noticed that a perfectly fair test had produced a politically impossible result.</p>
+<h2 id="7-what-the-machine-made">7. What the machine made</h2>
+<p>Thirteen centuries is long enough for a selection system to stop being a system and become a society. Three things the examination made are worth separating.</p>
+<p>The first is a class. The degree-holders, from the humblest licentiate up, formed the gentry: a legally privileged stratum of perhaps a million and a half men in the late Qing who dominated local life whether or not they held office. Most never did. They taught school, managed clan estates, mediated disputes, organised militia and famine relief, and served as the link between the magistrate, who was a stranger, and the villages, which were not. The state had produced, at almost no cost to itself, a resident local elite that had staked its identity on the state's own values. Families paid for the decades of tuition. The government paid only for the examiners.</p>
+<p>The second is a common culture. An empire stretching from the tropics to the steppe, whose spoken languages were mutually incomprehensible, had a single elite that had memorised the same texts in the same order and wrote to each other in the same classical language. A <em>juren</em> from Guangdong and one from Shandong could not have held a conversation, but they had wept over the same passages of Mencius at the age of nine, and they knew it about each other. Elman calls the examination a "cultural prison" and the "social glue" of late imperial China in the same breath, and both are right.</p>
+<p>The third is a question that historians have argued over for sixty years: did the ladder actually let people climb?</p>
+<aside class="callout evidence" data-label="Evidence check">
+<p>In 1962 Ho Ping-ti published a study of the family backgrounds of tens of thousands of Ming and Qing degree-holders and found that roughly half of Ming <em>jinshi</em>, and about a third of Qing ones, came from families with no degree-holder in the previous three generations. On that reading the examination was the most open route to power in the pre-modern world by a wide margin. Later critics, notably Robert Hymes and Elman, pointed out that Ho counted only the father's line: a "commoner" by his definition might have had degree-holding uncles, maternal grandfathers, or in-laws, and in any case a family that could fund fifteen years of a son's study was not poor. The honest summary is that mobility was real, genuinely larger than anything in contemporary Europe, and still overwhelmingly a matter of moving within the top few per cent. Women were excluded entirely, throughout.</p>
+</aside>
+<p>What did it cost? Here I move from evidence to speculation. The most famous question in Chinese economic history is why China, which led the world in technology through the Song, did not go on to a scientific and industrial revolution. One answer, argued in modern form by the economist Justin Yifu Lin in the 1990s, is that the examination did it: for six centuries the most capable young men in the largest country on earth were paid, in status and prospects, to spend their twenties memorising ancient texts and learning to write in the voice of a dead sage, and nothing at all for studying the natural world.</p>
+<aside class="callout speculation" data-label="Speculation">
+<p>Hold this loosely. The Song, when the examinations were most fiercely competitive, was also the period of China's greatest technical creativity, and many other things differed between China and Europe: political fragmentation, the price of labour, coal, the absence of rival states to lose to. That the examination shaped where talent went is certain. That it explains the different path is one hypothesis among several.</p>
+</aside>
+<h2 id="8-the-men-the-ladder-dropped">8. The men the ladder dropped</h2>
+<p>A ladder that promotes one in a hundred at each rung manufactures, as its main product, men who did not get up it. What became of them is one of the great recurring stories of Chinese history, and it has a pattern.</p>
+<p>Most failed candidates did what failed candidates do. They taught, they clerked, they wrote. The greatest works of Chinese fiction come disproportionately from this reservoir. Pu Songling, whose ghost stories are among the most loved books in the language, failed the provincial examination for half a century and was granted a consolation title at seventy-one. Wu Jingzi's eighteenth-century satire The Scholars has a scene every educated Chinese reader knows: Fan Jin, a threadbare candidate, passes the provincial examination at fifty-four, goes mad with joy at the news, and has to be slapped back to his senses by his butcher father-in-law, who then spends the rest of the chapter grovelling to him. Fan Jin's life had been an unbroken humiliation, and the whole village's treatment of him reversed in an afternoon.</p>
+<p>A few failed candidates did something else. In 875 a salt smuggler named Huang Chao, who had failed the <em>jinshi</em> examination, raised a rebellion that marched the length of China, sacked the capital in 881, and left the Tang a corpse that took another quarter-century to fall over. It was Huang Chao's army that slaughtered the old aristocratic families whose absence let the Song build a meritocracy on cleared ground.</p>
+<p>Nine and a half centuries later a village schoolteacher from outside Guangzhou named Hong Xiuquan sat the licentiate examination four times, in 1827, 1836, 1837, and 1843, and failed each time. After the third failure he collapsed, and in his delirium saw a bearded old man and a younger brother who commanded him to slay demons. Years later he re-read a Christian tract he had been handed in the city and understood the visions: the old man was God, the brother was Jesus, and he, Hong, was Jesus's younger brother. The movement he founded, the Taiping Heavenly Kingdom, rose in 1851, took Nanjing in 1853, held much of the lower Yangzi for a decade, and was destroyed by 1864 in a war whose death toll is usually put at twenty million or more, the bloodiest conflict of the nineteenth century anywhere. Among the Taiping's first acts in Nanjing was to hold an examination, on Christian texts, and by some accounts to open it to women.</p>
+<aside class="callout evidence" data-label="Evidence check">
+<p>The bare facts of Hong's failures and visions are well attested from his own family's testimony and from the Taiping's own publications. The death toll is a wide estimate, since it includes famine and disease across a region whose population was never accurately counted. The story that a woman placed first in a Taiping examination appears in later sources and I would treat it as reported rather than established.</p>
+</aside>
+<p>The pattern across these cases is not that failing an examination makes a rebel. Millions failed and did nothing. It is that a state which spends centuries training far more men in the language of legitimate authority than it can ever employ keeps, at all times, a reserve of articulate, frustrated, well-connected people who know exactly how power is supposed to justify itself and have personal reason to say it has not. The historian Peter Turchin has given this a modern name, elite overproduction, and argues it is a general precursor of political crisis. Whether the general claim holds is contested; that China's ladder was a machine for producing it is not.</p>
+<aside class="concept" id="concept-elite-overproduction">
+<div class="concept-title">Elite overproduction</div>
+<p>Peter Turchin's term for a condition in which a society produces more people trained and entitled to elite positions than there are positions, so that competition among aspirants intensifies and the losers become available for opposition. The examination ladder, promoting one in a hundred, is a limiting case.</p>
+</aside>
+<h2 id="9-six-years-from-abolition-to-revolution">9. Six years from abolition to revolution</h2>
+<p>The ending was fast. After the Qing were beaten by Japan in 1895 the examination, and the eight-legged essay especially, became the symbol of everything reformers thought was wrong. The essay was abolished in 1901 and policy questions put in its place. Then on 2 September 1905 two of the most powerful men in the empire, Yuan Shikai and Zhang Zhidong, sent a joint memorial arguing that as long as the examinations existed, families would not send their sons to the new modern schools, and the court abolished the whole system with effect from the following year. Thirteen centuries ended in a paragraph.</p>
+<p>Consider what that meant on the ground. Roughly a million and a half degree-holders and several million more candidates were somewhere on the ladder. Every one of them had organised his life, and his family had organised its finances, around the assumption that the next rung existed. Overnight it did not. The new schools took years to build and favoured cities and the young. A thirty-five-year-old licentiate in a market town, who had given his life to the classics, had nothing to sell.</p>
+<aside class="callout evidence" data-label="Evidence check">
+<p>The economists Ying Bai and Ruixue Jia tested the consequence in a 2016 paper. Prefectures had different examination quotas per head of population, for historical reasons that had nothing to do with 1905. Bai and Jia found that prefectures with higher quotas, that is, places where more men had been on the ladder, saw significantly more participation in the revolutionary movement and more uprisings after abolition than places with lower quotas. Their conclusion is that abolishing the examination helped bring on the revolution of 1911 by cutting the link between local elites and the state. It is an observational study, with the usual limits, but the mechanism is plausible and the effect survives the checks they ran.</p>
+</aside>
+<p>The Qing fell in 1911. Put this next to the first reading's finding about feedback and reversibility. The examination had been the channel through which the state and the local elite told each other what they needed, and the state had cut it in the belief that a better instrument was coming. Foresters could carry the ants back in. The Qing had six years, and the ants did not come.</p>
+<figure id="figure-3" class="figure" data-n="3">
+<div class="svg"><svg viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Timeline from 605 to 1911 with nine labelled events">
+  <g font-size="12" fill="var(--ink)">
+    <line x1="40" y1="120" x2="680" y2="120" stroke="var(--line-2)" stroke-width="2"/>
+    <g>
+      <line x1="40" y1="112" x2="40" y2="128" stroke="var(--accent)"/><text x="40" y="100" text-anchor="middle" font-weight="600">605</text><text x="40" y="148" text-anchor="middle" fill="var(--faint)">Sui begins</text>
+    </g>
+    <g>
+      <line x1="86" y1="112" x2="86" y2="128" stroke="var(--faint)"/><text x="86" y="170" text-anchor="middle" fill="var(--faint)">690s Empress Wu</text>
+    </g>
+    <g>
+      <line x1="243" y1="112" x2="243" y2="128" stroke="var(--accent)"/><text x="243" y="100" text-anchor="middle" font-weight="600">992 to 1015</text><text x="243" y="148" text-anchor="middle" fill="var(--faint)">names sealed, papers recopied</text>
+    </g>
+    <g>
+      <line x1="388" y1="112" x2="388" y2="128" stroke="var(--faint)"/><text x="388" y="170" text-anchor="middle" fill="var(--faint)">1313 Zhu Xi canon</text>
+    </g>
+    <g>
+      <line x1="429" y1="112" x2="429" y2="128" stroke="var(--accent)"/><text x="429" y="100" text-anchor="middle" font-weight="600">1397</text><text x="429" y="148" text-anchor="middle" fill="var(--faint)">Southern and Northern lists</text>
+    </g>
+    <g>
+      <line x1="470" y1="112" x2="470" y2="128" stroke="var(--faint)"/><text x="470" y="192" text-anchor="middle" fill="var(--faint)">c.1480 eight-legged essay fixed</text>
+    </g>
+    <g>
+      <line x1="653" y1="112" x2="653" y2="128" stroke="var(--faint)"/><text x="653" y="100" text-anchor="middle" fill="var(--faint)">1854 Britain</text>
+    </g>
+    <g>
+      <line x1="678" y1="112" x2="678" y2="128" stroke="var(--accent)"/><text x="678" y="148" text-anchor="end" font-weight="600">1905 abolished</text><text x="678" y="170" text-anchor="end" fill="var(--faint)">1911 Qing falls</text>
+    </g>
+    <text x="360" y="40" text-anchor="middle" fill="var(--faint)" font-style="italic">One pixel is about two years.</text>
+  </g>
+</svg></div>
+<figcaption>Thirteen centuries in one line. The machine took four hundred years to reach its mature form and six years to bring down the state that switched it off.</figcaption>
+</figure>
+<h2 id="10-the-idea-travels">10. The idea travels</h2>
+<p>The examination did not stay in China. Korea ran its own version from 958 to 1894 and Vietnam from 1075 to 1919, the last examination of the old kind being held at Hue that year. Japan tried it in the eighth century and the court aristocracy smothered it within a few generations, which is what happens when the great families win the argument the Song had lost.</p>
+<p>The more surprising journey was westward. Jesuit missionaries at the Ming court, Matteo Ricci above all, sent back admiring accounts of a state governed by scholars chosen by examination, and eighteenth-century Europe, which chose its officials by birth and purchase, read them with interest. Voltaire praised the system and the economist François Quesnay held China up as the model of enlightened government. In the nineteenth century Britain built one: the East India Company opened a college for its administrators in 1806, Parliament required open competitive examination for the Indian Civil Service in 1853, the Northcote-Trevelyan report recommended the same for the home civil service the next year, and open competition became general in 1870. The United States passed the Pendleton Act in 1883, after a disappointed office-seeker shot President Garfield, and began examining its own clerks.</p>
+<aside class="callout interpretation" data-label="Interpretation">
+<p>Whether the British borrowed the idea from China or arrived at it independently is a genuinely open question. The historian Teng Ssu-yü argued in 1943 for direct influence, and it is certain that China was cited in the British debates, by advocates as a precedent and by opponents as a warning about pedantic mandarins. But Prussia had examined its officials since the eighteenth century, Oxford and Cambridge had built a culture of competitive written examination of their own, and the men who wrote the reports had reasons of their own. The fair statement is that the Chinese example was known, admired, and available, and that the reformers reached for it when it suited them.</p>
+</aside>
+<h2 id="11-where-the-lens-breaks-and-what-to-keep">11. Where the lens breaks, and what to keep</h2>
+<p>It would be easy to end with the examination as a cautionary tale, a thirteen-century Goodhart's law, the forest of identical trees applied to the human mind. That reading is available and much of it is true. But the system lasted thirteen hundred years, and the Prussian forest lasted eighty, and a lens that cannot explain the difference is not finished.</p>
+<p>Three things kept the examination alive that the forest did not have. It was cheap to the state, because the families paid. It bought legitimacy, and the quotas show that its designers knew that was what they were buying and adjusted for it. And, above all, it was believed in by the people it selected and the people it rejected alike. Fan Jin's neighbours mocked him for thirty years and then bowed to him the same afternoon, and both the mocking and the bowing were tributes to the system. A legibility scheme that the territory itself endorses is a different thing from one imposed on it, and it is much harder to see the damage from inside.</p>
+<p>The broader lesson is about a trade-off that every selection system faces and none escapes. Each step the Song took to make the examination fair also made it narrower. Sealing the names removed favouritism and also removed everything the examiners could have known about a candidate's character. Recopying removed handwriting, and with it any judgment of the hand. A fixed canon removed the examiner's discretion to set what he liked, and also removed anything that was not in the canon. A fixed essay form made grading consistent and made the form the thing selected for. By the end, the examination was almost perfectly fair and measured almost nothing, and both facts were produced by the same set of decisions.</p>
+<div class="rule">
+<p>Every step that makes a test harder to game or to favour also makes it narrower.</p>
+<p>Fairness and validity pull against each other; a perfectly fair test measures only what can be made identical for everyone.</p>
+</div>
+<p>You can see the same tension in any examination sat today. China's university entrance test, the <em>gaokao</em>, is taken by more than thirteen million students a year, is graded anonymously, is proof against almost every form of favouritism, and draws exactly the complaints Gu Yanwu made in 1660: that it selects for the ability to produce a form, that an industry sells the model answers, that talented children who cannot produce the form are lost. The test-preparation industry everywhere is the Ming model-essay collection, and every argument about adjusting admissions by region or background is the Southern and Northern lists.</p>
+<p>The examination's designers understood the trade-off better than most of their successors. They chose fairness consciously, because the alternative they had lived through was patronage, and patronage had been worse. The lesson is not that they were wrong. It is that they were making a choice, that the choice has a cost, and that the cost falls on what the test cannot see: the metis of the clerks, the talent that could not write in the voice of the sage, the losers in the cells.</p>
+<p>When you next meet a selection system, in a company, a school, a benchmark, or a piece of software that ranks people, ask what this history teaches you to ask. What is its eight-legged essay, the form that has quietly replaced the thing it was meant to measure? Where are its clerks, the people with the real knowledge whom it does not test? And what keeps it standing: fairness, cheapness, or belief? If the answer is belief, remember that the Qing had six years.</p>
+<section class="questions" id="questions">
+<h2>Questions to sit with</h2>
+<ol>
+<li><strong>Recall:</strong> What were the two Song innovations that made grading anonymous, and what did each of them remove from the examiner's view along with the risk of favouritism?</li>
+<li><strong>Connect:</strong> The first reading's four factors were coercion, feedback delay, irreversibility, and what the map leaves out. Score the examination on each. Which of the four explains why it lasted thirteen centuries when scientific forestry lasted eighty years?</li>
+<li><strong>Apply:</strong> Think of a selection process you have been through or run. What is its fixed form, the thing candidates learn to produce? Who are its clerks, the people it does not test who hold the real knowledge? Does it have quotas, open or hidden, and what legitimacy are they buying?</li>
+<li><strong>Judge:</strong> The 1397 emperor overturned a correct grading for a political reason and his successors turned that into a rule. Was that a corruption of the system or a repair of it? Try to argue the side you did not first take.</li>
+</ol>
+</section>
+</article>
+<footer class="colophon"><a href="index.html">Library</a> · The Examination: Thirteen Centuries of Choosing Rulers by Test · 2026-09-12</footer>
+</main>
+<script type="application/json" id="press-meta">{"title": "The Examination: Thirteen Centuries of Choosing Rulers by Test", "standfirst": "For thirteen hundred years China filled its government by written examination, the longest experiment in fairness any state has run. It created a class, held an empire together, turned its failures into rebels, and left its fingerprints on every standardised test you have ever sat.", "date": "2026-09-12", "series": "Daily Reading", "day": "2", "concepts": ["civil service examination", "examination ladder", "anonymisation", "quotas as legitimacy", "eight-legged essay", "fairness-validity trade-off", "elite overproduction", "credential inflation"], "words": 6055, "minutes": 26, "audio": "audio/2026-09-12-examination.mp3", "audio_minutes": 38}</script>
+<script>/* Press reader: progress bar, contents drawer, active-section highlight, audio player. No dependencies. */
+(function () {
+  var fill = document.getElementById('progress-fill');
+  var toc = document.getElementById('toc');
+  var toggle = document.getElementById('toc-toggle');
+  var links = toc ? Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+
+  function progress() {
+    if (!fill) return;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    fill.style.width = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + '%';
+  }
+
+  function active() {
+    if (!links.length) return;
+    var y = window.scrollY + window.innerHeight * 0.28;
+    var current = -1;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i] && targets[i].offsetTop <= y) current = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { progress(); active(); ticking = false; });
+  }
+
+  if (toggle && toc) {
+    toggle.addEventListener('click', function () {
+      var open = toc.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    toc.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A' && window.matchMedia('(max-width: 1179px)').matches) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toc.classList.contains('open')) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  progress();
+  active();
+
+  /* ---------------- audio player ---------------- */
+  var player = document.getElementById('player');
+  if (!player) return;
+  var src = player.getAttribute('data-src');
+  var audio = new Audio();
+  audio.preload = 'metadata';
+  audio.src = src;
+  var key = 'press-audio:' + src;
+  var playBtn = player.querySelector('.p-play');
+  var backBtn = player.querySelector('.p-back');
+  var fwdBtn = player.querySelector('.p-fwd');
+  var range = player.querySelector('.p-range');
+  var cur = player.querySelector('.p-cur');
+  var dur = player.querySelector('.p-dur');
+  var seeking = false;
+
+  function fmt(s) {
+    if (!isFinite(s)) return '–:––';
+    s = Math.floor(s);
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    var mm = (h ? String(m).padStart(2, '0') : String(m));
+    return (h ? h + ':' : '') + mm + ':' + String(sec).padStart(2, '0');
+  }
+  function setPlaying(on) {
+    player.classList.toggle('playing', on);
+    playBtn.setAttribute('aria-label', on ? 'Pause' : 'Play');
+  }
+  function skip(delta) {
+    if (!isFinite(audio.duration)) return;
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + delta));
+  }
+
+  audio.addEventListener('loadedmetadata', function () {
+    range.max = audio.duration;
+    dur.textContent = fmt(audio.duration);
+    try {
+      var p = parseFloat(localStorage.getItem(key));
+      if (p > 5 && p < audio.duration - 10) { audio.currentTime = p; range.value = p; cur.textContent = fmt(p); }
+    } catch (e) {}
+  });
+  audio.addEventListener('timeupdate', function () {
+    if (!seeking) { range.value = audio.currentTime; cur.textContent = fmt(audio.currentTime); }
+    try { localStorage.setItem(key, String(audio.currentTime)); } catch (e) {}
+  });
+  audio.addEventListener('play', function () { setPlaying(true); });
+  audio.addEventListener('pause', function () { setPlaying(false); });
+  audio.addEventListener('ended', function () {
+    setPlaying(false);
+    try { localStorage.removeItem(key); } catch (e) {}
+  });
+  audio.addEventListener('error', function () {
+    player.classList.add('error');
+    dur.textContent = 'audio unavailable';
+  });
+
+  playBtn.addEventListener('click', function () { audio.paused ? audio.play() : audio.pause(); });
+  backBtn.addEventListener('click', function () { skip(-15); });
+  fwdBtn.addEventListener('click', function () { skip(15); });
+  range.addEventListener('input', function () { seeking = true; cur.textContent = fmt(parseFloat(range.value)); });
+  range.addEventListener('change', function () { audio.currentTime = parseFloat(range.value); seeking = false; });
+
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === ' ' || e.key === 'k') { e.preventDefault(); playBtn.click(); }
+    else if (e.key === 'j') skip(-15);
+    else if (e.key === 'l') skip(15);
+  });
+
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: document.title, artist: player.getAttribute('data-series') || 'Reading' });
+      navigator.mediaSession.setActionHandler('play', function () { audio.play(); });
+      navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
+      navigator.mediaSession.setActionHandler('seekbackward', function () { skip(-15); });
+      navigator.mediaSession.setActionHandler('seekforward', function () { skip(15); });
+      navigator.mediaSession.setActionHandler('seekto', function (d) { if (d.seekTime != null) audio.currentTime = d.seekTime; });
+    } catch (e) {}
+  }
+})();
+</script>
+</body></html>
