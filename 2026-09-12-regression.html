@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Return to the Middle: A Law That Is Not a Force</title>
+<style>/* Press theme. Default: true black, warm off-white type, hairline rules, one brass accent.
+   Add class "light" to .press for the off-white variant. Nothing moves; nothing glows. */
+.press{
+  --bg:#000000;--panel:#0b0b0b;--panel-2:#111111;--line:#1f1f1f;--line-2:#2c2c2c;
+  --ink:#d9d5cd;--bright:#f4f1ea;--muted:#8f8b83;--faint:#5f5c56;
+  --accent:#c9b592;          /* brass: labels, links, active contents */
+  --accent-2:#a9b4c4;        /* cool slate: numerals, blockquote bar, interpretation */
+  --warm:#d1a24f;            /* amber: speculation, late-arriving cost */
+  --rose:#c98a8a;
+  --sel:#c9b592;--sel-ink:#000;
+  --serif:"Newsreader","Charter","Iowan Old Style","Cambria","Georgia","Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Cascadia Code","JetBrains Mono","Consolas",ui-monospace,monospace;
+  --col:44rem;--toc:15rem;
+  color-scheme:dark;
+  background:var(--bg);
+  color:var(--ink);
+  font:1.125rem/1.72 var(--serif);
+  margin:0;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.press.light{
+  --bg:#f7f5f0;--panel:#f1eee7;--panel-2:#ebe7de;--line:#e0dcd2;--line-2:#cfc9bc;
+  --ink:#2a2823;--bright:#141310;--muted:#6e6a61;--faint:#9a958a;
+  --accent:#8a7248;--accent-2:#5f6f85;--warm:#a8761f;--rose:#a85d5d;
+  --sel:#141310;--sel-ink:#f7f5f0;
+  color-scheme:light;
+}
+body.press{margin:0}
+.press *{box-sizing:border-box}
+.press a{color:var(--bright);text-decoration:none;border-bottom:1px solid var(--accent)}
+.press a:hover{color:var(--accent)}
+.press ::selection{background:var(--sel);color:var(--sel-ink)}
+.press :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+
+/* reading progress */
+.press .progress{position:fixed;inset:0 0 auto 0;height:1px;background:transparent;z-index:30}
+.press .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .1s linear}
+
+/* page column */
+.press .page{max-width:var(--col);margin:0 auto;padding:5rem 1.4rem 7rem}
+@media(min-width:1180px){
+  .press .page{margin-left:calc(50% - var(--col)/2 + 3rem)}
+}
+
+/* masthead */
+.press .masthead{margin:0 0 3.5rem}
+.press .eyebrow{font:500 .7rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
+.press h1{font:400 clamp(2.2rem,5.2vw,3.6rem)/1.08 var(--serif);letter-spacing:-.02em;color:var(--bright);margin:0 0 1.2rem;text-wrap:balance}
+.press .standfirst{font:italic 1.3rem/1.5 var(--serif);color:var(--muted);margin:0 0 1.4rem;text-wrap:pretty}
+.press .meta{font:.76rem/1.5 var(--sans);color:var(--faint);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+
+/* headings */
+.press h2{font:500 .74rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin:4rem 0 1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);scroll-margin-top:2.5rem}
+.press h3{font:400 1.55rem/1.3 var(--serif);color:var(--bright);margin:2.6rem 0 1rem;letter-spacing:-.01em;text-wrap:balance;scroll-margin-top:2.5rem}
+.press h4{font:600 1.05rem/1.4 var(--sans);color:var(--bright);margin:2rem 0 .8rem}
+
+/* prose */
+.press p{margin:0 0 1.35rem;text-wrap:pretty}
+.press strong{color:var(--bright);font-weight:600}
+.press em{color:var(--ink)}
+.press code{font:.86em var(--mono);background:var(--panel-2);padding:.1em .4em;border-radius:3px}
+.press pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1rem 1.2rem;overflow:auto;font:.85rem/1.55 var(--mono);margin:0 0 1.5rem}
+.press pre code{background:none;padding:0;font-size:inherit}
+.press hr{border:0;height:1px;background:var(--line);margin:3rem 0}
+.press ul,.press ol{margin:0 0 1.5rem;padding-left:1.4rem}
+.press li{margin:0 0 .55rem;padding-left:.2rem}
+.press li::marker{color:var(--accent);font-family:var(--sans);font-size:.9em}
+.press blockquote{margin:2.2rem 0;padding:.2rem 0 .2rem 1.4rem;border-left:1px solid var(--accent-2);color:var(--bright);font-size:1.16rem;line-height:1.6}
+.press blockquote p:last-child{margin-bottom:0}
+
+/* tables */
+.press .table-wrap{overflow:auto;margin:1.8rem 0;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.press table{border-collapse:collapse;width:100%;font:.9rem/1.55 var(--sans);font-variant-numeric:tabular-nums}
+.press th,.press td{padding:.8rem .9rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.press th{color:var(--accent);font-weight:600;background:var(--panel-2)}
+.press tbody tr:last-child td{border-bottom:0}
+
+/* figures */
+.press article{counter-reset:fig}
+.press .figure{margin:2.6rem 0;padding:1.4rem 1.4rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:6px;counter-increment:fig}
+.press .figure .svg{margin:0 0 .6rem}
+.press .figure svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.press figcaption{font:.84rem/1.55 var(--sans);color:var(--muted);padding-top:.7rem;border-top:1px solid var(--line)}
+.press figcaption::before{content:"Figure " counter(fig) " · ";color:var(--accent);font-weight:600;letter-spacing:.04em}
+.press pre.mermaid{background:var(--panel);text-align:center}
+
+/* concept card */
+.press .concept{margin:2.2rem 0;padding:1.2rem 1.4rem 1rem;border-left:2px solid var(--accent);background:var(--panel);border-radius:0 4px 4px 0}
+.press .concept-title{font:600 .7rem/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.press .concept-title::before{content:"Concept · ";color:var(--faint)}
+.press .concept p{font-size:1.02rem;line-height:1.62}
+.press .concept p:last-child{margin-bottom:0}
+
+/* callouts with epistemic labels */
+.press .callout{margin:2rem 0;padding:1.05rem 1.3rem .9rem;border-radius:4px;border:1px solid var(--line);background:var(--panel);font-size:1.02rem;line-height:1.62}
+.press .callout::before{content:attr(data-label);display:block;font:600 .68rem/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+.press .callout p:last-child{margin-bottom:0}
+.press .callout.evidence{border-left:2px solid var(--accent)}
+.press .callout.evidence::before{color:var(--accent)}
+.press .callout.interpretation{border-left:2px solid var(--accent-2)}
+.press .callout.interpretation::before{color:var(--accent-2)}
+.press .callout.speculation{border-left:2px solid var(--warm)}
+.press .callout.speculation::before{color:var(--warm)}
+.press .callout.aside,.press .callout.note{border-style:dashed;color:var(--muted);background:none}
+@media(min-width:1500px){
+  .press .callout.aside{float:right;width:17rem;margin:.3rem -19rem 1.2rem 1.6rem;font-size:.92rem;line-height:1.55;border:0;border-left:1px solid var(--line-2);border-radius:0;padding:.2rem 0 .2rem 1rem}
+}
+
+/* displayed rule / formula */
+.press .rule{margin:2.6rem 0;padding:1.6rem 1.4rem;text-align:center;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.press .rule p{font:italic 1.32rem/1.45 var(--serif);color:var(--bright);margin:0;text-wrap:balance}
+.press .rule p + p{margin-top:.6rem;font:.9rem/1.5 var(--sans);color:var(--muted);font-style:normal}
+
+/* questions */
+.press .questions{margin-top:4rem;padding:2rem 1.6rem 1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.press .questions h2{margin:0 0 1.4rem;padding:0;border:0}
+.press .questions ol{list-style:none;padding:0;counter-reset:q}
+.press .questions li{counter-increment:q;position:relative;padding-left:3rem;margin-bottom:1.3rem;font-size:1.04rem;line-height:1.6}
+.press .questions li::before{content:counter(q,decimal-leading-zero);position:absolute;left:0;top:.05rem;font:400 1.6rem/1 var(--serif);color:var(--accent-2);font-variant-numeric:tabular-nums}
+.press .questions li:last-child{margin-bottom:0}
+
+/* contents */
+.press .toc-toggle{position:fixed;top:1rem;right:1rem;z-index:25;font:600 .7rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--bg);border:1px solid var(--line-2);border-radius:999px;padding:.6rem .95rem;cursor:pointer}
+.press .toc-toggle:hover{border-color:var(--accent);color:var(--bright)}
+.press .toc{display:none;position:fixed;top:3.6rem;right:1rem;z-index:24;width:min(22rem,calc(100vw - 2rem));max-height:calc(100vh - 5rem);overflow:auto;padding:1rem 1.2rem 1.1rem;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;box-shadow:0 30px 80px #0009}
+.press.light .toc{box-shadow:0 20px 60px #0002}
+.press .toc.open{display:block}
+.press .toc-label{font:600 .66rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem}
+.press .toc a{display:block;font:.86rem/1.4 var(--sans);color:var(--muted);border:0;padding:.42rem 0 .42rem .8rem;border-left:1px solid transparent;margin-left:-.05rem}
+.press .toc a.lvl3{padding-left:1.8rem;font-size:.8rem}
+.press .toc a:hover{color:var(--bright)}
+.press .toc a.active{color:var(--bright);border-left-color:var(--accent)}
+@media(min-width:1180px){
+  .press .toc-toggle{display:none}
+  .press .toc{display:block;position:fixed;top:5.4rem;left:calc(50% - var(--col)/2 - var(--toc) - 1.5rem);right:auto;width:var(--toc);max-height:calc(100vh - 8rem);padding:0 0 0 .2rem;background:none;border:0;box-shadow:none}
+  .press .toc a{border-left:1px solid var(--line)}
+}
+
+/* audio player: sits under the masthead, sticks to the top while scrolling */
+.press .player{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.6rem;margin:0 0 2.5rem;padding:.7rem 0;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:.78rem/1 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.press .player button{appearance:none;border:1px solid var(--line-2);background:none;color:var(--ink);border-radius:999px;width:2.3rem;height:2.3rem;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:0 0 auto}
+.press .player button:hover{border-color:var(--accent);color:var(--bright)}
+.press .player button svg{width:1rem;height:1rem;fill:currentColor;display:block}
+.press .player .p-play{width:2.7rem;height:2.7rem;border-color:var(--accent);color:var(--bright)}
+.press .player .p-play .i-pause{display:none}
+.press .player.playing .p-play .i-play{display:none}
+.press .player.playing .p-play .i-pause{display:block}
+.press .player .p-skip{position:relative}
+.press .player .p-skip svg{width:1.35rem;height:1.35rem}
+.press .player .p-skip span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 .5rem/1 var(--sans);color:currentColor;padding-top:.1rem}
+.press .player .p-time{flex:0 0 auto;min-width:2.6rem;text-align:center;letter-spacing:.02em}
+.press .player .p-range{flex:1 1 auto;appearance:none;height:2px;background:var(--line-2);border-radius:2px;outline:0;margin:0 .2rem;cursor:pointer;min-width:4rem}
+.press .player .p-range::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range:focus-visible{outline:1px solid var(--accent);outline-offset:6px}
+.press .player .p-label{flex:0 0 auto;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;color:var(--accent);margin-right:.2rem}
+.press .player.error{color:var(--faint)}
+@media(max-width:640px){
+  .press .player{gap:.45rem;margin:0 -.2rem 2rem}
+  .press .player .p-label{display:none}
+  .press .player .p-time{min-width:2.3rem;font-size:.72rem}
+}
+@media print{.press .player{display:none!important}}
+
+/* colophon */
+.press .colophon{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);font:.74rem/1.5 var(--sans);color:var(--faint);letter-spacing:.08em}
+
+/* library */
+.press.library .cards{display:grid;gap:1rem;margin-bottom:3rem}
+.press.library .card{display:block;padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:inherit}
+.press.library .card:hover{border-color:var(--accent)}
+.press.library .card h2{font:400 1.5rem/1.25 var(--serif);color:var(--bright);text-transform:none;letter-spacing:-.01em;margin:.2rem 0 .6rem;padding:0;border:0}
+.press.library .card p{color:var(--muted);font-size:1rem;margin-bottom:.8rem}
+.press.library .card .eyebrow{margin-bottom:.2rem}
+.press.library .concept-row{font:.92rem/1.7 var(--sans);color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--line)}
+.press.library .concept-row b{color:var(--bright);margin-right:.6rem}
+
+/* small screens */
+@media(max-width:640px){
+  .press{font-size:1.05rem;line-height:1.68}
+  .press .page{padding:4rem 1.1rem 5rem}
+  .press .figure{padding:1rem 1rem .8rem;margin:2rem -.3rem}
+  .press .figure .svg{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .press .figure svg{min-width:34rem}
+  .press .questions{padding:1.5rem 1.1rem 1rem}
+  .press blockquote{font-size:1.08rem}
+}
+
+/* print: light and complete */
+@media print{
+  .press{background:#fff;color:#111;font-size:11pt;line-height:1.5;--bright:#000;--muted:#444;--faint:#666;--accent:#6b5a38;--accent-2:#45526a;--warm:#8a6118;--line:#ccc;--line-2:#bbb;--panel:#f6f6f6;--panel-2:#eee}
+  .press .progress,.press .toc,.press .toc-toggle{display:none!important}
+  .press .page{max-width:none;margin:0;padding:0}
+  .press h2,.press h3{break-after:avoid}
+  .press .figure,.press .concept,.press .callout,.press blockquote,.press .questions li{break-inside:avoid}
+  .press a{color:inherit;border:0}
+}
+@media(prefers-reduced-motion:reduce){.press .progress i{transition:none}}
+</style></head>
+<body class="press">
+<div class="progress" aria-hidden="true"><i id="progress-fill"></i></div>
+<button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc">Contents</button>
+<nav class="toc" id="toc" aria-label="Contents"><div class="toc-label">Contents</div><a class="lvl2" href="#1-ten-years-proving-the-multiplication-table">1. Ten years proving the multiplication table</a><a class="lvl2" href="#2-sweet-peas-and-the-height-of-englishmen">2. Sweet peas and the height of Englishmen</a><a class="lvl2" href="#3-the-symmetry-that-kills-the-force">3. The symmetry that kills the force</a><a class="lvl2" href="#4-what-a-measurement-is-made-of">4. What a measurement is made of</a><a class="lvl2" href="#5-why-the-story-always-arrives-first">5. Why the story always arrives first</a><a class="lvl2" href="#6-the-crackdown-in-connecticut">6. The crackdown in Connecticut</a><a class="lvl2" href="#7-the-patient-arrives-at-the-worst-moment">7. The patient arrives at the worst moment</a><a class="lvl2" href="#8-the-consultant-who-never-fails">8. The consultant who never fails</a><a class="lvl2" href="#9-the-hot-hand-when-the-debunkers-were-fooled">9. The hot hand: when the debunkers were fooled</a><a class="lvl2" href="#10-where-the-law-breaks-down">10. Where the law breaks down</a><a class="lvl2" href="#11-what-to-do-with-it">11. What to do with it</a></nav>
+<main class="page">
+<header class="masthead"><div class="eyebrow">Daily Reading · Day 3 · 2026-09-12</div><h1>The Return to the Middle: A Law That Is Not a Force</h1><p class="standfirst">In 1886 Francis Galton found that the children of tall parents are shorter than their parents, that the parents of tall children are shorter than their children, and that both are true at once. Out of that puzzle came the correlation coefficient, the control group, a century of consultants who never fail, and the most dependable way there is to be fooled by your own success.</p><div class="meta">5,927 words · about 26 min</div></header>
+<div class="player" id="player" data-src="audio/2026-09-12-regression.mp3" data-series="Daily Reading" role="group" aria-label="Audio version"><span class="p-label">Listen · about 36 min</span><button class="p-skip p-back" type="button" aria-label="Back 15 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="currentColor"/></svg><span>15</span></button><button class="p-play" type="button" aria-label="Play"><svg viewBox="0 0 16 16" class="i-play" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg><svg viewBox="0 0 16 16" class="i-pause" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg></button><button class="p-skip p-fwd" type="button" aria-label="Forward 15 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1l5 5-5 5V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="currentColor"/></svg><span>15</span></button><span class="p-time p-cur">0:00</span><input class="p-range" type="range" min="0" max="100" step="0.5" value="0" aria-label="Position"><span class="p-time p-dur">–:––</span></div>
+<article class="article" id="article">
+<p>The first two readings were about states trying to see. This one is about something smaller and stranger: what happens whenever anything is measured twice. It is a fact about arithmetic, not about the world, and that is exactly why it is so hard to stop seeing it as a force.</p>
+<h2 id="1-ten-years-proving-the-multiplication-table">1. Ten years proving the multiplication table</h2>
+<p>In 1933 Horace Secrist, a professor of statistics at Northwestern University, published a book called <em>The Triumph of Mediocrity in Business</em>. It was 468 pages long and rested on ten years of work. He had taken seventy-three industries, from department stores to railways, and for each one ranked the firms by their performance in a starting year, split them into groups from best to worst, and then followed each group forward through the 1920s. The result was the same in every industry. The best firms drifted down towards the average. The worst drifted up towards it. The spread between them narrowed year by year. Secrist concluded that competition itself was pulling American business towards mediocrity, that excellence was being eroded by some structural force in the economy, and he said so with the confidence of a man holding ten years of tables.</p>
+<p>The book was well received. Reviewers called it careful and important. Then, in December of that year, a review appeared in the <em>Journal of the American Statistical Association</em> by Harold Hotelling, a mathematical statistician at Columbia. Hotelling did not dispute a single number. He pointed out that Secrist would have found the same convergence in any set of figures whatever, including figures produced by throwing dice, and that the whole result was a property of the method of grouping and not of business. He then suggested a test that anyone could run. Take Secrist's data and read it backwards in time. Rank the firms by their performance in the final year, group them, and trace the groups back towards the start. You find exactly the same picture: the best firms of the final year were closer to average at the beginning, and so were the worst. If the "force" pulls towards mediocrity going forwards, and also pulls towards mediocrity going backwards, it is not a force. Hotelling's last sentence has been quoted by statisticians ever since. To prove such a result by a long and expensive study of real data, he wrote, is like proving the multiplication table by arranging elephants in rows and columns, and then doing it again with other kinds of animals.</p>
+<p>Secrist replied, defended his book, and was answered again. His book is now remembered only as the largest known example of a mistake so natural that the man who first found the law behind it made it himself.</p>
+<h2 id="2-sweet-peas-and-the-height-of-englishmen">2. Sweet peas and the height of Englishmen</h2>
+<p>That man was Francis Galton, cousin of Charles Darwin, explorer, inventor of weather maps and fingerprint identification, and one of the most restless minds of Victorian England. In the 1870s he wanted to measure heredity. He chose sweet peas because they self-fertilise, so there is only one parent to worry about, and because the seeds are easy to weigh. He sorted parent seeds into seven size classes, from very small to very large, sent packets to friends around the country to grow, and collected the offspring seeds in 1877. Two things were true of what came back. The offspring of large seeds were larger than average, so heredity was real. But they were not as large as their parents. The offspring of small seeds were, likewise, larger than their parents. Each generation's extremes had moved back some fixed fraction of the way towards the middle. Galton called this "reversion" and, being a Victorian, thought at first he had found a biological law: some tendency in the germ to return to the ancestral type.</p>
+<p>He then did the same thing with people. Through a public appeal, with prizes, he collected the heights of 205 pairs of parents and their 928 adult children. To make one number of the two parents he averaged them, multiplying the mother's height by 1.08 to put women on the men's scale, and called the result the "mid-parent". Then he laid out a table: mid-parent height down the side, children's heights across the top, and counts in the cells. In 1886 he published the result under a title that gave the law its permanent name, "Regression towards Mediocrity in Hereditary Stature". Children of mid-parents who stood one inch above the average of the population stood, on average, only two-thirds of an inch above it. The children of parents an inch below the average were only two-thirds of an inch below. The rate of return was the same at every height, about a third of the distance, in both directions.</p>
+<aside class="concept" id="concept-regression-to-the-mean">
+<div class="concept-title">Regression to the mean</div>
+<p>When a quantity is measured twice and the two measurements are imperfectly related, the cases that were extreme on the first measurement will, on average, be less extreme on the second. The effect is symmetrical: cases extreme on the second measurement were, on average, less extreme on the first. It requires no cause other than the imperfection of the relation. Named by Francis Galton in 1886, who at first mistook it for a biological force.</p>
+</aside>
+<h2 id="3-the-symmetry-that-kills-the-force">3. The symmetry that kills the force</h2>
+<p>Galton was still thinking of reversion as something heredity <em>did</em>. What changed his mind was looking at the table the other way round. If you pick out the children who were tall and ask how tall their parents were, the parents were also closer to the average than the children. Tall children come, on average, from less-tall parents, just as tall parents produce, on average, less-tall children. Heredity runs from parents to children, not the other way, so whatever produced this pattern could not be heredity. It had to be something about the table itself.</p>
+<p>He took the table to a Cambridge mathematician, J. D. Hamilton Dickson, who showed him that if you draw contour lines through cells with equal counts, you get a set of concentric ellipses tilted along the diagonal, and that two straight lines can be drawn through the cloud: one giving the average child for each height of parent, and one giving the average parent for each height of child. Neither line is the diagonal. Both lean away from it, towards the axis of whatever you are predicting. The slope of each line is the same number, and that number is what Galton, and after him Karl Pearson, turned into the correlation coefficient.</p>
+<figure id="figure-1" class="figure" data-n="1">
+<div class="svg"><svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Scatter ellipse of parent height against child height with three lines: a dashed diagonal of equality, a flatter regression line of child on parent, and a steeper regression line of parent on child">
+  <g font-size="13" fill="var(--ink)">
+    <line x1="90" y1="360" x2="680" y2="360" stroke="var(--line-2)"/>
+    <line x1="90" y1="360" x2="90" y2="30" stroke="var(--line-2)"/>
+    <text x="385" y="400" text-anchor="middle" fill="var(--faint)">mid-parent height, inches above or below the average</text>
+    <text x="30" y="200" text-anchor="middle" fill="var(--faint)" transform="rotate(-90 30 200)">child's height, inches above or below the average</text>
+    <g fill="var(--faint)" font-size="12">
+      <text x="90" y="378" text-anchor="middle">−4</text>
+      <text x="238" y="378" text-anchor="middle">−2</text>
+      <text x="385" y="378" text-anchor="middle">0</text>
+      <text x="532" y="378" text-anchor="middle">+2</text>
+      <text x="680" y="378" text-anchor="middle">+4</text>
+      <text x="76" y="200" text-anchor="end">0</text>
+      <text x="76" y="118" text-anchor="end">+2</text>
+      <text x="76" y="282" text-anchor="end">−2</text>
+    </g>
+    <line x1="90" y1="200" x2="680" y2="200" stroke="var(--line-2)" stroke-dasharray="2 4"/>
+    <line x1="385" y1="30" x2="385" y2="360" stroke="var(--line-2)" stroke-dasharray="2 4"/>
+    <g fill="none" stroke="var(--line-2)" transform="translate(385 200) rotate(-40)">
+      <ellipse rx="230" ry="95"/>
+      <ellipse rx="160" ry="66"/>
+      <ellipse rx="90" ry="37"/>
+    </g>
+    <line x1="150" y1="395" x2="620" y2="5" stroke="var(--faint)" stroke-dasharray="6 5"/>
+    <text x="606" y="18" fill="var(--faint)" font-style="italic" font-size="12" text-anchor="end">child equals parent</text>
+    <line x1="120" y1="333" x2="650" y2="67" stroke="var(--accent)" stroke-width="2"/>
+    <text x="654" y="60" fill="var(--accent)" font-size="12">average child, given parent</text>
+    <line x1="270" y1="360" x2="500" y2="40" stroke="var(--slate, #8a94a6)" stroke-width="2"/>
+    <text x="504" y="44" fill="var(--slate, #8a94a6)" font-size="12">average parent, given child</text>
+    <circle cx="532" cy="126" r="4" fill="var(--accent)"/>
+    <text x="544" y="130" fill="var(--accent)" font-size="12">parents +2, children average about +1.3</text>
+  </g>
+</svg></div>
+<figcaption>Galton's cloud, redrawn. The dashed diagonal is where children would sit if they matched their parents exactly. The brass line is the average child for each height of parent; it is flatter than the diagonal, so tall parents' children fall short of them. The slate line is the average parent for each height of child; it leans the other way. Both regress. Neither is a force.</figcaption>
+</figure>
+<aside class="concept" id="concept-the-correlation-coefficient">
+<div class="concept-title">The correlation coefficient</div>
+<p>A number between minus one and one that says how tightly two quantities move together. At one, knowing the first tells you the second exactly; at zero, it tells you nothing. Galton's height data gave about two-thirds, and that fraction is exactly how much of a parent's distance from the average is passed on, on average, to a child. Correlation and regression are two views of the same number: the weaker the correlation, the stronger the return to the middle. Formalised by Karl Pearson in the 1890s.</p>
+</aside>
+<p>The point that Galton grasped in 1886 is the one Secrist missed in 1933 and that most of us miss most days: the return to the middle is not something the world does to the extremes. It is something the arithmetic of two imperfect measurements does to our selection of them.</p>
+<h2 id="4-what-a-measurement-is-made-of">4. What a measurement is made of</h2>
+<p>To see why, take any score that can be measured twice. A child's height. A firm's profit this year. A pupil's mark on a test. A pilot's landing this morning. A patient's blood pressure at ten o'clock. Every such score can be thought of as two parts added together. One part is stable: the pupil's real knowledge, the firm's real position, the patient's usual pressure. The other part is everything that happened to be true at the moment of measurement and will not happen again in the same way: the questions that came up, the customer who paid early, the argument on the way to the clinic. Call the first part the signal and the second part luck, with no moral meaning attached; luck here is simply the part that does not repeat.</p>
+<p>Now pick out the cases that scored highest. What have you selected? Partly you have selected high signal, which is what you wanted. But you have also, unavoidably, selected good luck, because on any one day the top of the table is crowded with people whose luck was good. The stable part will still be there tomorrow. The luck will be drawn again from scratch, and on average it will come out ordinary. So tomorrow the group you selected will still be above average, because their signal is real, but less far above than today, because their luck was borrowed. The same holds at the bottom with the signs reversed. And it holds in reverse time: select on tomorrow's scores and the same people were, on average, less extreme today, because tomorrow's luck had not yet been dealt.</p>
+<figure id="figure-2" class="figure" data-n="2">
+<div class="svg"><svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two panels of six bars each. Day one: bars sorted by score, each split into a stable base and a luck segment; the top three have large positive luck. Day two: the same people with the same base but fresh luck of mixed sign, so the former top three sit lower.">
+  <g font-size="13" fill="var(--ink)">
+    <text x="180" y="28" text-anchor="middle" font-weight="600">Day one: pick the top three</text>
+    <text x="540" y="28" text-anchor="middle" font-weight="600">Day two: the same three, luck redrawn</text>
+    <line x1="40" y1="300" x2="330" y2="300" stroke="var(--line-2)"/>
+    <line x1="400" y1="300" x2="690" y2="300" stroke="var(--line-2)"/>
+    <line x1="40" y1="200" x2="330" y2="200" stroke="var(--faint)" stroke-dasharray="3 4"/>
+    <line x1="400" y1="200" x2="690" y2="200" stroke="var(--faint)" stroke-dasharray="3 4"/>
+    <text x="334" y="204" fill="var(--faint)" font-size="12">average</text>
+    <text x="694" y="204" fill="var(--faint)" font-size="12">average</text>
+    <g>
+      <rect x="60" y="150" width="30" height="150" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <rect x="60" y="84" width="30" height="66" fill="var(--accent)" opacity="0.85"/>
+      <rect x="105" y="170" width="30" height="130" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <rect x="105" y="120" width="30" height="50" fill="var(--accent)" opacity="0.85"/>
+      <rect x="150" y="196" width="30" height="104" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <rect x="150" y="156" width="30" height="40" fill="var(--accent)" opacity="0.85"/>
+      <rect x="195" y="188" width="30" height="112" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <rect x="195" y="188" width="30" height="24" fill="var(--amber, #c99a4b)" opacity="0.6"/>
+      <rect x="240" y="206" width="30" height="94" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <rect x="240" y="206" width="30" height="40" fill="var(--amber, #c99a4b)" opacity="0.6"/>
+      <rect x="285" y="230" width="30" height="70" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <rect x="285" y="230" width="30" height="22" fill="var(--amber, #c99a4b)" opacity="0.6"/>
+      <path d="M52 76 L52 300" fill="none" stroke="var(--accent)" stroke-dasharray="4 3"/>
+      <path d="M188 76 L188 300" fill="none" stroke="var(--accent)" stroke-dasharray="4 3"/>
+      <text x="120" y="66" text-anchor="middle" fill="var(--accent)" font-size="12">selected</text>
+    </g>
+    <g>
+      <rect x="420" y="150" width="30" height="150" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <rect x="420" y="150" width="30" height="30" fill="var(--amber, #c99a4b)" opacity="0.6"/>
+      <rect x="465" y="170" width="30" height="130" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <rect x="465" y="150" width="30" height="20" fill="var(--accent)" opacity="0.85"/>
+      <rect x="510" y="196" width="30" height="104" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <rect x="510" y="196" width="30" height="36" fill="var(--amber, #c99a4b)" opacity="0.6"/>
+      <text x="480" y="66" text-anchor="middle" fill="var(--accent)" font-size="12">same three, day two</text>
+      <path d="M412 76 L412 300" fill="none" stroke="var(--accent)" stroke-dasharray="4 3"/>
+      <path d="M548 76 L548 300" fill="none" stroke="var(--accent)" stroke-dasharray="4 3"/>
+      <text x="620" y="250" text-anchor="middle" fill="var(--faint)" font-size="12">still above average,</text>
+      <text x="620" y="268" text-anchor="middle" fill="var(--faint)" font-size="12">no longer on top</text>
+    </g>
+    <g font-size="12">
+      <rect x="60" y="340" width="14" height="14" fill="var(--panel-2)" stroke="var(--line-2)"/>
+      <text x="80" y="352">stable part, the signal</text>
+      <rect x="240" y="340" width="14" height="14" fill="var(--accent)" opacity="0.85"/>
+      <text x="260" y="352">good luck, added</text>
+      <rect x="400" y="340" width="14" height="14" fill="var(--amber, #c99a4b)" opacity="0.6"/>
+      <text x="420" y="352">bad luck, subtracted from the top of the bar</text>
+    </g>
+  </g>
+</svg></div>
+<figcaption>Why the top group falls back. Each bar is one score, split into its stable part and its luck. Selecting the highest scores on day one takes mostly positive luck along with the signal. On day two the signal stays and the luck is redrawn, so the same people land lower on average, still above the middle but no longer at the top.</figcaption>
+</figure>
+<p>How far back do they fall? Exactly as far as the correlation says. If the two measurements are perfectly correlated, there is no luck in the score and no regression at all: a ruler measures a table the same way twice. If they are uncorrelated, the score is all luck and the selected group falls all the way back to the average on the second measurement, as Secrist's dice would. In between, the expected second score sits at the correlation's fraction of the way from the average to the first score. Galton's two-thirds means that a mid-parent four inches above average is expected to have children about two and two-thirds inches above it.</p>
+<div class="rule">
+<p>Expected second score = the average + correlation × (first score − the average).</p>
+<p>The part of an extreme that does not survive is the part that was never there.</p>
+</div>
+<figure id="figure-3" class="figure" data-n="3">
+<div class="svg"><svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chart with first score on the horizontal axis and expected second score on the vertical axis, showing three lines through the centre with slopes one, two-thirds and zero">
+  <g font-size="13" fill="var(--ink)">
+    <line x1="100" y1="330" x2="660" y2="330" stroke="var(--line-2)"/>
+    <line x1="100" y1="330" x2="100" y2="30" stroke="var(--line-2)"/>
+    <text x="380" y="366" text-anchor="middle" fill="var(--faint)">first score, distance from the average</text>
+    <text x="40" y="180" text-anchor="middle" fill="var(--faint)" transform="rotate(-90 40 180)">expected second score</text>
+    <line x1="100" y1="180" x2="660" y2="180" stroke="var(--line-2)" stroke-dasharray="2 4"/>
+    <line x1="380" y1="30" x2="380" y2="330" stroke="var(--line-2)" stroke-dasharray="2 4"/>
+    <text x="380" y="346" text-anchor="middle" fill="var(--faint)" font-size="12">average</text>
+    <line x1="130" y1="330" x2="630" y2="30" stroke="var(--faint)" stroke-dasharray="6 5"/>
+    <text x="636" y="34" fill="var(--faint)" font-size="12">correlation 1: no return</text>
+    <line x1="130" y1="280" x2="630" y2="80" stroke="var(--accent)" stroke-width="2"/>
+    <text x="636" y="84" fill="var(--accent)" font-size="12">two-thirds: Galton's heights</text>
+    <line x1="130" y1="180" x2="630" y2="180" stroke="var(--slate, #8a94a6)" stroke-width="2"/>
+    <text x="636" y="184" fill="var(--slate, #8a94a6)" font-size="12">zero: all luck</text>
+    <line x1="580" y1="330" x2="580" y2="60" stroke="var(--line-2)" stroke-dasharray="2 3"/>
+    <circle cx="580" cy="60" r="4" fill="var(--faint)"/>
+    <circle cx="580" cy="100" r="4" fill="var(--accent)"/>
+    <circle cx="580" cy="180" r="4" fill="var(--slate, #8a94a6)"/>
+    <text x="580" y="318" text-anchor="middle" fill="var(--faint)" font-size="12">an extreme first score</text>
+  </g>
+</svg></div>
+<figcaption>The same rule at three strengths. Along the bottom is a first score; the height of each line is the expected second score. At a correlation of one there is no return. At Galton's two-thirds the extremes give back a third of their distance. At zero, everything returns to the middle, and the first score told you nothing.</figcaption>
+</figure>
+<p>Notice what this rule does not say. It does not say that any individual will fall back. Some of the top group will do even better tomorrow, because their luck holds or their signal was underestimated. The rule is about the group's average, and it is a statement about what to <em>expect</em>, not about what happens to any one case. That distinction is where most of the damage is done, because we do not experience averages. We experience one case at a time, with a story attached.</p>
+<h2 id="5-why-the-story-always-arrives-first">5. Why the story always arrives first</h2>
+<p>Here is the shape of the trap. Something extreme happens. Someone reacts to it. The next measurement is less extreme, as arithmetic said it would be. The reaction gets the credit or the blame.</p>
+<p>Daniel Kahneman told the founding story of this trap in his memoir <em>Thinking, Fast and Slow</em>, and since it is his recollection of an event from the mid-1960s, take the details as remembered rather than recorded. He was a young psychologist lecturing to Israeli Air Force flight instructors about the evidence, from animal and human studies, that reward works better than punishment for teaching a skill. One of the instructors objected. His experience was the opposite. When he praised a cadet for a clean manoeuvre, the next attempt was usually worse. When he shouted at a cadet for a bad one, the next attempt was usually better. Therefore, he concluded, praise makes pilots complacent and shouting makes them concentrate, and he would go on shouting.</p>
+<p>Kahneman saw, standing there, that the instructor was describing regression to the mean and had built a theory of human motivation on top of it. A manoeuvre good enough to earn praise was an extreme; the next one was likely to be worse whatever the instructor said. A manoeuvre bad enough to earn a shout was the other extreme; the next was likely to be better whatever he said. The instructor had been rewarded for punishing and punished for rewarding, thousands of times, by a process that had nothing to do with him. And Kahneman drew the wider lesson: because we tend to praise people after good outcomes and criticise them after bad ones, life itself is arranged to teach every one of us, over and over, that criticism works and praise does not. This is a lesson delivered by arithmetic, and it is false.</p>
+<aside class="concept" id="concept-the-regression-fallacy">
+<div class="concept-title">The regression fallacy</div>
+<p>Attributing the return of an extreme to the average to whatever happened in between: the treatment, the scolding, the new manager, the jinx. The fallacy is invisible from inside a single case because a cause is always available and the return is genuine. It is exposed only by asking what would have happened with no intervention at all.</p>
+</aside>
+<p>Once you know the shape, you see it in every domain that keeps records. Athletes who make the cover of <em>Sports Illustrated</em> seem to slump afterwards; the "cover jinx" is a folk theory built by fans on exactly the instructor's evidence, since you make the cover in your best season. The second novel, the second album, the second season after a rookie's astonishing first are all measured against an extreme. A restaurant that gets a rave review is visited at its peak and disappoints. A film that opens with the best weekend of the year cannot hold the record. In each case the extreme was selected precisely because it was extreme, and in each case a story stands ready to explain the fall: pressure, complacency, the curse, the critics.</p>
+<h2 id="6-the-crackdown-in-connecticut">6. The crackdown in Connecticut</h2>
+<p>The stakes rise when the person reacting to the extreme governs. In 1955, 324 people died on the roads of Connecticut, the worst year the state had recorded. In December the governor, Abraham Ribicoff, announced a crackdown on speeding: anyone convicted would lose their licence for thirty days on the first offence, and the police were told to enforce it. In 1956 the toll fell to 284. Ribicoff announced that the crackdown had saved forty lives, and the numbers seemed to say so: a fall of twelve per cent in a single year.</p>
+<p>In 1968 the psychologist Donald Campbell and the lawyer H. Laurence Ross took the same figures apart in a paper that became a founding text of programme evaluation. Campbell is the same man whose law about corrupted measures appeared in the first reading; this paper is where he began building the tools that led to it. Their point was not that the crackdown did nothing. It was that the evidence offered could not tell. The year before the crackdown was chosen for the crackdown <em>because</em> it was the worst. A record year contains a great deal of luck: weather, a few multiple-fatality crashes, the state of the roads. The next year was always likely to be lower, crackdown or no crackdown. To see the crackdown's real effect you had to widen the frame: look at Connecticut's deaths over a decade rather than two years, and look at the neighbouring states, which had no crackdown, over the same years. When they did, the decade-long trend was downward everywhere, the neighbours fell too, and the 1955 spike looked like what it probably was, a bad year. Some effect of the crackdown may remain in the residue; the forty lives do not.</p>
+<aside class="concept" id="concept-selection-on-an-extreme">
+<div class="concept-title">Selection on an extreme</div>
+<p>Choosing which cases to treat, study, or celebrate because of their extreme value on the very measure you then track. The selection guarantees that a part of what you selected was luck, and so guarantees an apparent change afterwards. It is the entrance to nearly every regression fallacy: the worst schools get the programme, the sickest patients get the drug, the best year gets the cover.</p>
+</aside>
+<p>The same pattern has been argued over in Britain for twenty years about speed cameras, which are placed, sensibly, where the most crashes have just happened. Every camera site therefore shows a fall in collisions afterwards. Some of that fall is the camera and some is the return to the average of a site chosen for its bad year, and separating the two has occupied the Department for Transport, road-safety statisticians, and motoring campaigners since the first four-year evaluation in 2005.</p>
+<aside class="callout evidence" data-label="Evidence check">
+<p>The direction is settled: independent analyses agree that part of the measured fall at camera sites is regression to the mean, and the official 2005 evaluation itself set out to allow for it. The size is not settled, because it depends on how the sites were chosen and over how many years, and the published estimates range from a modest share to most of the effect. What no serious analysis supports is the raw before-and-after figure.</p>
+</aside>
+<p>Hotelling's trick from 1933 gives a fast first test whenever you suspect this. Run the film backwards. If the sites with the most crashes this year had fewer crashes last year, on average, than they have now, then the "improvement" you are about to observe next year is at least partly the same thing seen from the other side. A cause that works in both directions of time is not a cause.</p>
+<div class="rule">
+<p>The reversal test: select on the second measurement instead of the first, and see whether the first was also less extreme.</p>
+<p>If it was, you have found the arithmetic, not the treatment.</p>
+</div>
+<h2 id="7-the-patient-arrives-at-the-worst-moment">7. The patient arrives at the worst moment</h2>
+<p>Medicine is where the law does its most expensive work, because patients do not present themselves at random. They come when they are at their worst, which is to say at an extreme, and they come to be treated. Whatever is done to them next is followed, on average, by improvement. A doctor who gave every patient a glass of water and sent them home would, for most conditions that fluctuate, see most of them get better, and would be tempted to conclude, as the flight instructor did, that the water works.</p>
+<p>The clearest case is blood pressure. A single reading is a noisy measurement of a stable quantity: it moves with anxiety, the walk to the clinic, the time of day, and the presence of a person in a white coat. Screen a population once, pick everyone whose reading is above a threshold, and measure them again a week later, untreated: a large share of them will now be below it. This is so well established that guidelines for diagnosing hypertension require elevated readings on several separate occasions before anyone is labelled, and trials of blood-pressure drugs must be judged against people who were selected the same way and given nothing. Any uncontrolled trial that selects the highest readers and then treats them will "work".</p>
+<p>The point generalises to the placebo. For most of the twentieth century, the improvement seen in the placebo arm of a trial was taken to be the placebo <em>effect</em>, the healing power of expectation, and it was often quoted as a third of patients improving on sugar pills. In 2001 two Danish researchers, Asbjørn Hróbjartsson and Peter Gøtzsche, published in the <em>New England Journal of Medicine</em> an analysis of the trials that had three arms rather than two: a treatment group, a placebo group, and a group that received nothing at all. Only the third group can tell you what improvement occurs without any intervention, and therefore how much of the placebo group's improvement was the placebo. Their answer, across more than a hundred trials, was that for most outcomes the placebo group did about as well as the nothing group. The improvement was real, but it was mostly the natural course of the illness plus the return to the average of people who had enrolled when they felt worst. A genuine placebo effect survived for a few outcomes, pain most clearly, and was smaller than the folklore.</p>
+<aside class="callout interpretation" data-label="Interpretation">
+<p>The clean lesson is not that placebos do nothing. It is that "patients improved after X" is evidence about X only when it is compared with patients who were selected in the same way and given something else, or nothing. The comparison group exists to absorb regression. That is a large part of what a control group is <em>for</em>, and it is why the randomised trial, in which the extremes are shared out by lot between the arms, is the one design that makes the return to the middle cancel out.</p>
+</aside>
+<aside class="concept" id="concept-the-control-group">
+<div class="concept-title">The control group</div>
+<p>A set of cases chosen in the same way as the treated cases, at the same time, and left untreated or given a comparison treatment, so that whatever would have happened anyway, including regression to the mean, happens to them as well and can be subtracted. Randomising who goes into which group shares the luck equally between them. Without a control group, the return to the middle is credited to the treatment.</p>
+</aside>
+<h2 id="8-the-consultant-who-never-fails">8. The consultant who never fails</h2>
+<p>Now return to business, where Secrist began, because the law there has a peculiar property: it can be sold.</p>
+<p>A consultancy that is hired to fix a company's worst-performing branches will, on average, be able to show improvement, whatever it does, because the branches were chosen for a bad year. A chief executive appointed after a disastrous year will, on average, preside over a recovery, because the year that got the predecessor sacked was an extreme. A training programme given to the salespeople with the lowest figures will lift their figures. A turnaround specialist can build a career on being called in at the bottom. None of these people need be frauds. They may believe, exactly like the instructor, that they have watched their methods work, and they have the numbers to prove it. They have simply never seen the branches, executives, or salespeople who were left alone.</p>
+<p>The effect works upwards too, and there it is called a halo. In 2001 Jim Collins published <em>Good to Great</em>, which selected eleven companies whose stock had beaten the market for fifteen years and searched their histories for the disciplines that explained it. The book sold millions. Within a decade two of the eleven, Circuit City and Fannie Mae, had gone bankrupt or into government hands, and most of the rest had fallen back to the market's average. The management writer Phil Rosenzweig, in <em>The Halo Effect</em> in 2007, made the general point: if you select companies for extreme success and then ask what they did, you will find that they did things, and those things will look like the causes of success, because the story arrives first. Then the luck is redrawn.</p>
+<p>The same dispute reached the economics of whole nations. In 1986 William Baumol published an influential paper showing that the industrial countries had converged over the previous century: those that were poorest in 1870 had grown fastest since. The data came from a set of sixteen countries assembled by the economic historian Angus Maddison. Two years later Bradford De Long pointed out that the sixteen were the countries that were rich <em>now</em>, in the 1980s; Maddison had chosen them for being industrialised at the end of the period. Countries that were rich in 1870 and had since fallen behind, such as Argentina, were left out, and so were countries that were poor in 1870 and stayed poor. Selecting on the end of the period and then looking backwards produces convergence for exactly Hotelling's reason. When De Long added the countries that were as rich as the sixteen in 1870 but had not made it into the club, most of the convergence went away. Milton Friedman, reviewing the affair in 1992 under the title "Do Old Fallacies Ever Die?", drew the line straight back to Secrist and remarked that the economists had not read Hotelling either.</p>
+<aside class="callout evidence" data-label="Evidence check">
+<p>Baumol's finding, De Long's correction, and the disappearance of most of the convergence in the widened sample are all in the published record and not in dispute. Whether poorer countries in general tend to catch up is a separate and still-live question, and later work using far larger samples finds a weak conditional version of it. The lesson here is only about the sample: the sixteen were chosen by their ending.</p>
+</aside>
+<h2 id="9-the-hot-hand-when-the-debunkers-were-fooled">9. The hot hand: when the debunkers were fooled</h2>
+<p>A law that fools everyone will eventually fool the people who teach it. In 1985 Thomas Gilovich, Robert Vallone, and Amos Tversky published a paper on the "hot hand" in basketball, the belief among players, coaches and fans that a shooter who has hit several shots in a row is more likely to hit the next one. They examined shooting records from the Philadelphia 76ers and free-throw records from the Boston Celtics, and ran a controlled shooting experiment with Cornell players. In each case they asked whether a player's chance of scoring after a run of hits was higher than his chance after a run of misses. It was not, or not detectably. They concluded that the hot hand was an illusion, produced by our habit of seeing streaks in random sequences. For thirty years the paper was the textbook example of a cognitive bias, cited in every account of how the mind imposes patterns on chance.</p>
+<p>In 2018 two economists, Joshua Miller and Adam Sanjurjo, published a paper in <em>Econometrica</em> showing that the 1985 method contained a subtle bias of exactly the kind this reading is about. Suppose a coin is fair and you flip it a small number of times. Now look only at the flips that came right after a head, and ask what fraction of those were heads. You would expect a half. It is less than a half. With three flips, the average across all possible sequences of that fraction is five-twelfths. The reason is a selection effect: choosing to look at "the flip after a head" uses up heads, and in a short sequence the flips that follow a head are drawn from a pool that has been slightly depleted of them. The shorter the sequence, the stronger the effect. Gilovich and his colleagues had computed a shooter's hit rate after streaks, found it roughly equal to his overall rate, and concluded there was no hot hand. But a shooter with no hot hand at all should have shown a rate <em>below</em> his overall rate on this measure. Equal to it meant something was pushing it up. Reanalysing the original data with the bias corrected, Miller and Sanjurjo found a real, moderate hot hand, on the order of several percentage points, in the very data that had been used to deny it.</p>
+<aside class="callout evidence" data-label="Evidence check">
+<p>The mathematical result about short sequences is not contested; it is a theorem and can be checked with a table of eight sequences. That the corrected analysis shows a hot hand in the 1985 data is accepted by most who have examined it, including Gilovich, who has said the effect is real but smaller than fans believe. The size of the hot hand in professional play, and whether it is large enough to act on, remain open.</p>
+</aside>
+<p>The moral is not that the 1985 authors were careless; their paper was rigorous by the standards of its day and its central claim, that people see streaks where there are none, is still well supported. The moral is that conditioning on an extreme, "look at what happened right after the good run", is a selection, and every selection on an outcome bends the next measurement. The instrument they used to look for the illusion had the illusion's own shape. It took thirty years for someone to run the reversal test on the debunkers.</p>
+<h2 id="10-where-the-law-breaks-down">10. Where the law breaks down</h2>
+<p>A lens this powerful needs its limits marked, because it can be misused in exactly the direction it warns against: as a story that arrives first.</p>
+<p><strong>It says nothing about any single case.</strong> A patient, a company, a pupil may genuinely have changed. The law tells you what to expect of a group selected on an extreme; it does not tell you which members of the group are the ones with real signal. The instructor's cadets did sometimes learn from being shouted at. Regression cannot be used to dismiss an individual's improvement; only to withhold credit from the treatment until a comparison exists.</p>
+<p><strong>It assumes the stable part is stable.</strong> The whole argument rests on the signal being the same at both measurements and only the luck being redrawn. Where the underlying thing is itself moving, a growing child, a company in genuine decline, a technology on a learning curve, the prediction from the average will be wrong in the direction of the trend. Statisticians call the assumption stationarity, and the return to the middle is a law about stationary things. Connecticut's deaths were trending down for a decade; that trend was not regression and was not the crackdown either.</p>
+<aside class="concept" id="concept-stationarity">
+<div class="concept-title">Stationarity</div>
+<p>The assumption that the underlying quantity, and the spread of luck around it, do not change between measurements. Regression to the mean is a consequence of imperfect correlation <em>given</em> stationarity. Where the thing measured is genuinely trending or the population is changing, the return to the middle is mixed with real movement, and the two must be separated before either is claimed.</p>
+</aside>
+<p><strong>It is strong only where luck is a large share of the score.</strong> How much regression to expect is the correlation, and the correlation is high when the stable part dominates. A ruler does not regress. Adult height barely does from one year to the next. A single free throw regresses almost entirely. When a score's extremes are produced mostly by real differences, with heavy tails of genuine talent or genuine catastrophe, an extreme observation is more likely to be signal than luck, and the fall-back is small. The law is therefore a question before it is an answer: how much of this score, measured once, is luck?</p>
+<p><strong>It can be used as an excuse.</strong> "That is just regression to the mean" is as much a story as "the crackdown worked", and it is unfalsifiable in the same way if no one checks. The check is always the same: a comparison group chosen the same way, or, failing that, the reversal test. Without one of those, the person invoking regression has not shown anything either.</p>
+<p><strong>Its discoverer misread it.</strong> Galton, having found that the extremes of each generation return towards the middle, concluded that populations were under a constant pull towards mediocrity which only deliberate breeding could resist; he coined the word "eugenics" in 1883, and the movement that carried the word did great harm through the twentieth century. But the return to the middle does not make a population more mediocre. The spread of heights in England did not narrow between Galton's parents and their children; it was the same, because the luck redrawn in each generation creates new extremes exactly as fast as it dissolves the old ones. Galton knew this, and built a machine, a board of pins through which lead shot fell in two stages, to show a lecture audience why the spread was maintained. He still could not shake the feeling that the law was a decline. The feeling was the fallacy, and it survived the arithmetic in the mind of the man who did the arithmetic.</p>
+<h2 id="11-what-to-do-with-it">11. What to do with it</h2>
+<p>The practical form of the law is three questions, asked whenever an extreme is followed by a change.</p>
+<p>First: was this case chosen for attention <em>because</em> it was extreme? The worst branch, the record year, the patient in crisis, the highest blood pressure, the best quarter. If yes, some of what you are looking at was luck, and some of what follows is its withdrawal.</p>
+<p>Second: how much luck is in one measurement? Rough answers suffice. Free throws, quarterly profits, single test scores, single-day sales: a great deal. Height, long-run averages, records over many years: little. The more luck, the more of the change to expect for free.</p>
+<p>Third: what did the untreated do? A comparison group selected the same way is the gold answer. Failing that, run the reversal test: select on the "after" and look at the "before". If the pattern is symmetrical in time, you have found the arithmetic.</p>
+<p>The two earlier readings sit differently once this is in place. A target set on a unit's worst year, in the manner of the first reading, will be met by regression before anyone lifts a finger, which is one reason Goodhart's law is so easy to trigger and so hard to see. A single examination sitting, in the manner of the second, is a measurement with a large luck component: the man who topped the list of three hundred in a Ming palace examination was very able, and also, on that day, lucky, and the empire then treated the rank as if it were all signal. But those are cross-references, not the point. The point is smaller and applies to the next thing you measure twice: the extreme you noticed was partly borrowed, and the world is about to take it back, and it will feel like something you did.</p>
+<section class="questions" id="questions">
+<h2>Questions to sit with</h2>
+<ol>
+<li><strong>Recall:</strong> Galton found the same rate of return in both directions, from parents to children and from children to parents. Explain in one sentence why that symmetry rules out heredity as the cause of the return, and what it leaves as the cause.</li>
+<li><strong>Connect:</strong> Hotelling's reversal test, Campbell's neighbouring states, and the three-armed trials of Hróbjartsson and Gøtzsche are three different ways of answering the same question. What is the question, and what does each method use as its stand-in for "what would have happened anyway"?</li>
+<li><strong>Apply:</strong> Name a decision in your own work or life that was taken right after an extreme result, good or bad. Estimate, roughly, how much of a single such result is luck. Then say what you would need to see before believing the decision, rather than the arithmetic, produced what followed.</li>
+<li><strong>Judge:</strong> The hot-hand debunking stood for thirty years as a textbook example of bias, and turned out to contain one. Was the 1985 paper a failure of science or an example of it working? Argue the side you did not first take, and say what, if anything, should have been done differently in the thirty years between.</li>
+</ol>
+</section>
+</article>
+<footer class="colophon"><a href="index.html">Library</a> · The Return to the Middle: A Law That Is Not a Force · 2026-09-12</footer>
+</main>
+<script type="application/json" id="press-meta">{"title": "The Return to the Middle: A Law That Is Not a Force", "standfirst": "In 1886 Francis Galton found that the children of tall parents are shorter than their parents, that the parents of tall children are shorter than their children, and that both are true at once. Out of that puzzle came the correlation coefficient, the control group, a century of consultants who never fail, and the most dependable way there is to be fooled by your own success.", "date": "2026-09-12", "series": "Daily Reading", "day": "3", "concepts": ["regression to the mean", "correlation coefficient", "regression fallacy", "selection on an extreme", "reversal test", "control group", "stationarity"], "words": 5927, "minutes": 26, "audio": "audio/2026-09-12-regression.mp3", "audio_minutes": 36}</script>
+<script>/* Press reader: progress bar, contents drawer, active-section highlight, audio player. No dependencies. */
+(function () {
+  var fill = document.getElementById('progress-fill');
+  var toc = document.getElementById('toc');
+  var toggle = document.getElementById('toc-toggle');
+  var links = toc ? Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+
+  function progress() {
+    if (!fill) return;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    fill.style.width = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + '%';
+  }
+
+  function active() {
+    if (!links.length) return;
+    var y = window.scrollY + window.innerHeight * 0.28;
+    var current = -1;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i] && targets[i].offsetTop <= y) current = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { progress(); active(); ticking = false; });
+  }
+
+  if (toggle && toc) {
+    toggle.addEventListener('click', function () {
+      var open = toc.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    toc.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A' && window.matchMedia('(max-width: 1179px)').matches) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toc.classList.contains('open')) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  progress();
+  active();
+
+  /* ---------------- audio player ---------------- */
+  var player = document.getElementById('player');
+  if (!player) return;
+  var src = player.getAttribute('data-src');
+  var audio = new Audio();
+  audio.preload = 'metadata';
+  audio.src = src;
+  var key = 'press-audio:' + src;
+  var playBtn = player.querySelector('.p-play');
+  var backBtn = player.querySelector('.p-back');
+  var fwdBtn = player.querySelector('.p-fwd');
+  var range = player.querySelector('.p-range');
+  var cur = player.querySelector('.p-cur');
+  var dur = player.querySelector('.p-dur');
+  var seeking = false;
+
+  function fmt(s) {
+    if (!isFinite(s)) return '–:––';
+    s = Math.floor(s);
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    var mm = (h ? String(m).padStart(2, '0') : String(m));
+    return (h ? h + ':' : '') + mm + ':' + String(sec).padStart(2, '0');
+  }
+  function setPlaying(on) {
+    player.classList.toggle('playing', on);
+    playBtn.setAttribute('aria-label', on ? 'Pause' : 'Play');
+  }
+  function skip(delta) {
+    if (!isFinite(audio.duration)) return;
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + delta));
+  }
+
+  audio.addEventListener('loadedmetadata', function () {
+    range.max = audio.duration;
+    dur.textContent = fmt(audio.duration);
+    try {
+      var p = parseFloat(localStorage.getItem(key));
+      if (p > 5 && p < audio.duration - 10) { audio.currentTime = p; range.value = p; cur.textContent = fmt(p); }
+    } catch (e) {}
+  });
+  audio.addEventListener('timeupdate', function () {
+    if (!seeking) { range.value = audio.currentTime; cur.textContent = fmt(audio.currentTime); }
+    try { localStorage.setItem(key, String(audio.currentTime)); } catch (e) {}
+  });
+  audio.addEventListener('play', function () { setPlaying(true); });
+  audio.addEventListener('pause', function () { setPlaying(false); });
+  audio.addEventListener('ended', function () {
+    setPlaying(false);
+    try { localStorage.removeItem(key); } catch (e) {}
+  });
+  audio.addEventListener('error', function () {
+    player.classList.add('error');
+    dur.textContent = 'audio unavailable';
+  });
+
+  playBtn.addEventListener('click', function () { audio.paused ? audio.play() : audio.pause(); });
+  backBtn.addEventListener('click', function () { skip(-15); });
+  fwdBtn.addEventListener('click', function () { skip(15); });
+  range.addEventListener('input', function () { seeking = true; cur.textContent = fmt(parseFloat(range.value)); });
+  range.addEventListener('change', function () { audio.currentTime = parseFloat(range.value); seeking = false; });
+
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === ' ' || e.key === 'k') { e.preventDefault(); playBtn.click(); }
+    else if (e.key === 'j') skip(-15);
+    else if (e.key === 'l') skip(15);
+  });
+
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: document.title, artist: player.getAttribute('data-series') || 'Reading' });
+      navigator.mediaSession.setActionHandler('play', function () { audio.play(); });
+      navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
+      navigator.mediaSession.setActionHandler('seekbackward', function () { skip(-15); });
+      navigator.mediaSession.setActionHandler('seekforward', function () { skip(15); });
+      navigator.mediaSession.setActionHandler('seekto', function (d) { if (d.seekTime != null) audio.currentTime = d.seekTime; });
+    } catch (e) {}
+  }
+})();
+</script>
+</body></html>
