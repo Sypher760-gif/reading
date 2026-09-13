@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Birds with Two Homes: Why Travel to Breed?</title>
+<style>/* Press theme. Default: true black, warm off-white type, hairline rules, one brass accent.
+   Add class "light" to .press for the off-white variant. Nothing moves; nothing glows. */
+.press{
+  --bg:#000000;--panel:#0b0b0b;--panel-2:#111111;--line:#1f1f1f;--line-2:#2c2c2c;
+  --ink:#d9d5cd;--bright:#f4f1ea;--muted:#8f8b83;--faint:#5f5c56;
+  --accent:#c9b592;          /* brass: labels, links, active contents */
+  --accent-2:#a9b4c4;        /* cool slate: numerals, blockquote bar, interpretation */
+  --warm:#d1a24f;            /* amber: speculation, late-arriving cost */
+  --rose:#c98a8a;
+  --sel:#c9b592;--sel-ink:#000;
+  --serif:"Newsreader","Charter","Iowan Old Style","Cambria","Georgia","Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Cascadia Code","JetBrains Mono","Consolas",ui-monospace,monospace;
+  --col:44rem;--toc:15rem;
+  color-scheme:dark;
+  background:var(--bg);
+  color:var(--ink);
+  font:1.125rem/1.72 var(--serif);
+  margin:0;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.press.light{
+  --bg:#f7f5f0;--panel:#f1eee7;--panel-2:#ebe7de;--line:#e0dcd2;--line-2:#cfc9bc;
+  --ink:#2a2823;--bright:#141310;--muted:#6e6a61;--faint:#9a958a;
+  --accent:#8a7248;--accent-2:#5f6f85;--warm:#a8761f;--rose:#a85d5d;
+  --sel:#141310;--sel-ink:#f7f5f0;
+  color-scheme:light;
+}
+body.press{margin:0}
+.press *{box-sizing:border-box}
+.press a{color:var(--bright);text-decoration:none;border-bottom:1px solid var(--accent)}
+.press a:hover{color:var(--accent)}
+.press ::selection{background:var(--sel);color:var(--sel-ink)}
+.press :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+
+/* reading progress */
+.press .progress{position:fixed;inset:0 0 auto 0;height:1px;background:transparent;z-index:30}
+.press .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .1s linear}
+
+/* page column */
+.press .page{max-width:var(--col);margin:0 auto;padding:5rem 1.4rem 7rem}
+@media(min-width:1180px){
+  .press .page{margin-left:calc(50% - var(--col)/2 + 3rem)}
+}
+
+/* masthead */
+.press .masthead{margin:0 0 3.5rem}
+.press .eyebrow{font:500 .7rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
+.press h1{font:400 clamp(2.2rem,5.2vw,3.6rem)/1.08 var(--serif);letter-spacing:-.02em;color:var(--bright);margin:0 0 1.2rem;text-wrap:balance}
+.press .standfirst{font:italic 1.3rem/1.5 var(--serif);color:var(--muted);margin:0 0 1.4rem;text-wrap:pretty}
+.press .meta{font:.76rem/1.5 var(--sans);color:var(--faint);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+
+/* headings */
+.press h2{font:500 .74rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin:4rem 0 1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);scroll-margin-top:2.5rem}
+.press h3{font:400 1.55rem/1.3 var(--serif);color:var(--bright);margin:2.6rem 0 1rem;letter-spacing:-.01em;text-wrap:balance;scroll-margin-top:2.5rem}
+.press h4{font:600 1.05rem/1.4 var(--sans);color:var(--bright);margin:2rem 0 .8rem}
+
+/* prose */
+.press p{margin:0 0 1.35rem;text-wrap:pretty}
+.press strong{color:var(--bright);font-weight:600}
+.press em{color:var(--ink)}
+.press code{font:.86em var(--mono);background:var(--panel-2);padding:.1em .4em;border-radius:3px}
+.press pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1rem 1.2rem;overflow:auto;font:.85rem/1.55 var(--mono);margin:0 0 1.5rem}
+.press pre code{background:none;padding:0;font-size:inherit}
+.press hr{border:0;height:1px;background:var(--line);margin:3rem 0}
+.press ul,.press ol{margin:0 0 1.5rem;padding-left:1.4rem}
+.press li{margin:0 0 .55rem;padding-left:.2rem}
+.press li::marker{color:var(--accent);font-family:var(--sans);font-size:.9em}
+.press blockquote{margin:2.2rem 0;padding:.2rem 0 .2rem 1.4rem;border-left:1px solid var(--accent-2);color:var(--bright);font-size:1.16rem;line-height:1.6}
+.press blockquote p:last-child{margin-bottom:0}
+
+/* tables */
+.press .table-wrap{overflow:auto;margin:1.8rem 0;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.press table{border-collapse:collapse;width:100%;font:.9rem/1.55 var(--sans);font-variant-numeric:tabular-nums}
+.press th,.press td{padding:.8rem .9rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.press th{color:var(--accent);font-weight:600;background:var(--panel-2)}
+.press tbody tr:last-child td{border-bottom:0}
+
+/* figures */
+.press article{counter-reset:fig}
+.press .figure{margin:2.6rem 0;padding:1.4rem 1.4rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:6px;counter-increment:fig}
+.press .figure .svg{margin:0 0 .6rem}
+.press .figure svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.press figcaption{font:.84rem/1.55 var(--sans);color:var(--muted);padding-top:.7rem;border-top:1px solid var(--line)}
+.press figcaption::before{content:"Figure " counter(fig) " · ";color:var(--accent);font-weight:600;letter-spacing:.04em}
+.press pre.mermaid{background:var(--panel);text-align:center}
+
+/* concept card */
+.press .concept{margin:2.2rem 0;padding:1.2rem 1.4rem 1rem;border-left:2px solid var(--accent);background:var(--panel);border-radius:0 4px 4px 0}
+.press .concept-title{font:600 .7rem/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.press .concept-title::before{content:"Concept · ";color:var(--faint)}
+.press .concept p{font-size:1.02rem;line-height:1.62}
+.press .concept p:last-child{margin-bottom:0}
+
+/* callouts with epistemic labels */
+.press .callout{margin:2rem 0;padding:1.05rem 1.3rem .9rem;border-radius:4px;border:1px solid var(--line);background:var(--panel);font-size:1.02rem;line-height:1.62}
+.press .callout::before{content:attr(data-label);display:block;font:600 .68rem/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+.press .callout p:last-child{margin-bottom:0}
+.press .callout.evidence{border-left:2px solid var(--accent)}
+.press .callout.evidence::before{color:var(--accent)}
+.press .callout.interpretation{border-left:2px solid var(--accent-2)}
+.press .callout.interpretation::before{color:var(--accent-2)}
+.press .callout.speculation{border-left:2px solid var(--warm)}
+.press .callout.speculation::before{color:var(--warm)}
+.press .callout.aside,.press .callout.note{border-style:dashed;color:var(--muted);background:none}
+@media(min-width:1500px){
+  .press .callout.aside{float:right;width:17rem;margin:.3rem -19rem 1.2rem 1.6rem;font-size:.92rem;line-height:1.55;border:0;border-left:1px solid var(--line-2);border-radius:0;padding:.2rem 0 .2rem 1rem}
+}
+
+/* displayed rule / formula */
+.press .rule{margin:2.6rem 0;padding:1.6rem 1.4rem;text-align:center;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.press .rule p{font:italic 1.32rem/1.45 var(--serif);color:var(--bright);margin:0;text-wrap:balance}
+.press .rule p + p{margin-top:.6rem;font:.9rem/1.5 var(--sans);color:var(--muted);font-style:normal}
+
+/* questions */
+.press .questions{margin-top:4rem;padding:2rem 1.6rem 1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.press .questions h2{margin:0 0 1.4rem;padding:0;border:0}
+.press .questions ol{list-style:none;padding:0;counter-reset:q}
+.press .questions li{counter-increment:q;position:relative;padding-left:3rem;margin-bottom:1.3rem;font-size:1.04rem;line-height:1.6}
+.press .questions li::before{content:counter(q,decimal-leading-zero);position:absolute;left:0;top:.05rem;font:400 1.6rem/1 var(--serif);color:var(--accent-2);font-variant-numeric:tabular-nums}
+.press .questions li:last-child{margin-bottom:0}
+
+/* contents */
+.press .toc-toggle{position:fixed;top:1rem;right:1rem;z-index:25;font:600 .7rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--bg);border:1px solid var(--line-2);border-radius:999px;padding:.6rem .95rem;cursor:pointer}
+.press .toc-toggle:hover{border-color:var(--accent);color:var(--bright)}
+.press .toc{display:none;position:fixed;top:3.6rem;right:1rem;z-index:24;width:min(22rem,calc(100vw - 2rem));max-height:calc(100vh - 5rem);overflow:auto;padding:1rem 1.2rem 1.1rem;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;box-shadow:0 30px 80px #0009}
+.press.light .toc{box-shadow:0 20px 60px #0002}
+.press .toc.open{display:block}
+.press .toc-label{font:600 .66rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem}
+.press .toc a{display:block;font:.86rem/1.4 var(--sans);color:var(--muted);border:0;padding:.42rem 0 .42rem .8rem;border-left:1px solid transparent;margin-left:-.05rem}
+.press .toc a.lvl3{padding-left:1.8rem;font-size:.8rem}
+.press .toc a:hover{color:var(--bright)}
+.press .toc a.active{color:var(--bright);border-left-color:var(--accent)}
+@media(min-width:1180px){
+  .press .toc-toggle{display:none}
+  .press .toc{display:block;position:fixed;top:5.4rem;left:calc(50% - var(--col)/2 - var(--toc) - 1.5rem);right:auto;width:var(--toc);max-height:calc(100vh - 8rem);padding:0 0 0 .2rem;background:none;border:0;box-shadow:none}
+  .press .toc a{border-left:1px solid var(--line)}
+}
+
+/* audio player: sits under the masthead, sticks to the top while scrolling */
+.press .player{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.6rem;margin:0 0 2.5rem;padding:.7rem 0;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:.78rem/1 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.press .player button{appearance:none;border:1px solid var(--line-2);background:none;color:var(--ink);border-radius:999px;width:2.3rem;height:2.3rem;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:0 0 auto}
+.press .player button:hover{border-color:var(--accent);color:var(--bright)}
+.press .player button svg{width:1rem;height:1rem;fill:currentColor;display:block}
+.press .player .p-play{width:2.7rem;height:2.7rem;border-color:var(--accent);color:var(--bright)}
+.press .player .p-play .i-pause{display:none}
+.press .player.playing .p-play .i-play{display:none}
+.press .player.playing .p-play .i-pause{display:block}
+.press .player .p-skip{position:relative}
+.press .player .p-skip svg{width:1.35rem;height:1.35rem}
+.press .player .p-skip span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 .5rem/1 var(--sans);color:currentColor;padding-top:.1rem}
+.press .player .p-time{flex:0 0 auto;min-width:2.6rem;text-align:center;letter-spacing:.02em}
+.press .player .p-range{flex:1 1 auto;appearance:none;height:2px;background:var(--line-2);border-radius:2px;outline:0;margin:0 .2rem;cursor:pointer;min-width:4rem}
+.press .player .p-range::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range:focus-visible{outline:1px solid var(--accent);outline-offset:6px}
+.press .player .p-label{flex:0 0 auto;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;color:var(--accent);margin-right:.2rem}
+.press .player.error{color:var(--faint)}
+@media(max-width:640px){
+  .press .player{gap:.45rem;margin:0 -.2rem 2rem}
+  .press .player .p-label{display:none}
+  .press .player .p-time{min-width:2.3rem;font-size:.72rem}
+}
+@media print{.press .player{display:none!important}}
+
+/* colophon */
+.press .colophon{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);font:.74rem/1.5 var(--sans);color:var(--faint);letter-spacing:.08em}
+
+/* library */
+.press.library .cards{display:grid;gap:1rem;margin-bottom:3rem}
+.press.library .card{display:block;padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:inherit}
+.press.library .card:hover{border-color:var(--accent)}
+.press.library .card h2{font:400 1.5rem/1.25 var(--serif);color:var(--bright);text-transform:none;letter-spacing:-.01em;margin:.2rem 0 .6rem;padding:0;border:0}
+.press.library .card p{color:var(--muted);font-size:1rem;margin-bottom:.8rem}
+.press.library .card .eyebrow{margin-bottom:.2rem}
+.press.library .concept-row{font:.92rem/1.7 var(--sans);color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--line)}
+.press.library .concept-row b{color:var(--bright);margin-right:.6rem}
+
+/* small screens */
+@media(max-width:640px){
+  .press{font-size:1.05rem;line-height:1.68}
+  .press .page{padding:4rem 1.1rem 5rem}
+  .press .figure{padding:1rem 1rem .8rem;margin:2rem -.3rem}
+  .press .figure .svg{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .press .figure svg{min-width:34rem}
+  .press .questions{padding:1.5rem 1.1rem 1rem}
+  .press blockquote{font-size:1.08rem}
+}
+
+/* print: light and complete */
+@media print{
+  .press{background:#fff;color:#111;font-size:11pt;line-height:1.5;--bright:#000;--muted:#444;--faint:#666;--accent:#6b5a38;--accent-2:#45526a;--warm:#8a6118;--line:#ccc;--line-2:#bbb;--panel:#f6f6f6;--panel-2:#eee}
+  .press .progress,.press .toc,.press .toc-toggle{display:none!important}
+  .press .page{max-width:none;margin:0;padding:0}
+  .press h2,.press h3{break-after:avoid}
+  .press .figure,.press .concept,.press .callout,.press blockquote,.press .questions li{break-inside:avoid}
+  .press a{color:inherit;border:0}
+}
+@media(prefers-reduced-motion:reduce){.press .progress i{transition:none}}
+</style></head>
+<body class="press">
+<div class="progress" aria-hidden="true"><i id="progress-fill"></i></div>
+<button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc">Contents</button>
+<nav class="toc" id="toc" aria-label="Contents"><div class="toc-label">Contents</div><a class="lvl2" href="#1-a-season-can-be-richer-than-a-place">1. A season can be richer than a place</a><a class="lvl2" href="#2-more-hours-more-chicks">2. More hours, more chicks?</a><a class="lvl2" href="#3-the-journey-is-a-cost-and-a-set-of-constraints">3. The journey is a cost, and a set of constraints</a><a class="lvl2" href="#4-which-home-came-first">4. Which home came first?</a><a class="lvl2" href="#5-the-winter-can-determine-the-summer">5. The winter can determine the summer</a><a class="lvl2" href="#6-where-the-northern-story-fails">6. Where the northern story fails</a><a class="lvl2" href="#7-two-clocks-that-can-come-apart">7. Two clocks that can come apart</a></nav>
+<main class="page">
+<header class="masthead"><div class="eyebrow">Daily Reading · Day 4 · 2026-09-13</div><h1>Birds with Two Homes: Why Travel to Breed?</h1><p class="standfirst">A northern summer can raise more young than a tropical year, but that does not tell us where migration began—or which season decides whether the birds survive. The answer changes as we follow one bird through its whole year.</p><div class="meta">3,215 words · about 14 min</div></header>
+
+<article class="article" id="article">
+<p>In May, an American redstart reaches a wood in Ontario after spending the winter in the Caribbean or Central America. It weighs about eight grams. Within weeks it must claim a place, find a mate, build a nest, and feed young that will leave before summer is over. The wood will be almost useless to this insect-eating bird in January. Why make the journey at all? Why not breed where it can live through the winter?</p>
+<p>“There is more food in the north in summer” is a start, though only a start. The tropics are productive too, and a bird there may have months rather than weeks in which to nest. The northern trip exposes an adult to storms, unfamiliar places, and the possibility of arriving too early or too late. A good answer has to explain why the gain in offspring can pay for those costs. It must also distinguish a present advantage from an evolutionary origin: the reason a route works now may not be the reason the first birds began to take it.</p>
+<h2 id="1-a-season-can-be-richer-than-a-place">1. A season can be richer than a place</h2>
+<p>The year is not a contest between a permanently rich tropics and a permanently poor north. At high latitude, light and warmth arrive together. Leaves expand, insects feed on them, and insect-eating birds can provision chicks during a concentrated period of abundance. In winter the same place may offer almost none of that food. Nearer the equator, the supply can be steadier, though wet and dry seasons matter greatly. A migrant uses two parts of the world at the times when each can sustain it.</p>
+<p>The relevant quantity is not simply how much food a forest produces in a year. It is how much a breeding pair can gather <em>while its chicks need feeding</em>, compared with how many other birds are trying to gather it. A brief surplus can be excellent for raising a brood even if the place cannot support the adults all year. This is one reason seasonal habitats can reward a journey that would look wasteful on a map of annual averages.</p>
+<figure id="figure-1" class="figure" data-n="1">
+<div class="svg"><svg viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two conceptual resource curves across a year: a sharp summer peak for a northern habitat and a flatter tropical curve. A shaded window marks chick feeding during the northern peak.">
+<rect x="0" y="0" width="720" height="330" fill="transparent"/>
+<rect x="360" y="38" width="138" height="230" fill="var(--accent)" opacity="0.08"/>
+<line x1="72" y1="268" x2="676" y2="268" stroke="var(--line-2)"/>
+<line x1="72" y1="268" x2="72" y2="36" stroke="var(--line-2)"/>
+<path d="M72 229 C190 218 260 222 320 190 C355 140 382 71 428 67 C475 67 497 147 526 208 C565 247 619 241 676 232" fill="none" stroke="var(--accent)" stroke-width="3"/>
+<path d="M72 180 C165 174 222 180 302 172 C385 183 470 169 550 179 C620 174 652 177 676 174" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="7 5"/>
+<g fill="var(--faint)" font-size="13" font-family="sans-serif"><text x="72" y="292">winter</text><text x="365" y="292">summer</text><text x="632" y="292">winter</text><text x="11" y="43">usable food</text><text x="376" y="56">chicks</text></g>
+<g font-family="sans-serif" font-size="13"><text x="536" y="112" fill="var(--accent)">northern season</text><text x="538" y="166" fill="var(--ink)">tropical habitat</text></g>
+</svg></div>
+<figcaption>A conceptual comparison, not measured data. Northern insect food can peak sharply during a short breeding season and then collapse; food in a tropical habitat may be less sharply seasonal. A migrant's decision depends on the height and timing of the usable peak, not annual totals alone.</figcaption>
+</figure>
+<p>The word <em>usable</em> matters. A tree may produce leaves, but a flycatcher needs insects it can catch at the right time, near a place where it can nest. When a forest has a large caterpillar peak, the date of that peak may matter more to a chick than the forest’s total annual production. The curve in the figure is a way to keep this timing problem in view; it is not a claim that every tropical habitat is constant or every northern one follows the same curve.</p>
+<h2 id="2-more-hours-more-chicks">2. More hours, more chicks?</h2>
+<p>There is another northern resource easy to overlook: hours of daylight. Parents that hunt by sight have longer days in which to gather food. This does not mean they can work without limit; they must also maintain themselves. But the length of the day can change how much food a pair can deliver before darkness stops them.</p>
+<p>Ecologists have long noticed that many bird species lay larger clutches at higher latitudes. The familiar explanation is that seasonal environments produce more food per breeding bird. In 2013 Alexandra Rose and Bruce Lyon studied tree swallows in California and Alaska to separate that proposal from a simpler one: perhaps the birds have longer workdays. Their comparison of reproductive effort found clear support for the daylight explanation in those populations, and little support for the alternative as they tested it. That does not prove daylight explains every north–south clutch-size pattern. It does show that “more food” can conceal two different mechanisms: more prey available <em>per hour</em>, and more hours in which to collect it. <a href="https://pubmed.ncbi.nlm.nih.gov/23923496/">Rose and Lyon, <em>Ecology</em> (2013)</a>.</p>
+<p>The larger-clutch pattern also has a population-level explanation. In 1963 the ornithologist Philip Ashmole argued that the number of birds a place can support in its lean season affects how much food is available to each pair in its rich season. Imagine two habitats that each produce enough summer food for a hundred pairs. One can keep ninety pairs alive through winter; the other can keep only thirty. When summer arrives, the second habitat has more food per surviving pair, even though its total summer production is no greater. A migrant need not survive the local winter to exploit that gap. Ashmole developed the argument while studying tropical seabirds, not as a complete explanation of songbird migration, and competition, predation, and breeding season length also affect clutch size. The useful distinction is between <strong>total abundance</strong> and <strong>abundance per competitor</strong>. <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1474-919X.1963.tb06766.x">Ashmole, <em>Ibis</em> (1963)</a>.</p>
+<aside class="concept" id="concept-ashmole-s-hypothesis">
+<div class="concept-title">Ashmole's hypothesis</div>
+<p>The number of birds supported through a lean season affects how much food is available per breeding bird in the rich season. A place with strong seasonality can therefore support unusually high reproductive output per pair without being unusually productive across the whole year.</p>
+</aside>
+<aside class="concept" id="concept-seasonal-opportunity">
+<div class="concept-title">Seasonal opportunity</div>
+<p>A place may be valuable for reproduction during a brief period without being habitable year-round. The gain depends on food available at the time chicks need it, daylight for gathering it, and the number of competitors—not just annual productivity.</p>
+</aside>
+<p>Neither mechanism makes every bird migrate north. A tropical resident can breed more than once, may enjoy higher adult survival, and avoids the hazards of two long journeys. Clutch size is not lifetime success. Four eggs in one northern nest are not automatically better than two eggs in several tropical attempts, especially if the adult does not survive the return flight. Natural selection compares the whole life, although our observations often cover only the nest.</p>
+<h2 id="3-the-journey-is-a-cost-and-a-set-of-constraints">3. The journey is a cost, and a set of constraints</h2>
+<p>A migrating bird has to spend resources before it can collect the northern benefit. Fat is a particularly useful flight fuel because it stores much energy for its weight. Some shorebirds can carry enough to cross an ocean without landing. Researchers studying bar-tailed godwits estimated that their long Pacific flight lasts roughly eight days; they also emphasize that range depends on fuel load, speed, and the added cost of carrying fuel. The godwit is an extreme example, not a model for every songbird, many of which stop repeatedly to feed. <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1000362">Hedenström, <em>PLOS Biology</em> (2010)</a>.</p>
+<p>Time is as important as fuel. Arrive before insects appear and the bird may struggle to survive. Arrive after the best nesting sites are taken and it may lose the chance to breed well. It cannot simply wait to see what the northern spring will do: the decision to depart is made far away, with incomplete information about weather at the destination. Bird migration therefore involves several coupled problems—when to leave, how much fuel to carry, where to stop, and when to begin breeding. A route can be profitable in an average year and disastrous in an exceptional one.</p>
+<p>Migration also comes in degrees. Some populations contain both birds that move and birds that stay; others travel only a short distance or change elevation. In European blackcaps, captive breeding and crossing experiments have shown inherited variation in migratory activity and direction. A striking field case emerged in the late twentieth century: some continental blackcaps began wintering northwest in Britain rather than following the more usual southwest route. By 1992, researchers had shown that offspring of birds wintering in Britain oriented northwest in captivity. A different route did not require a new species or a plan conceived by an individual bird. Heritable variation, exposed to different survival and breeding outcomes, could alter the population in decades. <a href="https://www.nature.com/articles/360668a0">Berthold and colleagues, <em>Nature</em> (1992)</a>; <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1474-919X.1992.tb04731.x">Berthold, <em>Ibis</em> (1992)</a>.</p>
+<aside class="concept" id="concept-partial-migration">
+<div class="concept-title">Partial migration</div>
+<p>A population in which some individuals migrate and others remain resident. It makes migration a variable strategy subject to selection, rather than an all-or-nothing property of a species.</p>
+</aside>
+<p>That flexibility helps explain how migration can change, but it leaves a historical question. Which part of a migrant’s present range was home first?</p>
+<h2 id="4-which-home-came-first">4. Which home came first?</h2>
+<p>For much of the twentieth century, one influential account began in the tropics. An ancestral bird lived there year-round. Some descendants moved north for the seasonal breeding opportunity, then returned to their original home for winter. On this account, migration is an expansion of the breeding range. It fits the intuitive answer to our opening question: tropical birds make a costly excursion because northern summers let them raise more young.</p>
+<p>There is an equally coherent history running in the opposite direction. An ancestral population lived year-round in temperate North America. Winter grew difficult or the range expanded into places with harder winters. Some descendants survived by moving south during the lean season while retaining the ancestral northern breeding ground. Here migration is an expansion of the <em>winter</em> range. Both histories produce the same modern map: breed north, spend winter south. Watching a present-day bird cannot reveal which season’s range moved first.</p>
+<figure id="figure-2" class="figure" data-n="2">
+<div class="svg"><svg viewBox="0 0 720 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two panels show tropical-origin and temperate-origin histories, each ending with northern breeding and southern wintering ranges.">
+<g font-family="sans-serif" font-size="13" fill="var(--ink)">
+<text x="62" y="31" fill="var(--accent)">TROPICAL HOME</text><text x="392" y="31" fill="var(--accent)">TEMPERATE HOME</text>
+<text x="66" y="89">north</text><text x="66" y="196">south</text><text x="395" y="89">north</text><text x="395" y="196">south</text>
+<text x="123" y="252" fill="var(--faint)">ancestor</text><text x="261" y="252" fill="var(--faint)">descendant</text><text x="455" y="252" fill="var(--faint)">ancestor</text><text x="591" y="252" fill="var(--faint)">descendant</text>
+</g>
+<g stroke="var(--line-2)"><line x1="105" y1="52" x2="105" y2="220"/><line x1="435" y1="52" x2="435" y2="220"/></g>
+<g fill="var(--ink)"><circle cx="153" cy="185" r="8"/><circle cx="484" cy="78" r="8"/></g>
+<g fill="var(--accent)"><circle cx="289" cy="78" r="8"/><circle cx="289" cy="185" r="8"/><circle cx="619" cy="78" r="8"/><circle cx="619" cy="185" r="8"/></g>
+<g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M165 177 C211 136 239 96 276 82"/><path d="M496 84 C539 111 569 157 605 179"/></g>
+<g fill="var(--accent)"><path d="M274 76 l14 2 -8 12z"/><path d="M602 168 l17 17 -18 0z"/></g>
+</svg></div>
+<figcaption>Two evolutionary histories can produce the same present route. In the tropical-home account the breeding range moves north. In the temperate-home account the winter range moves south. The arrows describe changes across generations, not the flights of one bird.</figcaption>
+</figure>
+<p>In 2014 Benjamin Winger, F. Keith Barker, and Richard Ree tried to distinguish the two. They built a family-tree model that treated breeding and winter ranges separately, then applied it to a large group of New World songbirds. In that group, long-distance migration arose mainly through winter ranges moving south from northern ancestors. Some tropical resident lineages were descended from migrants that later stopped breeding in the north. The tropics, in those cases, were reached <em>through</em> migration; they were not the ancestral base from which migration departed. <a href="https://www.wingerlab.org/uploads/3/7/0/9/37099457/pnas-2014-winger-12115-20.pdf">Winger, Barker, and Ree, <em>PNAS</em> (2014)</a>.</p>
+<p>This method asks a different kind of question from watching birds or measuring food. It compares which historical changes would most plausibly produce the seasonal ranges of living relatives. Breeding and winter ranges must be separate in the model; otherwise, the two histories in the figure collapse into the same present-day distribution. Like any reconstruction from living species, it can be changed by missing or extinct branches and by different assumptions about how ranges shift. Its value is that it makes a historical claim testable instead of reading ancestry straight off a migration map.</p>
+<p>This is the turn in the answer. We began by asking why a tropical bird would leave home to breed. For many of the songbirds in that study, the better historical question is why a northern bird began leaving home to survive winter. The northern summer need not have drawn an ancestor into a new breeding range; it may have been the season the lineage managed to keep.</p>
+<aside class="callout evidence" data-label="How far the result goes">
+<p>The 2014 study reconstructed ranges on an evolutionary tree; it did not observe ancestral birds, and its result applies to the lineage and geography it analyzed. A later worldwide analysis of 9,819 bird species found varied paths, including both temperate and tropical ancestry. A 2020 review of migration within the Neotropics likewise reports no settled origin story across lineages. The supported correction is that there is <strong>no single direction</strong> in which bird migration evolved, not that the tropical-home account has been disproved everywhere. <a href="https://onlinelibrary.wiley.com/doi/10.1111/jbi.13700">Dufour and colleagues, <em>Journal of Biogeography</em> (2020)</a>; <a href="https://academic.oup.com/auk/article/137/4/ukaa033/5879312">Jahn and colleagues, <em>The Auk</em> (2020)</a>.</p>
+</aside>
+<p>The difference matters because present function and historical origin answer different questions. Today a northern summer can reward reproduction and a southern winter can keep adults alive. Either benefit could have supplied the first selective step in a particular lineage. Once a route exists, selection can alter both ends of it. A bird’s “home” is not something its present map can tell us.</p>
+<aside class="concept" id="concept-ancestral-range-reconstruction">
+<div class="concept-title">Ancestral-range reconstruction</div>
+<p>An inference about where ancestral populations bred and spent the nonbreeding season, made from the distributions and family relationships of living species. For migrants, the two seasonal ranges must be reconstructed separately; a modern route alone cannot reveal which end moved first.</p>
+</aside>
+<h2 id="5-the-winter-can-determine-the-summer">5. The winter can determine the summer</h2>
+<p>We have talked about breeding in the north as though the bird arrives with a fresh chance. It does not. Its winter food, territory, health, and departure date travel with it in the condition of its body.</p>
+<p>In 2001 and 2002, D. Ryan Norris and colleagues monitored American redstarts breeding at a field station in Ontario. They used the carbon signature in the birds’ blood to infer what kind of habitat each had occupied over winter: moister, food-rich habitat left a different signal from drier scrub. Males associated with better winter habitat arrived earlier, and earlier arrival affected the timing and results of breeding. Their model predicted meaningful differences in fledged young across winter habitats; the large numerical contrast for females in the paper was a <em>model prediction</em>, not a direct count of two extra young from a controlled habitat experiment. The observational result is already consequential: a nest in Ontario can partly reflect conditions thousands of kilometres away. <a href="https://repository.si.edu/bitstream/handle/10088/2951/Norris_Marra_et_al_Proc_Roy_Soc2003.pdf">Norris and colleagues, <em>Proceedings of the Royal Society B</em> (2004)</a>.</p>
+<aside class="concept" id="concept-carry-over-effect">
+<div class="concept-title">Carry-over effect</div>
+<p>An event or condition in one season changes an individual’s performance in a later season. In a migrant, winter habitat can affect departure, arrival, and reproduction far from the place where the original difference occurred.</p>
+</aside>
+<p>There is a population consequence. Suppose a northern forest still contains nesting sites and insects, yet fewer migrants return each spring. The limiting change might have occurred in winter habitat or at a stopover, not in the forest itself. Conversely, plentiful winter habitat cannot guarantee population growth if nesting success is poor. Researchers now build <em>full-annual-cycle</em> models to join survival during winter and migration to breeding output, including the links between particular breeding and wintering populations. The models are demanding because those links and seasonal survival rates are hard to measure. They are necessary because a migrant population is produced by the whole circuit. <a href="https://repository.si.edu/items/dfed57ef-838e-489b-828a-ccac927d0f2d">Hostetler, Sillett, and Marra, <em>The Auk</em> (2015)</a>.</p>
+<figure id="figure-3" class="figure" data-n="3">
+<div class="svg"><svg viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four linked stages: winter habitat, spring arrival, breeding, and autumn journey, looping back to winter. Arrows show carry-over effects.">
+<g font-family="sans-serif" font-size="14" text-anchor="middle">
+<rect x="30" y="62" width="145" height="64" rx="4" fill="var(--panel-2)" stroke="var(--line-2)"/><text x="102" y="88" fill="var(--ink)">winter habitat</text><text x="102" y="108" fill="var(--faint)" font-size="12">food · condition</text>
+<rect x="202" y="62" width="145" height="64" rx="4" fill="var(--panel-2)" stroke="var(--line-2)"/><text x="274" y="88" fill="var(--ink)">spring journey</text><text x="274" y="108" fill="var(--faint)" font-size="12">departure · arrival</text>
+<rect x="374" y="62" width="145" height="64" rx="4" fill="var(--panel-2)" stroke="var(--line-2)"/><text x="446" y="88" fill="var(--ink)">breeding</text><text x="446" y="108" fill="var(--faint)" font-size="12">timing · young</text>
+<rect x="546" y="62" width="145" height="64" rx="4" fill="var(--panel-2)" stroke="var(--line-2)"/><text x="618" y="88" fill="var(--ink)">autumn journey</text><text x="618" y="108" fill="var(--faint)" font-size="12">survival · return</text>
+</g>
+<g stroke="var(--accent)" stroke-width="2" fill="none"><path d="M175 94h27"/><path d="M347 94h27"/><path d="M519 94h27"/><path d="M619 126v60H102v-60"/></g>
+<g fill="var(--accent)"><path d="M196 89l8 5-8 5z"/><path d="M368 89l8 5-8 5z"/><path d="M540 89l8 5-8 5z"/><path d="M97 134l5-10 5 10z"/></g>
+<text x="360" y="210" text-anchor="middle" fill="var(--faint)" font-family="sans-serif" font-size="12">the next year begins with the survivors</text>
+</svg></div>
+<figcaption>A bird's breeding result is not set only at the nest. Conditions in one season can change the bird's condition and timing in the next; survival and offspring produced across the whole circuit determine whether the population grows.</figcaption>
+</figure>
+<p>This also changes what it means to call a place the bird’s home. The redstart spends only a short breeding period in the north and much longer in its nonbreeding range, with journeys between. Neither end is an optional annex. Breeding supplies new birds; winter and passage determine which adults can try again.</p>
+<aside class="concept" id="concept-full-annual-cycle">
+<div class="concept-title">Full annual cycle</div>
+<p>The linked sequence of breeding, migration, and nonbreeding seasons. Population growth depends on survival and reproduction across the sequence, including effects that carry from one stage into another.</p>
+</aside>
+<h2 id="6-where-the-northern-story-fails">6. Where the northern story fails</h2>
+<p>If long summer daylight and a temperate insect peak were the entire explanation, movement within the tropics would make little sense. Yet birds migrate there too, sometimes changing elevation or following rain, flowering, fruit, or insects without ever approaching a northern summer. The organizing feature is a resource or breeding opportunity that moves in time and space, not northward travel itself. A review of Neotropical migration finds diverse routes and cautions that their causes remain poorly understood in many species. <a href="https://academic.oup.com/auk/article/137/4/ukaa033/5879312">Jahn and colleagues, <em>The Auk</em> (2020)</a>.</p>
+<p>Nor does every bird that could reach a northern peak benefit from doing so. Diet, nesting habitat, competition, adult survival, the number of broods possible in the tropics, and travel hazards alter the calculation. Even within one population, the best choice can differ among individuals. A strong resident may secure enough food through winter; a weaker bird may do better by leaving. In another species the relation could reverse. Partial migration is evidence that the selective balance can sit close enough to a threshold for both strategies to persist.</p>
+<p>The historical reconstructions warn against treating all these variations as steps on one ladder from residence to long-distance migration. Routes can lengthen, shorten, turn, or disappear. A tropical resident may descend from a migratory ancestor, just as a migrant may descend from a resident one. Looking only at the living bird and assuming the simpler behavior came first can mislead. Evolution retains what works under a lineage’s circumstances; it does not work toward the most impressive journey.</p>
+<h2 id="7-two-clocks-that-can-come-apart">7. Two clocks that can come apart</h2>
+<p>The seasonal opportunity is not fixed. Warming can advance the emergence of insects at a breeding site, while a migrant’s departure from its distant winter range responds to other cues. In Dutch populations of pied flycatchers, Christiaan Both and colleagues examined declines in relation to the timing of spring caterpillar peaks. Populations where food peaked earliest fell far more sharply than those where it peaked later—about 90 percent versus about 10 percent in the locations they compared. Resident great tits using the same nest boxes did not show a corresponding relation between their population trends and the caterpillar peak date. The evidence supports a timing problem specific to the migrant in those sites, not a claim that every flycatcher population or every migrant is declining for this one reason. <a href="https://www.rug.nl/staff/c.both/2006bothnature.pdf">Both and colleagues, <em>Nature</em> (2006)</a>.</p>
+<aside class="concept" id="concept-phenological-mismatch">
+<div class="concept-title">Phenological mismatch</div>
+<p>When the timing of one seasonal event changes relative to another that depends on it. For a migrant, peak chick demand can fall after the prey peak if arrival and breeding do not advance as fast as spring food does.</p>
+</aside>
+<p>There are two clocks: the bird’s schedule and the seasonal life of the place it is going. They need not move together. But the blackcaps wintering in Britain show that routes can also evolve quickly. These findings pull against a simple forecast. Some populations will be constrained by inherited timing or distant cues; others may adjust by shifting departure, breeding, or destination. To predict which, we need the actual route, the season when survival is limited, and the degree to which its timing can change. Temperature alone does not supply that information.</p>
+<p>The answer to the opening question is therefore conditional. A bird travels to breed when the extra young it can raise in a seasonal habitat, over its lifetime, outweigh the lost survival and time caused by travel. Northern summer may provide a sharp food peak, long working days, or lower competition per breeding pair; southern habitat may make winter survival possible. Which benefit first produced the route differs among lineages. And the outcome of a northern nest can be set partly by the winter months before the bird arrives. We would have to change this account if comparisons across many populations showed no reproductive gain from the seasonal destination after migration mortality and later survival were included, or if better ancestral reconstructions consistently reversed the inferred histories. For now, the safest unit of explanation is the whole year, not either end of the journey.</p>
+<section class="questions" id="questions">
+<h2>To keep</h2>
+<ol>
+<li>How can a place that supports few birds in winter provide unusually good breeding conditions in summer?</li>
+<li>What is the difference between explaining why a migration route pays now and explaining how it first evolved?</li>
+<li>If a migrant’s breeding numbers fall while its northern forest appears healthy, which parts of its year would you investigate next?</li>
+</ol>
+</section>
+</article>
+<footer class="colophon"><a href="index.html">Library</a> · Birds with Two Homes: Why Travel to Breed? · 2026-09-13</footer>
+</main>
+<script type="application/json" id="press-meta">{"title": "Birds with Two Homes: Why Travel to Breed?", "standfirst": "A northern summer can raise more young than a tropical year, but that does not tell us where migration began—or which season decides whether the birds survive. The answer changes as we follow one bird through its whole year.", "date": "2026-09-13", "series": "Daily Reading", "day": "4", "concepts": ["seasonal opportunity", "Ashmole's hypothesis", "partial migration", "ancestral-range reconstruction", "carry-over effect", "full annual cycle", "phenological mismatch"], "words": 3215, "minutes": 14, "audio": "", "audio_minutes": 0}</script>
+<script>/* Press reader: progress bar, contents drawer, active-section highlight, audio player. No dependencies. */
+(function () {
+  var fill = document.getElementById('progress-fill');
+  var toc = document.getElementById('toc');
+  var toggle = document.getElementById('toc-toggle');
+  var links = toc ? Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+
+  function progress() {
+    if (!fill) return;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    fill.style.width = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + '%';
+  }
+
+  function active() {
+    if (!links.length) return;
+    var y = window.scrollY + window.innerHeight * 0.28;
+    var current = -1;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i] && targets[i].offsetTop <= y) current = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { progress(); active(); ticking = false; });
+  }
+
+  if (toggle && toc) {
+    toggle.addEventListener('click', function () {
+      var open = toc.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    toc.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A' && window.matchMedia('(max-width: 1179px)').matches) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toc.classList.contains('open')) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  progress();
+  active();
+
+  /* ---------------- audio player ---------------- */
+  var player = document.getElementById('player');
+  if (!player) return;
+  var src = player.getAttribute('data-src');
+  var audio = new Audio();
+  audio.preload = 'metadata';
+  audio.src = src;
+  var key = 'press-audio:' + src;
+  var playBtn = player.querySelector('.p-play');
+  var backBtn = player.querySelector('.p-back');
+  var fwdBtn = player.querySelector('.p-fwd');
+  var range = player.querySelector('.p-range');
+  var cur = player.querySelector('.p-cur');
+  var dur = player.querySelector('.p-dur');
+  var seeking = false;
+
+  function fmt(s) {
+    if (!isFinite(s)) return '–:––';
+    s = Math.floor(s);
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    var mm = (h ? String(m).padStart(2, '0') : String(m));
+    return (h ? h + ':' : '') + mm + ':' + String(sec).padStart(2, '0');
+  }
+  function setPlaying(on) {
+    player.classList.toggle('playing', on);
+    playBtn.setAttribute('aria-label', on ? 'Pause' : 'Play');
+  }
+  function skip(delta) {
+    if (!isFinite(audio.duration)) return;
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + delta));
+  }
+
+  audio.addEventListener('loadedmetadata', function () {
+    range.max = audio.duration;
+    dur.textContent = fmt(audio.duration);
+    try {
+      var p = parseFloat(localStorage.getItem(key));
+      if (p > 5 && p < audio.duration - 10) { audio.currentTime = p; range.value = p; cur.textContent = fmt(p); }
+    } catch (e) {}
+  });
+  audio.addEventListener('timeupdate', function () {
+    if (!seeking) { range.value = audio.currentTime; cur.textContent = fmt(audio.currentTime); }
+    try { localStorage.setItem(key, String(audio.currentTime)); } catch (e) {}
+  });
+  audio.addEventListener('play', function () { setPlaying(true); });
+  audio.addEventListener('pause', function () { setPlaying(false); });
+  audio.addEventListener('ended', function () {
+    setPlaying(false);
+    try { localStorage.removeItem(key); } catch (e) {}
+  });
+  audio.addEventListener('error', function () {
+    player.classList.add('error');
+    dur.textContent = 'audio unavailable';
+  });
+
+  playBtn.addEventListener('click', function () { audio.paused ? audio.play() : audio.pause(); });
+  backBtn.addEventListener('click', function () { skip(-15); });
+  fwdBtn.addEventListener('click', function () { skip(15); });
+  range.addEventListener('input', function () { seeking = true; cur.textContent = fmt(parseFloat(range.value)); });
+  range.addEventListener('change', function () { audio.currentTime = parseFloat(range.value); seeking = false; });
+
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === ' ' || e.key === 'k') { e.preventDefault(); playBtn.click(); }
+    else if (e.key === 'j') skip(-15);
+    else if (e.key === 'l') skip(15);
+  });
+
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: document.title, artist: player.getAttribute('data-series') || 'Reading' });
+      navigator.mediaSession.setActionHandler('play', function () { audio.play(); });
+      navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
+      navigator.mediaSession.setActionHandler('seekbackward', function () { skip(-15); });
+      navigator.mediaSession.setActionHandler('seekforward', function () { skip(15); });
+      navigator.mediaSession.setActionHandler('seekto', function (d) { if (d.seekTime != null) audio.currentTime = d.seekTime; });
+    } catch (e) {}
+  }
+})();
+</script>
+</body></html>
