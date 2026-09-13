@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Chosen Option: Why What You Pick Disappoints You</title>
+<style>/* Press theme. Default: true black, warm off-white type, hairline rules, one brass accent.
+   Add class "light" to .press for the off-white variant. Nothing moves; nothing glows. */
+.press{
+  --bg:#000000;--panel:#0b0b0b;--panel-2:#111111;--line:#1f1f1f;--line-2:#2c2c2c;
+  --ink:#d9d5cd;--bright:#f4f1ea;--muted:#8f8b83;--faint:#5f5c56;
+  --accent:#c9b592;          /* brass: labels, links, active contents */
+  --accent-2:#a9b4c4;        /* cool slate: numerals, blockquote bar, interpretation */
+  --warm:#d1a24f;            /* amber: speculation, late-arriving cost */
+  --rose:#c98a8a;
+  --sel:#c9b592;--sel-ink:#000;
+  --serif:"Newsreader","Charter","Iowan Old Style","Cambria","Georgia","Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Cascadia Code","JetBrains Mono","Consolas",ui-monospace,monospace;
+  --col:44rem;--toc:15rem;
+  color-scheme:dark;
+  background:var(--bg);
+  color:var(--ink);
+  font:1.125rem/1.72 var(--serif);
+  margin:0;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.press.light{
+  --bg:#f7f5f0;--panel:#f1eee7;--panel-2:#ebe7de;--line:#e0dcd2;--line-2:#cfc9bc;
+  --ink:#2a2823;--bright:#141310;--muted:#6e6a61;--faint:#9a958a;
+  --accent:#8a7248;--accent-2:#5f6f85;--warm:#a8761f;--rose:#a85d5d;
+  --sel:#141310;--sel-ink:#f7f5f0;
+  color-scheme:light;
+}
+body.press{margin:0}
+.press *{box-sizing:border-box}
+.press a{color:var(--bright);text-decoration:none;border-bottom:1px solid var(--accent)}
+.press a:hover{color:var(--accent)}
+.press ::selection{background:var(--sel);color:var(--sel-ink)}
+.press :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+
+/* reading progress */
+.press .progress{position:fixed;inset:0 0 auto 0;height:1px;background:transparent;z-index:30}
+.press .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .1s linear}
+
+/* page column */
+.press .page{max-width:var(--col);margin:0 auto;padding:5rem 1.4rem 7rem}
+@media(min-width:1180px){
+  .press .page{margin-left:calc(50% - var(--col)/2 + 3rem)}
+}
+
+/* masthead */
+.press .masthead{margin:0 0 3.5rem}
+.press .eyebrow{font:500 .7rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
+.press h1{font:400 clamp(2.2rem,5.2vw,3.6rem)/1.08 var(--serif);letter-spacing:-.02em;color:var(--bright);margin:0 0 1.2rem;text-wrap:balance}
+.press .standfirst{font:italic 1.3rem/1.5 var(--serif);color:var(--muted);margin:0 0 1.4rem;text-wrap:pretty}
+.press .meta{font:.76rem/1.5 var(--sans);color:var(--faint);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+
+/* headings */
+.press h2{font:500 .74rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin:4rem 0 1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);scroll-margin-top:2.5rem}
+.press h3{font:400 1.55rem/1.3 var(--serif);color:var(--bright);margin:2.6rem 0 1rem;letter-spacing:-.01em;text-wrap:balance;scroll-margin-top:2.5rem}
+.press h4{font:600 1.05rem/1.4 var(--sans);color:var(--bright);margin:2rem 0 .8rem}
+
+/* prose */
+.press p{margin:0 0 1.35rem;text-wrap:pretty}
+.press strong{color:var(--bright);font-weight:600}
+.press em{color:var(--ink)}
+.press code{font:.86em var(--mono);background:var(--panel-2);padding:.1em .4em;border-radius:3px}
+.press pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1rem 1.2rem;overflow:auto;font:.85rem/1.55 var(--mono);margin:0 0 1.5rem}
+.press pre code{background:none;padding:0;font-size:inherit}
+.press hr{border:0;height:1px;background:var(--line);margin:3rem 0}
+.press ul,.press ol{margin:0 0 1.5rem;padding-left:1.4rem}
+.press li{margin:0 0 .55rem;padding-left:.2rem}
+.press li::marker{color:var(--accent);font-family:var(--sans);font-size:.9em}
+.press blockquote{margin:2.2rem 0;padding:.2rem 0 .2rem 1.4rem;border-left:1px solid var(--accent-2);color:var(--bright);font-size:1.16rem;line-height:1.6}
+.press blockquote p:last-child{margin-bottom:0}
+
+/* tables */
+.press .table-wrap{overflow:auto;margin:1.8rem 0;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.press table{border-collapse:collapse;width:100%;font:.9rem/1.55 var(--sans);font-variant-numeric:tabular-nums}
+.press th,.press td{padding:.8rem .9rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.press th{color:var(--accent);font-weight:600;background:var(--panel-2)}
+.press tbody tr:last-child td{border-bottom:0}
+
+/* figures */
+.press article{counter-reset:fig}
+.press .figure{margin:2.6rem 0;padding:1.4rem 1.4rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:6px;counter-increment:fig}
+.press .figure .svg{margin:0 0 .6rem}
+.press .figure svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.press figcaption{font:.84rem/1.55 var(--sans);color:var(--muted);padding-top:.7rem;border-top:1px solid var(--line)}
+.press figcaption::before{content:"Figure " counter(fig) " · ";color:var(--accent);font-weight:600;letter-spacing:.04em}
+.press pre.mermaid{background:var(--panel);text-align:center}
+
+/* concept card */
+.press .concept{margin:2.2rem 0;padding:1.2rem 1.4rem 1rem;border-left:2px solid var(--accent);background:var(--panel);border-radius:0 4px 4px 0}
+.press .concept-title{font:600 .7rem/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.press .concept-title::before{content:"Concept · ";color:var(--faint)}
+.press .concept p{font-size:1.02rem;line-height:1.62}
+.press .concept p:last-child{margin-bottom:0}
+
+/* callouts with epistemic labels */
+.press .callout{margin:2rem 0;padding:1.05rem 1.3rem .9rem;border-radius:4px;border:1px solid var(--line);background:var(--panel);font-size:1.02rem;line-height:1.62}
+.press .callout::before{content:attr(data-label);display:block;font:600 .68rem/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+.press .callout p:last-child{margin-bottom:0}
+.press .callout.evidence{border-left:2px solid var(--accent)}
+.press .callout.evidence::before{color:var(--accent)}
+.press .callout.interpretation{border-left:2px solid var(--accent-2)}
+.press .callout.interpretation::before{color:var(--accent-2)}
+.press .callout.speculation{border-left:2px solid var(--warm)}
+.press .callout.speculation::before{color:var(--warm)}
+.press .callout.aside,.press .callout.note{border-style:dashed;color:var(--muted);background:none}
+@media(min-width:1500px){
+  .press .callout.aside{float:right;width:17rem;margin:.3rem -19rem 1.2rem 1.6rem;font-size:.92rem;line-height:1.55;border:0;border-left:1px solid var(--line-2);border-radius:0;padding:.2rem 0 .2rem 1rem}
+}
+
+/* displayed rule / formula */
+.press .rule{margin:2.6rem 0;padding:1.6rem 1.4rem;text-align:center;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.press .rule p{font:italic 1.32rem/1.45 var(--serif);color:var(--bright);margin:0;text-wrap:balance}
+.press .rule p + p{margin-top:.6rem;font:.9rem/1.5 var(--sans);color:var(--muted);font-style:normal}
+
+/* questions */
+.press .questions{margin-top:4rem;padding:2rem 1.6rem 1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.press .questions h2{margin:0 0 1.4rem;padding:0;border:0}
+.press .questions ol{list-style:none;padding:0;counter-reset:q}
+.press .questions li{counter-increment:q;position:relative;padding-left:3rem;margin-bottom:1.3rem;font-size:1.04rem;line-height:1.6}
+.press .questions li::before{content:counter(q,decimal-leading-zero);position:absolute;left:0;top:.05rem;font:400 1.6rem/1 var(--serif);color:var(--accent-2);font-variant-numeric:tabular-nums}
+.press .questions li:last-child{margin-bottom:0}
+
+/* contents */
+.press .toc-toggle{position:fixed;top:1rem;right:1rem;z-index:25;font:600 .7rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--bg);border:1px solid var(--line-2);border-radius:999px;padding:.6rem .95rem;cursor:pointer}
+.press .toc-toggle:hover{border-color:var(--accent);color:var(--bright)}
+.press .toc{display:none;position:fixed;top:3.6rem;right:1rem;z-index:24;width:min(22rem,calc(100vw - 2rem));max-height:calc(100vh - 5rem);overflow:auto;padding:1rem 1.2rem 1.1rem;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;box-shadow:0 30px 80px #0009}
+.press.light .toc{box-shadow:0 20px 60px #0002}
+.press .toc.open{display:block}
+.press .toc-label{font:600 .66rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem}
+.press .toc a{display:block;font:.86rem/1.4 var(--sans);color:var(--muted);border:0;padding:.42rem 0 .42rem .8rem;border-left:1px solid transparent;margin-left:-.05rem}
+.press .toc a.lvl3{padding-left:1.8rem;font-size:.8rem}
+.press .toc a:hover{color:var(--bright)}
+.press .toc a.active{color:var(--bright);border-left-color:var(--accent)}
+@media(min-width:1180px){
+  .press .toc-toggle{display:none}
+  .press .toc{display:block;position:fixed;top:5.4rem;left:calc(50% - var(--col)/2 - var(--toc) - 1.5rem);right:auto;width:var(--toc);max-height:calc(100vh - 8rem);padding:0 0 0 .2rem;background:none;border:0;box-shadow:none}
+  .press .toc a{border-left:1px solid var(--line)}
+}
+
+/* audio player: sits under the masthead, sticks to the top while scrolling */
+.press .player{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.6rem;margin:0 0 2.5rem;padding:.7rem 0;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:.78rem/1 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.press .player button{appearance:none;border:1px solid var(--line-2);background:none;color:var(--ink);border-radius:999px;width:2.3rem;height:2.3rem;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:0 0 auto}
+.press .player button:hover{border-color:var(--accent);color:var(--bright)}
+.press .player button svg{width:1rem;height:1rem;fill:currentColor;display:block}
+.press .player .p-play{width:2.7rem;height:2.7rem;border-color:var(--accent);color:var(--bright)}
+.press .player .p-play .i-pause{display:none}
+.press .player.playing .p-play .i-play{display:none}
+.press .player.playing .p-play .i-pause{display:block}
+.press .player .p-skip{position:relative}
+.press .player .p-skip svg{width:1.35rem;height:1.35rem}
+.press .player .p-skip span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 .5rem/1 var(--sans);color:currentColor;padding-top:.1rem}
+.press .player .p-time{flex:0 0 auto;min-width:2.6rem;text-align:center;letter-spacing:.02em}
+.press .player .p-range{flex:1 1 auto;appearance:none;height:2px;background:var(--line-2);border-radius:2px;outline:0;margin:0 .2rem;cursor:pointer;min-width:4rem}
+.press .player .p-range::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range:focus-visible{outline:1px solid var(--accent);outline-offset:6px}
+.press .player .p-label{flex:0 0 auto;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;color:var(--accent);margin-right:.2rem}
+.press .player.error{color:var(--faint)}
+@media(max-width:640px){
+  .press .player{gap:.45rem;margin:0 -.2rem 2rem}
+  .press .player .p-label{display:none}
+  .press .player .p-time{min-width:2.3rem;font-size:.72rem}
+}
+@media print{.press .player{display:none!important}}
+
+/* colophon */
+.press .colophon{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);font:.74rem/1.5 var(--sans);color:var(--faint);letter-spacing:.08em}
+
+/* library */
+.press.library .cards{display:grid;gap:1rem;margin-bottom:3rem}
+.press.library .card{display:block;padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:inherit}
+.press.library .card:hover{border-color:var(--accent)}
+.press.library .card h2{font:400 1.5rem/1.25 var(--serif);color:var(--bright);text-transform:none;letter-spacing:-.01em;margin:.2rem 0 .6rem;padding:0;border:0}
+.press.library .card p{color:var(--muted);font-size:1rem;margin-bottom:.8rem}
+.press.library .card .eyebrow{margin-bottom:.2rem}
+.press.library .concept-row{font:.92rem/1.7 var(--sans);color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--line)}
+.press.library .concept-row b{color:var(--bright);margin-right:.6rem}
+
+/* small screens */
+@media(max-width:640px){
+  .press{font-size:1.05rem;line-height:1.68}
+  .press .page{padding:4rem 1.1rem 5rem}
+  .press .figure{padding:1rem 1rem .8rem;margin:2rem -.3rem}
+  .press .figure .svg{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .press .figure svg{min-width:34rem}
+  .press .questions{padding:1.5rem 1.1rem 1rem}
+  .press blockquote{font-size:1.08rem}
+}
+
+/* print: light and complete */
+@media print{
+  .press{background:#fff;color:#111;font-size:11pt;line-height:1.5;--bright:#000;--muted:#444;--faint:#666;--accent:#6b5a38;--accent-2:#45526a;--warm:#8a6118;--line:#ccc;--line-2:#bbb;--panel:#f6f6f6;--panel-2:#eee}
+  .press .progress,.press .toc,.press .toc-toggle{display:none!important}
+  .press .page{max-width:none;margin:0;padding:0}
+  .press h2,.press h3{break-after:avoid}
+  .press .figure,.press .concept,.press .callout,.press blockquote,.press .questions li{break-inside:avoid}
+  .press a{color:inherit;border:0}
+}
+@media(prefers-reduced-motion:reduce){.press .progress i{transition:none}}
+</style></head>
+<body class="press">
+<div class="progress" aria-hidden="true"><i id="progress-fill"></i></div>
+<button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc">Contents</button>
+<nav class="toc" id="toc" aria-label="Contents"><div class="toc-label">Contents</div><a class="lvl2" href="#1-the-winners-who-lost">1. The winners who lost</a><a class="lvl2" href="#2-why-the-best-looking-option-is-not-the-best-option">2. Why the best-looking option is not the best option</a><a class="lvl2" href="#3-one-structure-four-names">3. One structure, four names</a><a class="lvl2" href="#4-where-it-should-appear-and-does-not">4. Where it should appear and does not</a><a class="lvl2" href="#5-the-turn-knowing-about-it-does-not-remove-it">5. The turn: knowing about it does not remove it</a><a class="lvl2" href="#6-the-cure-and-who-found-it-first">6. The cure, and who found it first</a><a class="lvl2" href="#7-what-to-do-with-it">7. What to do with it</a></nav>
+<main class="page">
+<header class="masthead"><div class="eyebrow">Daily Reading · Day 3, second version · 2026-09-12</div><h1>The Chosen Option: Why What You Pick Disappoints You</h1><p class="standfirst">In 1971 three engineers at an oil company worked out why it kept winning leases and losing money on them. The answer is a piece of arithmetic that applies to every option anyone has ever chosen because it looked best: the hire, the drug, the strategy, the belief, and the cow.</p><div class="meta">3,625 words · about 16 min</div></header>
+
+<article class="article" id="article">
+<p>The question is simple to state. Why does what we choose so reliably turn out worse than we expected, even when our judgment is unbiased and our information is good? The usual answers blame the chooser: overconfidence, wishful thinking, bad luck. This reading argues that the disappointment is booked at the moment of comparison, that it can be computed, and that the people who fixed it first were not economists or psychologists but dairy farmers.</p>
+<h2 id="1-the-winners-who-lost">1. The winners who lost</h2>
+<p>In the 1950s and 1960s the United States government sold the right to drill for oil under the Gulf of Mexico by sealed-bid auction. Each company surveyed the tract, estimated the oil beneath it, and posted a bid. The highest bid won. The estimates were made by good geologists with the best seismic data of the day, and there is no evidence that they were biased: across all the tracts, the estimates were about as often too high as too low.</p>
+<p>Yet the industry as a whole made poor returns on the leases it won, and some companies did worse than that. In 1971 three engineers at Atlantic Richfield, Ed Capen, Bob Clapp, and Bill Campbell, published a paper in the <em>Journal of Petroleum Technology</em> that explained why, and the explanation had nothing to do with the geology. On any tract, several companies estimated the same unknown quantity. Their estimates scattered around the truth. The company that won was, by construction, the one whose estimate was highest, and the highest of several unbiased estimates is not unbiased. It is the one that overshot the most. The winner had not found the best tract; it had found the tract on which it had made the largest error. The paper's tables showed the winning bid often running two or three times the runner-up on the same ground, and its authors put the conclusion in a sentence the industry has quoted since: a bidder who pays what he thinks a tract is worth "will, in the long run, be taken for a cleaning."</p>
+<p>The effect has a name now, the winner's curse, and it has been reproduced in the laboratory with jars of coins. In 1983 Max Bazerman and William Samuelson auctioned jars containing exactly eight dollars in coins to business students at Boston University. The average bid was about five dollars: the students, as a group, underestimated. The average <em>winning</em> bid was just over ten. The group was cautious, and the winner still lost two dollars, because the winner was whichever student had guessed highest.</p>
+<p>Notice what this does not require. It does not require anyone to be greedy, foolish, or fooled. It requires only that several people estimated the same thing with some error, and that the estimate decided who won.</p>
+<h2 id="2-why-the-best-looking-option-is-not-the-best-option">2. Why the best-looking option is not the best option</h2>
+<p>Now remove the other bidders. Suppose you alone are choosing among five options, and you have an estimate of the value of each. Your estimates are honest and unbiased: each one is the true value plus an error that is as likely to be positive as negative. You pick the option with the highest estimate. What should you expect?</p>
+<p>You should expect to be disappointed, by a computable amount. Write any estimate as truth plus error. When you choose the highest estimate you are choosing, in part, the highest error, because an option with a large positive error is more likely to top the list than one with a negative error of the same size. If all five options were in fact worth the same, the one you picked would have the highest of five errors, and the highest of five draws from an ordinary bell curve sits, on average, about one and a sixth standard deviations above zero. That is the expected gap between the estimate that won and the value you will actually receive. With ten options it is a little over one and a half standard deviations; with a hundred, two and a half. The more options you compare, and the noisier your estimates, the further the winner sits above its true value.</p>
+<figure id="figure-1" class="figure" data-n="1">
+<div class="svg"><svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five options as columns. A horizontal line marks the true value common to all. Each column has an estimate marker scattered above or below the line; the highest marker is circled and an arrow from it down to the line is labelled disappointment.">
+  <g font-size="13" fill="var(--ink)">
+    <line x1="80" y1="310" x2="680" y2="310" stroke="var(--line-2)"/>
+    <line x1="80" y1="310" x2="80" y2="40" stroke="var(--line-2)"/>
+    <text x="36" y="180" text-anchor="middle" fill="var(--faint)" transform="rotate(-90 36 180)">estimated value</text>
+    <line x1="80" y1="200" x2="680" y2="200" stroke="var(--faint)" stroke-dasharray="6 5"/>
+    <text x="684" y="204" fill="var(--faint)" font-size="12">true value</text>
+    <text x="684" y="220" fill="var(--faint)" font-size="12">(same for all five)</text>
+    <g fill="var(--faint)" font-size="12" text-anchor="middle">
+      <text x="150" y="332">A</text><text x="270" y="332">B</text><text x="390" y="332">C</text><text x="510" y="332">D</text><text x="630" y="332">E</text>
+    </g>
+    <g stroke="var(--line-2)" stroke-dasharray="2 3">
+      <line x1="150" y1="200" x2="150" y2="228"/>
+      <line x1="270" y1="200" x2="270" y2="176"/>
+      <line x1="390" y1="200" x2="390" y2="90"/>
+      <line x1="510" y1="200" x2="510" y2="212"/>
+      <line x1="630" y1="200" x2="630" y2="160"/>
+    </g>
+    <circle cx="150" cy="228" r="6" fill="var(--panel-2)" stroke="var(--line-2)"/>
+    <circle cx="270" cy="176" r="6" fill="var(--panel-2)" stroke="var(--line-2)"/>
+    <circle cx="510" cy="212" r="6" fill="var(--panel-2)" stroke="var(--line-2)"/>
+    <circle cx="630" cy="160" r="6" fill="var(--panel-2)" stroke="var(--line-2)"/>
+    <circle cx="390" cy="90" r="6" fill="var(--accent)"/>
+    <circle cx="390" cy="90" r="14" fill="none" stroke="var(--accent)"/>
+    <text x="410" y="84" fill="var(--accent)" font-size="12">chosen: highest estimate</text>
+    <line x1="430" y1="110" x2="430" y2="196" stroke="var(--accent)" stroke-width="1.5"/>
+    <path d="M425 190 L430 198 L435 190" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+    <text x="440" y="150" fill="var(--accent)" font-size="12">disappointment</text>
+    <text x="440" y="166" fill="var(--faint)" font-size="12">= the error you selected</text>
+  </g>
+</svg></div>
+<figcaption>Five options, each worth the same. The estimates scatter around the truth. Choosing the highest estimate picks the largest error, and the gap between that estimate and the truth is the disappointment you have just booked.</figcaption>
+</figure>
+<p>This is the optimizer's curse. The name is from a 2006 paper by James Smith and Robert Winkler in <em>Management Science</em>, but the finding is older: in 1984 the organisational theorists Richard Harrison and James March had already shown that a decision-maker who chooses the best-looking alternative should expect what they called post-decision surprise, and that the surprise is on average unpleasant. Smith and Winkler's contribution was to show that the curse survives the best practice of their own field. A decision analyst who builds a careful model, estimates every alternative without bias, and recommends the one with the highest expected value has still, by the act of choosing the maximum, recommended an alternative whose realised value will fall short of the model's number.</p>
+<aside class="concept" id="concept-the-optimizer-s-curse">
+<div class="concept-title">The optimizer's curse</div>
+<p>When several options are valued with error and the one with the highest estimate is chosen, the chosen option's estimate overstates its true value, on average, even if every estimate was unbiased. The overstatement grows with the number of options compared and with the noise in the estimates, and shrinks as the real differences between options grow. Named by Smith and Winkler in 2006; described by Harrison and March in 1984.</p>
+</aside>
+<div class="rule">
+<p>The option you chose looks better than it is by the size of the error you selected.</p>
+<p>The size grows with how many you compared and how noisy the numbers were.</p>
+</div>
+<p>The mechanism has one more consequence that is easy to miss. The curse does not depend on your being wrong about the ranking. You may well have picked the truly best option. The claim is only that its value will be less than the number that made you pick it. Being right and being disappointed are compatible, and usually simultaneous.</p>
+<h2 id="3-one-structure-four-names">3. One structure, four names</h2>
+<p>Once the mechanism is in view, the same arithmetic appears wherever a selection is made on a noisy number, and each field that met it gave it a different name.</p>
+<p>The oldest is the one Galton found in 1886 and that the earlier version of this reading was about: regression to the mean. Children of the tallest parents are shorter than their parents because "tallest parents" selected for a measurement that was partly chance. That is the optimizer's curse seen afterwards, with the population doing the choosing and time doing the second measurement.</p>
+<p>The winner's curse is the same arithmetic when the estimates belong to competitors and the auction picks the maximum among them. The difference from the single-chooser case is only who supplies the errors.</p>
+<p>The third name comes from plant breeding. In 1994 William Beavis, a geneticist at the seed company Pioneer Hi-Bred, reported that when researchers scanned the maize genome for regions that affected yield, the regions they found had effects that were consistently overstated, and the smaller the study, the larger the overstatement. A scan tests thousands of regions. The ones that pass the threshold are the ones whose measured effect was highest, which selects for measurement error just as an auction selects for the highest bid. Plant geneticists call this the Beavis effect. In 2001 Harald Göring and colleagues showed the same thing in human genetics, and in 2008 John Ioannidis generalised it under a title that says what it means: most discovered true associations are inflated. A gene that is really associated with a disease will, on its first discovery, look more strongly associated than it is, and its effect will shrink on replication. This is not fraud, and it is not the replication crisis, though it contributes to it. It is the arithmetic of choosing the maximum, applied to the genome.</p>
+<p>The fourth name is the one you already use. It is called a disappointing hire, a disappointing acquisition, a disappointing second album, or a strategy that did not deliver what the plan promised. In each case the option was chosen because its number was highest, and the number contained the error that got it chosen.</p>
+<div class="table-wrap" tabindex="0"><table><thead><tr><th scope="col">Field</th><th scope="col">Who chooses</th><th scope="col">What is estimated</th><th scope="col">What it is called</th></tr></thead><tbody>
+<tr><td>Statistics, 1886</td><td>the population, then time</td><td>a trait measured with chance</td><td>regression to the mean</td></tr>
+<tr><td>Oil leases, 1971</td><td>the auction, among rivals</td><td>the value of a common asset</td><td>the winner's curse</td></tr>
+<tr><td>Plant genetics, 1994</td><td>a genome scan's threshold</td><td>the effect of a gene region</td><td>the Beavis effect</td></tr>
+<tr><td>Decision analysis, 2006</td><td>one person, among options</td><td>the value of each alternative</td><td>the optimizer's curse</td></tr>
+</tbody></table></div>
+<aside class="concept" id="concept-selection-on-an-estimate">
+<div class="concept-title">Selection on an estimate</div>
+<p>The general form. Whenever a case is chosen, funded, published, promoted, or celebrated because a noisy measurement of it was extreme, the measurement overstates the case, on average, by an amount that depends on the noise and on how many cases competed. Regression to the mean, the winner's curse, the Beavis effect, and the optimizer's curse are this one fact in four settings.</p>
+</aside>
+<h2 id="4-where-it-should-appear-and-does-not">4. Where it should appear and does not</h2>
+<p>A law is understood only when you know where it stops. Three boundaries matter.</p>
+<p>The first is the difference between a common value and a private value. The oil under a tract is worth the same to everyone; each bidder is estimating one shared truth, and the winner is the one who mis-estimated it upward. A painting you buy for your own wall is different. Its value to you is your own; there is no shared truth to overshoot, and the fact that you bid more than anyone else says only that you wanted it more. The auction theory that separates these cases was built by William Vickrey in 1961 for private values and by Robert Wilson in the late 1960s for common ones, and unified by Paul Milgrom and Robert Weber in 1982. The practical rule falls straight out of it. When what you are buying has a market value that others are also estimating, winning is bad news about the thing won. When it has a value only to you, winning is just winning. Most large purchases are mixed, and the curse applies to the shared part: the resale value of the house, not your pleasure in the garden.</p>
+<aside class="concept" id="concept-common-value-and-private-value">
+<div class="concept-title">Common value and private value</div>
+<p>A common-value good is worth the same to everyone and each buyer estimates that one value with error; the winner's curse applies. A private-value good is worth a different amount to each buyer and each knows their own value; there is nothing to overshoot and no curse. Vickrey (1961) treated private values, Wilson (1969) common values, Milgrom and Weber (1982) both at once.</p>
+</aside>
+<p>The second boundary is the ratio of real spread to noise. If the options genuinely differ by far more than your measurement error, choosing the highest estimate mostly selects real difference, and the curse is small. A surgeon chosen on thirty years of outcomes is chosen on signal; a surgeon chosen on one operation is chosen on luck. This is the same quantity that governs how far an extreme regresses, and in the earlier reading it was called the correlation: the share of the spread in your numbers that is stable rather than noise.</p>
+<p>The third boundary is that the curse is the price of using information, not an argument against using it. A person who chooses at random suffers no curse and receives, on average, an average option. A person who chooses on estimates suffers the curse and still receives, on average, a better option than the random chooser, because the estimate contained signal as well as noise. The curse subtracts from a gain; it does not turn the gain into a loss. What it does is make the chooser's own forecast the wrong benchmark. The right comparison for a decision is what a random choice would have delivered, and by that standard most careful choices succeed while disappointing.</p>
+<h2 id="5-the-turn-knowing-about-it-does-not-remove-it">5. The turn: knowing about it does not remove it</h2>
+<p>Here is where the reading has to correct itself, because everything so far suggests a cure. Learn the arithmetic, discount your winning estimate, and the curse is gone. Capen and his colleagues said as much in 1971, and told the industry to bid less.</p>
+<p>The individual cure works. The population does not take it. In 1986 John Kagel and Dan Levin published the results of common-value auctions run with real money and, in one series, with bidders who had already been through many rounds and been paid according to their results. Experience helped. It did not help enough: as the number of bidders in the room rose, the experienced bidders raised their bids when the arithmetic said to lower them, and the winners kept losing. Several went bankrupt within the experiment. The pattern in the room was the pattern in the Gulf. Whoever discounts correctly does not win the auction; the auction is won by whoever discounted least. So in any population where some bidders apply the correction and some do not, the uncorrected win, and go on winning, until they run out of money. The market does cure the winner's curse, but its method is bankruptcy, one bidder at a time, and it takes years.</p>
+<aside class="callout evidence" data-label="Evidence check">
+<p>The laboratory result is robust: Kagel and Levin's finding that the curse survives experience and worsens with more bidders has been replicated many times. The field evidence is thinner. Studies of Gulf of Mexico lease returns after 1971 find them low but not negative on average, consistent with an industry that partly learned. That corporate acquirers overpay in takeovers, which Richard Roll in 1986 attributed to the same mechanism under the name hubris, is supported by the average returns to acquiring firms' shareholders being about zero or slightly negative, though the size and cause remain argued.</p>
+</aside>
+<p>This changes what the arithmetic means. At the level of one decision, the curse is a bias to correct. At the level of a competition, it is a selection pressure that favours whoever has not corrected. The venture fund that discounts every pitch correctly is outbid for every hot deal by the fund that does not. The hospital that reports its outcomes honestly loses the league table to the one that selects its patients. The correction is individually right and competitively punished, and a field can know the arithmetic for decades and still be run by people who ignore it, because those are the people the field's contests select.</p>
+<p>There is a second turn, and it points inward.</p>
+<aside class="callout interpretation" data-label="Interpretation">
+<p>Apply the same arithmetic to your beliefs. You hold some beliefs with much more confidence than others. The confident ones are, by construction, those where the evidence you happened to meet looked strongest to you. But "looked strongest" is an estimate with error, and you did not sample your evidence at random; you kept the beliefs whose evidence scored highest. Your strongest convictions are therefore the ones on which you are most likely to have selected an error, and the well-documented gap between people's confidence and their accuracy, first measured in the late 1960s, is at least partly this. That step, from a theorem about estimates to a claim about minds, is an interpretation. What is not in doubt is the direction: confidence that was chosen for being high is inflated for the same reason a winning bid is.</p>
+</aside>
+<h2 id="6-the-cure-and-who-found-it-first">6. The cure, and who found it first</h2>
+<p>The correction has a name, shrinkage, and it was worked out in practice a generation before the decision analysts named the disease.</p>
+<p>A dairy bull cannot be judged by its own milk. It is judged by its daughters' yields, and a bull with a few dozen daughters who happened to have a good year looks better than it is, exactly as a winning bidder does. From 1949 Charles Henderson at Cornell built the method that dairy breeders still use: pull each bull's estimated merit back towards the average of all bulls, by an amount that depends on how many daughters it has and how much of the spread in yields is heritable rather than luck. A bull with ten daughters is pulled back a long way; one with ten thousand barely moves. The industry adopted the method because it paid: the bulls chosen under it produced daughters closer to prediction than the bulls chosen on raw averages. The optimizer's curse was being corrected, in cattle, before most of the people in this reading were born.</p>
+<p>The mathematics caught up in 1956, when Charles Stein proved a result that statisticians still describe as a paradox. If you are estimating three or more unrelated quantities at once, the batting average of a baseball player, the price of wheat, and the rainfall in Peru, you can do better on all three together by pulling each raw estimate towards their common average than by taking each at face value. The quantities need share nothing; the improvement comes purely from the fact that whichever estimate is highest is probably too high. In 1977 Bradley Efron and Carl Morris demonstrated it in <em>Scientific American</em> with the first forty-five at-bats of eighteen players in the 1970 season. The raw averages, led by Roberto Clemente at .400, predicted the rest of the season badly. The shrunken averages, every one pulled towards the group's mean, predicted it better for most of the eighteen and cut the total error to about a third.</p>
+<figure id="figure-2" class="figure" data-n="2">
+<div class="svg"><svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two columns of eight points connected by lines. Left column raw estimates spread from top to bottom; right column shrunk estimates clustered closer to a central dashed mean line. The top point moves down the most.">
+  <g font-size="13" fill="var(--ink)">
+    <text x="200" y="36" text-anchor="middle" font-weight="600">raw estimates</text>
+    <text x="520" y="36" text-anchor="middle" font-weight="600">after shrinkage</text>
+    <line x1="120" y1="200" x2="600" y2="200" stroke="var(--faint)" stroke-dasharray="6 5"/>
+    <text x="606" y="204" fill="var(--faint)" font-size="12">mean of the group</text>
+    <g stroke="var(--line-2)">
+      <line x1="200" y1="60" x2="520" y2="130"/>
+      <line x1="200" y1="100" x2="520" y2="150"/>
+      <line x1="200" y1="140" x2="520" y2="170"/>
+      <line x1="200" y1="180" x2="520" y2="190"/>
+      <line x1="200" y1="220" x2="520" y2="210"/>
+      <line x1="200" y1="260" x2="520" y2="230"/>
+      <line x1="200" y1="300" x2="520" y2="250"/>
+      <line x1="200" y1="340" x2="520" y2="270"/>
+    </g>
+    <g fill="var(--panel-2)" stroke="var(--line-2)">
+      <circle cx="200" cy="100" r="6"/><circle cx="200" cy="140" r="6"/><circle cx="200" cy="180" r="6"/><circle cx="200" cy="220" r="6"/><circle cx="200" cy="260" r="6"/><circle cx="200" cy="300" r="6"/><circle cx="200" cy="340" r="6"/>
+      <circle cx="520" cy="150" r="6"/><circle cx="520" cy="170" r="6"/><circle cx="520" cy="190" r="6"/><circle cx="520" cy="210" r="6"/><circle cx="520" cy="230" r="6"/><circle cx="520" cy="250" r="6"/><circle cx="520" cy="270" r="6"/>
+    </g>
+    <line x1="200" y1="60" x2="520" y2="130" stroke="var(--accent)" stroke-width="2"/>
+    <circle cx="200" cy="60" r="6" fill="var(--accent)"/>
+    <circle cx="520" cy="130" r="6" fill="var(--accent)"/>
+    <text x="214" y="56" fill="var(--accent)" font-size="12">the winner, raw</text>
+    <text x="534" y="126" fill="var(--accent)" font-size="12">the winner, corrected</text>
+    <text x="360" y="365" text-anchor="middle" fill="var(--faint)" font-size="12">pull = share of the spread that is noise; more options and noisier numbers mean a stronger pull</text>
+  </g>
+</svg></div>
+<figcaption>Shrinkage. On the left, raw estimates for eight options, spread wide. On the right, the same estimates pulled towards the mean of the group by the share of the spread that is noise. The highest estimate moves the most, because it contained the most selected error. The order barely changes; the forecast does.</figcaption>
+</figure>
+<p>Smith and Winkler's prescription in 2006 was the same move, stated for decisions: treat every estimate as noisy, combine it with what you knew before you measured, and choose on the combined figure. The correction for the winner is then automatic, because the highest estimate is pulled back the most, and the amount of the pull is the same fraction that governed regression in the earlier reading, the share of the spread that is signal.</p>
+<aside class="concept" id="concept-shrinkage">
+<div class="concept-title">Shrinkage</div>
+<p>Pulling each estimate towards the average of the group by the fraction of the spread that is noise rather than real difference. It corrects selection on an estimate before the selection is made. Built for dairy breeding by Henderson from 1949, proved optimal for three or more quantities by Stein in 1956, and the standard cure in genetics, forecasting, and decision analysis since.</p>
+</aside>
+<div class="rule">
+<p>Corrected value of the winner = group average + (share of spread that is real) × (winner's estimate − group average).</p>
+<p>The more you compared and the less you trusted each number, the further back it comes.</p>
+</div>
+<h2 id="7-what-to-do-with-it">7. What to do with it</h2>
+<p>Three practices follow, and they are different from the ones the earlier reading gave, because they act before the choice rather than after the result.</p>
+<p>First, before believing the number on the option you are about to pick, ask two questions: how many options did this beat, and how much of the difference between them was noise? Two candidates compared on a long track record need almost no discount. Forty pitches compared on a slide deck need a large one. The discount is not pessimism; it is the expected size of the error you have just selected.</p>
+<p>Second, never judge a choice by the estimate that made it. The estimate is contaminated by the act of choosing. Judge it by a fresh measurement taken afterwards, or by what the options you did not choose went on to do. Companies that track the candidates they rejected, and funds that track the deals they passed on, are running the only honest test of their own selection.</p>
+<p>Third, know which kind of value you are bidding on. When the thing has a shared value others are also estimating, treat winning as evidence you overpaid, and bid as if you already knew you would win. When the value is yours alone, bid what it is worth to you and ignore the room.</p>
+<p>The earlier reading ended with the extreme you noticed being partly borrowed. This one ends earlier in the sequence, at the moment the borrowing happens. You did not overestimate the option you chose. You chose the option you had overestimated, and those are different sentences with the same consequence. The disappointment that follows most careful choices is not a fact about your judgment or about the world. It was booked when you compared, in an amount you could have computed, and the dairy farmers computed it first.</p>
+<section class="questions" id="questions">
+<h2>Questions to sit with</h2>
+<ol>
+<li><strong>Recall:</strong> Bazerman's students underestimated the jar on average and the winner still lost money. State in one sentence why a cautious group produces an overpaying winner.</li>
+<li><strong>Connect:</strong> Regression to the mean, the winner's curse, the Beavis effect, and the optimizer's curse are one fact. Say what is being selected in each case, and what supplies the errors.</li>
+<li><strong>Apply:</strong> Take a choice you made recently among several options on the basis of numbers or impressions. How many options did it beat, and how noisy were the comparisons? Estimate roughly how much of its promise to give back, and say what fresh measurement would tell you whether you were right.</li>
+<li><strong>Judge:</strong> The individual correction is undone by competition, because the uncorrected win the auctions. Is there any design of a market, a hiring process, or a funding round that removes the curse at the level of the population rather than the individual? Argue for one, and say what it would cost.</li>
+</ol>
+</section>
+</article>
+<footer class="colophon"><a href="index.html">Library</a> · The Chosen Option: Why What You Pick Disappoints You · 2026-09-12</footer>
+</main>
+<script type="application/json" id="press-meta">{"title": "The Chosen Option: Why What You Pick Disappoints You", "standfirst": "In 1971 three engineers at an oil company worked out why it kept winning leases and losing money on them. The answer is a piece of arithmetic that applies to every option anyone has ever chosen because it looked best: the hire, the drug, the strategy, the belief, and the cow.", "date": "2026-09-12", "series": "Daily Reading", "day": "3, second version", "concepts": ["optimizer's curse", "selection on an estimate", "common value and private value", "shrinkage"], "words": 3625, "minutes": 16, "audio": "", "audio_minutes": 0}</script>
+<script>/* Press reader: progress bar, contents drawer, active-section highlight, audio player. No dependencies. */
+(function () {
+  var fill = document.getElementById('progress-fill');
+  var toc = document.getElementById('toc');
+  var toggle = document.getElementById('toc-toggle');
+  var links = toc ? Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+
+  function progress() {
+    if (!fill) return;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    fill.style.width = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + '%';
+  }
+
+  function active() {
+    if (!links.length) return;
+    var y = window.scrollY + window.innerHeight * 0.28;
+    var current = -1;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i] && targets[i].offsetTop <= y) current = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { progress(); active(); ticking = false; });
+  }
+
+  if (toggle && toc) {
+    toggle.addEventListener('click', function () {
+      var open = toc.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    toc.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A' && window.matchMedia('(max-width: 1179px)').matches) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toc.classList.contains('open')) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  progress();
+  active();
+
+  /* ---------------- audio player ---------------- */
+  var player = document.getElementById('player');
+  if (!player) return;
+  var src = player.getAttribute('data-src');
+  var audio = new Audio();
+  audio.preload = 'metadata';
+  audio.src = src;
+  var key = 'press-audio:' + src;
+  var playBtn = player.querySelector('.p-play');
+  var backBtn = player.querySelector('.p-back');
+  var fwdBtn = player.querySelector('.p-fwd');
+  var range = player.querySelector('.p-range');
+  var cur = player.querySelector('.p-cur');
+  var dur = player.querySelector('.p-dur');
+  var seeking = false;
+
+  function fmt(s) {
+    if (!isFinite(s)) return '–:––';
+    s = Math.floor(s);
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    var mm = (h ? String(m).padStart(2, '0') : String(m));
+    return (h ? h + ':' : '') + mm + ':' + String(sec).padStart(2, '0');
+  }
+  function setPlaying(on) {
+    player.classList.toggle('playing', on);
+    playBtn.setAttribute('aria-label', on ? 'Pause' : 'Play');
+  }
+  function skip(delta) {
+    if (!isFinite(audio.duration)) return;
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + delta));
+  }
+
+  audio.addEventListener('loadedmetadata', function () {
+    range.max = audio.duration;
+    dur.textContent = fmt(audio.duration);
+    try {
+      var p = parseFloat(localStorage.getItem(key));
+      if (p > 5 && p < audio.duration - 10) { audio.currentTime = p; range.value = p; cur.textContent = fmt(p); }
+    } catch (e) {}
+  });
+  audio.addEventListener('timeupdate', function () {
+    if (!seeking) { range.value = audio.currentTime; cur.textContent = fmt(audio.currentTime); }
+    try { localStorage.setItem(key, String(audio.currentTime)); } catch (e) {}
+  });
+  audio.addEventListener('play', function () { setPlaying(true); });
+  audio.addEventListener('pause', function () { setPlaying(false); });
+  audio.addEventListener('ended', function () {
+    setPlaying(false);
+    try { localStorage.removeItem(key); } catch (e) {}
+  });
+  audio.addEventListener('error', function () {
+    player.classList.add('error');
+    dur.textContent = 'audio unavailable';
+  });
+
+  playBtn.addEventListener('click', function () { audio.paused ? audio.play() : audio.pause(); });
+  backBtn.addEventListener('click', function () { skip(-15); });
+  fwdBtn.addEventListener('click', function () { skip(15); });
+  range.addEventListener('input', function () { seeking = true; cur.textContent = fmt(parseFloat(range.value)); });
+  range.addEventListener('change', function () { audio.currentTime = parseFloat(range.value); seeking = false; });
+
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === ' ' || e.key === 'k') { e.preventDefault(); playBtn.click(); }
+    else if (e.key === 'j') skip(-15);
+    else if (e.key === 'l') skip(15);
+  });
+
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: document.title, artist: player.getAttribute('data-series') || 'Reading' });
+      navigator.mediaSession.setActionHandler('play', function () { audio.play(); });
+      navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
+      navigator.mediaSession.setActionHandler('seekbackward', function () { skip(-15); });
+      navigator.mediaSession.setActionHandler('seekforward', function () { skip(15); });
+      navigator.mediaSession.setActionHandler('seekto', function (d) { if (d.seekTime != null) audio.currentTime = d.seekTime; });
+    } catch (e) {}
+  }
+})();
+</script>
+</body></html>
