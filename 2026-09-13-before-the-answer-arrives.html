@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Before the Answer Arrives</title>
+<style>/* Press theme. Default: true black, warm off-white type, hairline rules, one brass accent.
+   Add class "light" to .press for the off-white variant. Nothing moves; nothing glows. */
+.press{
+  --bg:#000000;--panel:#0b0b0b;--panel-2:#111111;--line:#1f1f1f;--line-2:#2c2c2c;
+  --ink:#d9d5cd;--bright:#f4f1ea;--muted:#8f8b83;--faint:#5f5c56;
+  --accent:#c9b592;          /* brass: labels, links, active contents */
+  --accent-2:#a9b4c4;        /* cool slate: numerals, blockquote bar, interpretation */
+  --warm:#d1a24f;            /* amber: speculation, late-arriving cost */
+  --rose:#c98a8a;
+  --sel:#c9b592;--sel-ink:#000;
+  --serif:"Newsreader","Charter","Iowan Old Style","Cambria","Georgia","Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Cascadia Code","JetBrains Mono","Consolas",ui-monospace,monospace;
+  --col:44rem;--toc:15rem;
+  color-scheme:dark;
+  background:var(--bg);
+  color:var(--ink);
+  font:1.125rem/1.72 var(--serif);
+  margin:0;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.press.light{
+  --bg:#f7f5f0;--panel:#f1eee7;--panel-2:#ebe7de;--line:#e0dcd2;--line-2:#cfc9bc;
+  --ink:#2a2823;--bright:#141310;--muted:#6e6a61;--faint:#9a958a;
+  --accent:#8a7248;--accent-2:#5f6f85;--warm:#a8761f;--rose:#a85d5d;
+  --sel:#141310;--sel-ink:#f7f5f0;
+  color-scheme:light;
+}
+body.press{margin:0}
+.press *{box-sizing:border-box}
+.press a{color:var(--bright);text-decoration:none;border-bottom:1px solid var(--accent)}
+.press a:hover{color:var(--accent)}
+.press ::selection{background:var(--sel);color:var(--sel-ink)}
+.press :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+
+/* reading progress */
+.press .progress{position:fixed;inset:0 0 auto 0;height:1px;background:transparent;z-index:30}
+.press .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .1s linear}
+
+/* page column */
+.press .page{max-width:var(--col);margin:0 auto;padding:5rem 1.4rem 7rem}
+@media(min-width:1180px){
+  .press .page{margin-left:calc(50% - var(--col)/2 + 3rem)}
+}
+
+/* masthead */
+.press .masthead{margin:0 0 3.5rem}
+.press .eyebrow{font:500 .7rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
+.press h1{font:400 clamp(2.2rem,5.2vw,3.6rem)/1.08 var(--serif);letter-spacing:-.02em;color:var(--bright);margin:0 0 1.2rem;text-wrap:balance}
+.press .standfirst{font:italic 1.3rem/1.5 var(--serif);color:var(--muted);margin:0 0 1.4rem;text-wrap:pretty}
+.press .meta{font:.76rem/1.5 var(--sans);color:var(--faint);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+
+/* headings */
+.press h2{font:500 .74rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin:4rem 0 1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);scroll-margin-top:2.5rem}
+.press h3{font:400 1.55rem/1.3 var(--serif);color:var(--bright);margin:2.6rem 0 1rem;letter-spacing:-.01em;text-wrap:balance;scroll-margin-top:2.5rem}
+.press h4{font:600 1.05rem/1.4 var(--sans);color:var(--bright);margin:2rem 0 .8rem}
+
+/* prose */
+.press p{margin:0 0 1.35rem;text-wrap:pretty}
+.press strong{color:var(--bright);font-weight:600}
+.press em{color:var(--ink)}
+.press code{font:.86em var(--mono);background:var(--panel-2);padding:.1em .4em;border-radius:3px}
+.press pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1rem 1.2rem;overflow:auto;font:.85rem/1.55 var(--mono);margin:0 0 1.5rem}
+.press pre code{background:none;padding:0;font-size:inherit}
+.press hr{border:0;height:1px;background:var(--line);margin:3rem 0}
+.press ul,.press ol{margin:0 0 1.5rem;padding-left:1.4rem}
+.press li{margin:0 0 .55rem;padding-left:.2rem}
+.press li::marker{color:var(--accent);font-family:var(--sans);font-size:.9em}
+.press blockquote{margin:2.2rem 0;padding:.2rem 0 .2rem 1.4rem;border-left:1px solid var(--accent-2);color:var(--bright);font-size:1.16rem;line-height:1.6}
+.press blockquote p:last-child{margin-bottom:0}
+
+/* tables */
+.press .table-wrap{overflow:auto;margin:1.8rem 0;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.press table{border-collapse:collapse;width:100%;font:.9rem/1.55 var(--sans);font-variant-numeric:tabular-nums}
+.press th,.press td{padding:.8rem .9rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.press th{color:var(--accent);font-weight:600;background:var(--panel-2)}
+.press tbody tr:last-child td{border-bottom:0}
+
+/* figures */
+.press article{counter-reset:fig}
+.press .figure{margin:2.6rem 0;padding:1.4rem 1.4rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:6px;counter-increment:fig}
+.press .figure .svg{margin:0 0 .6rem}
+.press .figure svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.press figcaption{font:.84rem/1.55 var(--sans);color:var(--muted);padding-top:.7rem;border-top:1px solid var(--line)}
+.press figcaption::before{content:"Figure " counter(fig) " · ";color:var(--accent);font-weight:600;letter-spacing:.04em}
+.press pre.mermaid{background:var(--panel);text-align:center}
+
+/* concept card */
+.press .concept{margin:2.2rem 0;padding:1.2rem 1.4rem 1rem;border-left:2px solid var(--accent);background:var(--panel);border-radius:0 4px 4px 0}
+.press .concept-title{font:600 .7rem/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.press .concept-title::before{content:"Concept · ";color:var(--faint)}
+.press .concept p{font-size:1.02rem;line-height:1.62}
+.press .concept p:last-child{margin-bottom:0}
+
+/* callouts with epistemic labels */
+.press .callout{margin:2rem 0;padding:1.05rem 1.3rem .9rem;border-radius:4px;border:1px solid var(--line);background:var(--panel);font-size:1.02rem;line-height:1.62}
+.press .callout::before{content:attr(data-label);display:block;font:600 .68rem/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+.press .callout p:last-child{margin-bottom:0}
+.press .callout.evidence{border-left:2px solid var(--accent)}
+.press .callout.evidence::before{color:var(--accent)}
+.press .callout.interpretation{border-left:2px solid var(--accent-2)}
+.press .callout.interpretation::before{color:var(--accent-2)}
+.press .callout.speculation{border-left:2px solid var(--warm)}
+.press .callout.speculation::before{color:var(--warm)}
+.press .callout.aside,.press .callout.note{border-style:dashed;color:var(--muted);background:none}
+@media(min-width:1500px){
+  .press .callout.aside{float:right;width:17rem;margin:.3rem -19rem 1.2rem 1.6rem;font-size:.92rem;line-height:1.55;border:0;border-left:1px solid var(--line-2);border-radius:0;padding:.2rem 0 .2rem 1rem}
+}
+
+/* displayed rule / formula */
+.press .rule{margin:2.6rem 0;padding:1.6rem 1.4rem;text-align:center;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.press .rule p{font:italic 1.32rem/1.45 var(--serif);color:var(--bright);margin:0;text-wrap:balance}
+.press .rule p + p{margin-top:.6rem;font:.9rem/1.5 var(--sans);color:var(--muted);font-style:normal}
+
+/* questions */
+.press .questions{margin-top:4rem;padding:2rem 1.6rem 1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.press .questions h2{margin:0 0 1.4rem;padding:0;border:0}
+.press .questions ol{list-style:none;padding:0;counter-reset:q}
+.press .questions li{counter-increment:q;position:relative;padding-left:3rem;margin-bottom:1.3rem;font-size:1.04rem;line-height:1.6}
+.press .questions li::before{content:counter(q,decimal-leading-zero);position:absolute;left:0;top:.05rem;font:400 1.6rem/1 var(--serif);color:var(--accent-2);font-variant-numeric:tabular-nums}
+.press .questions li:last-child{margin-bottom:0}
+
+/* contents */
+.press .toc-toggle{position:fixed;top:1rem;right:1rem;z-index:25;font:600 .7rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--bg);border:1px solid var(--line-2);border-radius:999px;padding:.6rem .95rem;cursor:pointer}
+.press .toc-toggle:hover{border-color:var(--accent);color:var(--bright)}
+.press .toc{display:none;position:fixed;top:3.6rem;right:1rem;z-index:24;width:min(22rem,calc(100vw - 2rem));max-height:calc(100vh - 5rem);overflow:auto;padding:1rem 1.2rem 1.1rem;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;box-shadow:0 30px 80px #0009}
+.press.light .toc{box-shadow:0 20px 60px #0002}
+.press .toc.open{display:block}
+.press .toc-label{font:600 .66rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem}
+.press .toc a{display:block;font:.86rem/1.4 var(--sans);color:var(--muted);border:0;padding:.42rem 0 .42rem .8rem;border-left:1px solid transparent;margin-left:-.05rem}
+.press .toc a.lvl3{padding-left:1.8rem;font-size:.8rem}
+.press .toc a:hover{color:var(--bright)}
+.press .toc a.active{color:var(--bright);border-left-color:var(--accent)}
+@media(min-width:1180px){
+  .press .toc-toggle{display:none}
+  .press .toc{display:block;position:fixed;top:5.4rem;left:calc(50% - var(--col)/2 - var(--toc) - 1.5rem);right:auto;width:var(--toc);max-height:calc(100vh - 8rem);padding:0 0 0 .2rem;background:none;border:0;box-shadow:none}
+  .press .toc a{border-left:1px solid var(--line)}
+}
+
+/* audio player: sits under the masthead, sticks to the top while scrolling */
+.press .player{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.6rem;margin:0 0 2.5rem;padding:.7rem 0;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:.78rem/1 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.press .player button{appearance:none;border:1px solid var(--line-2);background:none;color:var(--ink);border-radius:999px;width:2.3rem;height:2.3rem;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:0 0 auto}
+.press .player button:hover{border-color:var(--accent);color:var(--bright)}
+.press .player button svg{width:1rem;height:1rem;fill:currentColor;display:block}
+.press .player .p-play{width:2.7rem;height:2.7rem;border-color:var(--accent);color:var(--bright)}
+.press .player .p-play .i-pause{display:none}
+.press .player.playing .p-play .i-play{display:none}
+.press .player.playing .p-play .i-pause{display:block}
+.press .player .p-skip{position:relative}
+.press .player .p-skip svg{width:1.35rem;height:1.35rem}
+.press .player .p-skip span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 .5rem/1 var(--sans);color:currentColor;padding-top:.1rem}
+.press .player .p-time{flex:0 0 auto;min-width:2.6rem;text-align:center;letter-spacing:.02em}
+.press .player .p-range{flex:1 1 auto;appearance:none;height:2px;background:var(--line-2);border-radius:2px;outline:0;margin:0 .2rem;cursor:pointer;min-width:4rem}
+.press .player .p-range::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range:focus-visible{outline:1px solid var(--accent);outline-offset:6px}
+.press .player .p-label{flex:0 0 auto;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;color:var(--accent);margin-right:.2rem}
+.press .player.error{color:var(--faint)}
+@media(max-width:640px){
+  .press .player{gap:.45rem;margin:0 -.2rem 2rem}
+  .press .player .p-label{display:none}
+  .press .player .p-time{min-width:2.3rem;font-size:.72rem}
+}
+@media print{.press .player{display:none!important}}
+
+/* colophon */
+.press .colophon{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);font:.74rem/1.5 var(--sans);color:var(--faint);letter-spacing:.08em}
+
+/* library */
+.press.library .cards{display:grid;gap:1rem;margin-bottom:3rem}
+.press.library .card{display:block;padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:inherit}
+.press.library .card:hover{border-color:var(--accent)}
+.press.library .card h2{font:400 1.5rem/1.25 var(--serif);color:var(--bright);text-transform:none;letter-spacing:-.01em;margin:.2rem 0 .6rem;padding:0;border:0}
+.press.library .card p{color:var(--muted);font-size:1rem;margin-bottom:.8rem}
+.press.library .card .eyebrow{margin-bottom:.2rem}
+.press.library .concept-row{font:.92rem/1.7 var(--sans);color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--line)}
+.press.library .concept-row b{color:var(--bright);margin-right:.6rem}
+
+/* small screens */
+@media(max-width:640px){
+  .press{font-size:1.05rem;line-height:1.68}
+  .press .page{padding:4rem 1.1rem 5rem}
+  .press .figure{padding:1rem 1rem .8rem;margin:2rem -.3rem}
+  .press .figure .svg{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .press .figure svg{min-width:34rem}
+  .press .questions{padding:1.5rem 1.1rem 1rem}
+  .press blockquote{font-size:1.08rem}
+}
+
+/* print: light and complete */
+@media print{
+  .press{background:#fff;color:#111;font-size:11pt;line-height:1.5;--bright:#000;--muted:#444;--faint:#666;--accent:#6b5a38;--accent-2:#45526a;--warm:#8a6118;--line:#ccc;--line-2:#bbb;--panel:#f6f6f6;--panel-2:#eee}
+  .press .progress,.press .toc,.press .toc-toggle{display:none!important}
+  .press .page{max-width:none;margin:0;padding:0}
+  .press h2,.press h3{break-after:avoid}
+  .press .figure,.press .concept,.press .callout,.press blockquote,.press .questions li{break-inside:avoid}
+  .press a{color:inherit;border:0}
+}
+@media(prefers-reduced-motion:reduce){.press .progress i{transition:none}}
+</style></head>
+<body class="press">
+<div class="progress" aria-hidden="true"><i id="progress-fill"></i></div>
+<button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc">Contents</button>
+<nav class="toc" id="toc" aria-label="Contents"><div class="toc-label">Contents</div><a class="lvl2" href="#what-can-be-ignored">What can be ignored</a><a class="lvl2" href="#the-forecast-before-the-contract">The forecast before the contract</a><a class="lvl2" href="#the-option-to-say-nothing">The option to say nothing</a><a class="lvl2" href="#the-loss-that-disappears-in-the-total">The loss that disappears in the total</a><a class="lvl2" href="#persuasion-without-a-lie">Persuasion without a lie</a><a class="lvl2" href="#what-the-average-belief-must-preserve">What the average belief must preserve</a><a class="lvl2" href="#what-to-arrange-before-learning">What to arrange before learning</a></nav>
+<main class="page">
+<header class="masthead"><div class="eyebrow">Daily Reading · Day 7 · 2026-09-13</div><h1>Before the Answer Arrives</h1><p class="standfirst">Better information can destroy an agreement everyone wanted, make silence revealing, and leave a loss invisible in the totals. Its value depends on what people can arrange before they know.</p><div class="meta">3,121 words · about 14 min</div></header>
+
+<article class="article" id="article">
+<p>Two farmers are about to sign an agreement. One owns low ground, the other high ground. In the deliberately simplified world we will give them, next season will be either wet or dry, with equal probability. Wet weather yields 200 sacks on the high ground and none on the low; dry weather reverses the harvests. Neither farmer can change what grows. Each would rather have 100 sacks for certain than an equal chance of 200 or nothing.</p>
+<p>Their agreement is straightforward: pool the harvest and divide it equally. Whatever the weather, each gets 100.</p>
+<p>Now suppose a perfect forecast arrives just before they sign. Both learn that the season will be wet. The high-ground farmer declines. Why exchange a certain 200 for a certain 100? The low-ground farmer still wants the agreement, but has nothing to offer in return.</p>
+<p>The forecast has not spoiled a crop. It has removed the uncertainty that made an exchange possible. Before hearing it, both farmers would have preferred to sign first.</p>
+<p>What, exactly, has become worse when their knowledge has improved?</p>
+<h2 id="what-can-be-ignored">What can be ignored</h2>
+<p>There is a powerful reason to think information cannot hurt. If someone offers you a free forecast, you can act as you would have acted without it. You now have an additional option: change your decision if the news justifies doing so. Keeping an old option while acquiring a new one cannot reduce the best outcome available to you, judged before the news arrives.</p>
+<p>David Blackwell gave this intuition a precise form in work published in 1951 and 1953. One experiment is more informative than another if its results can be transformed into the other's by discarding detail or adding noise, without consulting the hidden truth. Under the standard expected-utility framework, the richer experiment is at least as useful in every decision problem. Its recipient can reproduce any strategy available with the poorer experiment. <a href="https://doi.org/10.1214/aoms/1177729032">Blackwell, <em>Equivalent Comparisons of Experiments</em> (1953)</a>.</p>
+<aside class="concept" id="concept-blackwell-informativeness">
+<div class="concept-title">Blackwell informativeness</div>
+<p>An ordering of information sources by whether one can reproduce another through a transformation that needs no further knowledge of the underlying state. The more informative source is weakly better for an expected-utility decision maker with the same available actions and payoffs.</p>
+</aside>
+<p>Imagine a report that tells a warehouse manager the exact number of deliveries due tomorrow. A second report says only whether that number exceeds fifty. The manager can turn the exact count into the second report. The reverse is impossible. But a report about delivery times and a report about package weights need not be ordered this way: each can answer something the other cannot. More data is not automatically more useful data.</p>
+<p>Even with a perfect forecast, the guarantee concerns expected value before its arrival. A particular message can be terrible news. Learning that the warehouse will flood is worse than learning that it will remain dry; that does not establish that offering a forecast was worse than offering none.</p>
+<p>The farmers pose a different problem. We compared their prospects before either message arrived, and both preferred the arrangement without an early forecast. The reason is in the phrase <em>available actions</em>. The low-ground farmer can ignore the forecast. He cannot make his neighbor ignore it. Signing a mutually acceptable contract is no longer an available action merely because it was available yesterday.</p>
+<h2 id="the-forecast-before-the-contract">The forecast before the contract</h2>
+<p>Jack Hirshleifer explored the separation between information's private and social value in a 1971 paper. Knowledge can help someone obtain a larger share of what already exists, independently of helping anyone produce more. He also showed why public information arriving before trade can impose a risk that people would pay to avoid. His conclusion depended explicitly on the order of information and exchange. <a href="https://people.duke.edu/~qc2/BA532/1971%20AER%20Hirshleifer.pdf">Hirshleifer, <em>The Private and Social Value of Information and the Reward to Inventive Activity</em> (1971), especially section V</a>.</p>
+<p>Our farmers are a numerical illustration of this timing problem, not a historical case. They do not need different opinions to trade. They agree about the weather's probabilities. What differs is their exposure: the same rain that helps one harms the other. Their agreement converts two unstable harvests into two stable incomes.</p>
+<aside class="concept" id="concept-hirshleifer-effect">
+<div class="concept-title">Hirshleifer effect</div>
+<p>Information arriving before people can share a risk can reduce their welfare by eliminating mutually beneficial insurance opportunities. This is a conditional result about information, markets, and timing, not a general claim that ignorance is desirable.</p>
+</aside>
+<p>Make the contract binding before the forecast, and the result changes completely. Both still receive 100 sacks. They can read the forecast without losing their protection. The critical interval lies between the opportunity to learn and the opportunity to commit.</p>
+<figure id="figure-1" class="figure" data-n="1">
+<div class="svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 290" role="img" aria-label="Contract before forecast gives each farmer 100 sacks. Forecast before contract leaves one farmer with 200 and the other with zero.">
+<g font-family="sans-serif" font-size="15" fill="var(--ink)">
+<text x="24" y="30" fill="var(--accent)" font-size="12" letter-spacing="2">AGREEMENT FIRST</text>
+<rect x="24" y="49" width="196" height="67" rx="5" fill="none" stroke="var(--line-2)"/><text x="122" y="78" text-anchor="middle">Both sign</text><text x="122" y="100" text-anchor="middle" fill="var(--muted)">Share either harvest</text>
+<rect x="282" y="49" width="196" height="67" rx="5" fill="none" stroke="var(--line-2)"/><text x="380" y="89" text-anchor="middle">Forecast arrives</text>
+<rect x="540" y="49" width="196" height="67" rx="5" fill="none" stroke="var(--accent)"/><text x="638" y="89" text-anchor="middle">100 sacks each</text>
+<text x="24" y="169" fill="var(--accent)" font-size="12" letter-spacing="2">INFORMATION FIRST</text>
+<rect x="24" y="188" width="196" height="67" rx="5" fill="none" stroke="var(--line-2)"/><text x="122" y="228" text-anchor="middle">Forecast arrives</text>
+<rect x="282" y="188" width="196" height="67" rx="5" fill="none" stroke="var(--line-2)"/><text x="380" y="217" text-anchor="middle">Winner declines</text><text x="380" y="239" text-anchor="middle" fill="var(--muted)">No mutual insurance</text>
+<rect x="540" y="188" width="196" height="67" rx="5" fill="none" stroke="var(--line-2)"/><text x="638" y="228" text-anchor="middle">200 sacks / 0 sacks</text>
+</g><g stroke="var(--accent)" fill="none" stroke-width="2"><path d="M228 83h44m-8-5 8 5-8 5M486 83h44m-8-5 8 5-8 5M228 222h44m-8-5 8 5-8 5M486 222h44m-8-5 8 5-8 5"/></g>
+</svg></div>
+<figcaption>The same forecast has different consequences depending on when the farmers can make a binding agreement. Harvests and probabilities are assumptions of the example.</figcaption>
+</figure>
+<p>This also explains why “everyone is worse off” needs a date attached. Before the forecast, each farmer faces a lottery instead of a guaranteed income and dislikes the change. After the forecast, the fortunate farmer is pleased. There is no contradiction between unanimous opposition beforehand and resistance to compensation afterward. Information has given one person a reason to reject what both previously wanted.</p>
+<p>Nor does the example require that uncertainty itself be valuable. Suppose the forecast arrives early enough to let the threatened farmer protect the crop. Now learning may create additional food. Its productive benefit must be compared with the lost protection. If protection saves enough, the forecast can be worth having even when the insurance agreement disappears.</p>
+<p>There are therefore two distinct things a prediction can accomplish: change what happens, and change who must bear what happens. These can point in opposite directions. Calling a prediction “more accurate” settles neither comparison.</p>
+<p>The reverse mistake would be to preserve the uncertainty when a better contract would preserve the protection. In our example, signing first permits both knowledge and insurance. A refusal to learn is a response to the missing agreement. Supply the agreement, and the reason for refusing disappears.</p>
+<h2 id="the-option-to-say-nothing">The option to say nothing</h2>
+<p>Could each farmer simply keep his forecast private? If nobody else can learn anything from his behavior, perhaps. But this condition is demanding. A person can reveal information by declining an offer, requesting different terms, or publishing only favorable results.</p>
+<p>Consider a separate, invented market. Every machine has a certified quality score from one to five, each score equally common. Owners know their scores; buyers know that all owners know. Certificates are free to show and impossible to fake. Buyers pay in proportion to the expected score.</p>
+<p>If everyone remains silent, a machine is valued at three. Owners of fives can improve their price by showing their certificates. Once fives disclose, silence means a score between one and four, averaging 2.5. Fours now have a reason to disclose. As they leave the silent group, its average falls again. Threes follow, then twos. At the end, even an owner who says nothing reveals that the score is one.</p>
+<p>This is the reasoning behind <em>disclosure unraveling</em>, developed in foundational work by Sanford Grossman and Paul Milgrom. With verifiable, inexpensive disclosure and the appropriate common knowledge, withholding information need not conceal it. Grossman's 1981 analysis showed how buyers' inferences could induce full revelation even from a seller with an incentive to mislead them. <a href="https://doi.org/10.1086/466995">Grossman, <em>The Informational Role of Warranties and Private Disclosure about Product Quality</em> (1981)</a>; <a href="https://web.stanford.edu/~milgrom/publishedarticles/Good%20News%20and%20Bad%20News.pdf">Milgrom, <em>Good News and Bad News</em> (1981)</a>.</p>
+<aside class="concept" id="concept-disclosure-unraveling">
+<div class="concept-title">Disclosure unraveling</div>
+<p>A process in which favorable types reveal themselves, making silence less favorable and giving the next types an incentive to reveal. Full unraveling requires strong assumptions about verification, disclosure costs, knowledge, and inference.</p>
+</aside>
+<p>The rounds are a way to understand the equilibrium, not a prediction that sellers literally disclose in weekly batches. Nor must the lowest score be physically published: a buyer can infer it from silence.</p>
+<p>Now change one assumption. Some owners never received a certificate, and buyers cannot distinguish them from owners hiding poor scores. Silence no longer identifies the bottom. It may mean bad news, or no news. Costly certification, privacy preferences, and several incomparable dimensions of quality can likewise prevent the simple five-to-one deduction.</p>
+<p>The pressure is real within the model, but its completeness is not a safe description of human behavior. In experiments published in 2021, Ginger Zhe Jin, Michael Luca, and Daniel Martin found that senders withheld unfavorable information and that many receivers were insufficiently skeptical about nondisclosure without repeated feedback. The laboratory supported strategic disclosure more clearly than automatic, complete unraveling. <a href="https://doi.org/10.1257/mic.20180217">Jin, Luca, and Martin, <em>Is No News (Perceived As) Bad News?</em> (2021)</a>.</p>
+<aside class="concept" id="concept-information-externality">
+<div class="concept-title">Information externality</div>
+<p>One person's acquisition or disclosure of information changes someone else's opportunities or the inferences made about them. The person creating that effect need not bear its cost or receive its benefit.</p>
+</aside>
+<p>The machine owners show why a permission to remain silent is weaker than protection from the consequences of silence. An institution can leave disclosure formally optional while making it economically difficult to refuse. Whether that is desirable depends on what is being disclosed and why: uncovering a dangerous machine and removing someone's ability to pool an unavoidable risk are different achievements.</p>
+<h2 id="the-loss-that-disappears-in-the-total">The loss that disappears in the total</h2>
+<p>Return to the farms and imagine an analyst who studies them as one agricultural business. It produces 200 sacks in wet weather and 200 in dry weather. A perfect forecast changes nothing about its output. The analyst concludes that the information has no economic value and does no economic harm.</p>
+<p>For this single owner, the conclusion is correct. For the two actual owners, it misses the problem completely.</p>
+<p>The distinction goes beyond saying that averages conceal inequality. The missing feature is a relationship: whether the two people have agreed to exchange claims on their harvests. Their combined resources are identical with and without the agreement. Their individual prospects are not.</p>
+<p>Edward Schlee established a more general and particularly unsettling version of this problem in 2001. Under the conditions of his risk-sharing model, an economy can have a hypothetical representative agent whose demand reproduces aggregate demand, yet that agent is indifferent to information that makes the actual agents worse off. A model can represent market demand successfully and misrepresent welfare. <a href="https://doi.org/10.1257/aer.91.3.509">Schlee, <em>The Value of Information in Efficient Risk-Sharing Arrangements</em> (2001)</a>.</p>
+<aside class="concept" id="concept-representative-agent">
+<div class="concept-title">Representative agent</div>
+<p>A hypothetical decision maker used to reproduce an economy's aggregate behavior. Success at reproducing aggregate demand does not establish that this agent's welfare represents the welfare of the people being combined.</p>
+</aside>
+<figure id="figure-2" class="figure" data-n="2">
+<div class="svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img" aria-label="Shared harvest: each farmer receives 100 in either weather. Separate harvests: each receives 200 or zero. Combined total remains 200 in all cases.">
+<g font-family="sans-serif" font-size="15" fill="var(--ink)" text-anchor="middle">
+<text x="350" y="34" fill="var(--muted)">Wet season</text><text x="560" y="34" fill="var(--muted)">Dry season</text>
+<text x="24" y="78" text-anchor="start">With agreement</text><text x="350" y="78">100 + 100</text><text x="560" y="78">100 + 100</text>
+<text x="24" y="142" text-anchor="start">Without agreement</text><text x="350" y="142">0 + 200</text><text x="560" y="142">200 + 0</text>
+<text x="24" y="225" text-anchor="start" fill="var(--accent)">Combined total</text><text x="350" y="225" fill="var(--accent)" font-size="24">200</text><text x="560" y="225" fill="var(--accent)" font-size="24">200</text>
+<text x="380" y="280" fill="var(--muted)" font-size="14">Same output. Different security for each person.</text>
+</g><g stroke="var(--line-2)"><path d="M24 100H730M24 169H730"/></g>
+</svg></div>
+<figcaption>Aggregation preserves the 200-sack harvest but removes the distinction between protected and exposed individuals. The representative owner has no harvest risk in either arrangement.</figcaption>
+</figure>
+<p>Suppose, for illustration, that a farmer values a harvest according to its square root. One hundred guaranteed sacks gives a value of 10. The equal lottery between zero and 200 gives an expected value of about 7.07. Both prefer the guarantee. Combine their grain before evaluating it, however, and the square root of the total is always about 14.14. That calculation contains no trace of either person's lost security.</p>
+<p>Neither the chosen square-root rule nor these numbers are empirical estimates. They make the analytical error visible. Combining resources and then evaluating them is a different operation from evaluating each person's circumstances and then combining those evaluations.</p>
+<p>This is a stricter warning than “look beyond GDP.” Even a model that gets all the relevant aggregate quantities right can answer the welfare question incorrectly if it has removed the people between whom the important arrangement occurs. The question is not only what was omitted, but whether the omitted relation is where the benefit existed.</p>
+<h2 id="persuasion-without-a-lie">Persuasion without a lie</h2>
+<p>A person can understand exactly how someone is trying to persuade them and still rationally change their decision. Whether that helps or hurts depends on the alternatives they could have been offered.</p>
+<p>Imagine a buyer considering a machine. Both buyer and seller believe that forty percent of machines will suit the buyer's job and sixty percent will not. Buying a suitable machine produces a net gain of 100 for the buyer; buying an unsuitable one produces a net loss of 100. Walking away yields zero. The seller wants a sale either way.</p>
+<p>Without a test, buying has an expected payoff of minus 20. The buyer declines. A perfect test would generate purchases for the forty percent that are suitable.</p>
+<p>Instead, the seller commits in advance to a test with this publicly known design: every suitable machine passes, and one-third of unsuitable machines pass. The result must be reported honestly. For every hundred cases, the expected pass group contains forty suitable machines and twenty unsuitable ones. The fail group contains forty unsuitable machines.</p>
+<p>When the test says “pass,” the buyer knows exactly what it means: a two-thirds chance of suitability. Buying then has a positive expected payoff. The buyer purchases after a pass and walks away after a fail. Sales rise from forty percent under perfect testing to sixty percent under this less informative test.</p>
+<p>No certificate is forged. No calculation is wrong. The buyer knows the seller's motive and the test's limitations. Being aware of the persuasion does not undo it.</p>
+<figure id="figure-3" class="figure" data-n="3">
+<div class="svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 335" role="img" aria-label="Forty suitable machines all pass. Of sixty unsuitable machines, twenty pass and forty fail. Sixty pass in total, two thirds suitable, so the buyer purchases.">
+<g font-family="sans-serif" font-size="15" fill="var(--ink)" text-anchor="middle">
+<rect x="22" y="36" width="222" height="67" rx="5" fill="none" stroke="var(--accent)"/><text x="133" y="75">40 suitable</text>
+<rect x="22" y="210" width="222" height="67" rx="5" fill="none" stroke="var(--line-2)"/><text x="133" y="249">60 unsuitable</text>
+<rect x="452" y="36" width="284" height="94" rx="5" fill="none" stroke="var(--accent)"/><text x="594" y="65" fill="var(--accent)">PASS: 60</text><text x="594" y="91">40 suitable + 20 unsuitable</text><text x="594" y="114" fill="var(--muted)">Buyer purchases</text>
+<rect x="452" y="210" width="284" height="67" rx="5" fill="none" stroke="var(--line-2)"/><text x="594" y="239">FAIL: 40 unsuitable</text><text x="594" y="262" fill="var(--muted)">Buyer declines</text>
+<text x="380" y="318" font-size="13" fill="var(--muted)">Expected counts per 100 cases; illustrative assumptions.</text>
+</g><g fill="none" stroke-width="2"><path d="M245 70H437m-8-5 8 5-8 5" stroke="var(--accent)"/><path d="M245 239L437 104m-10 2 10-2-4 10M245 252H437m-8-5 8 5-8 5" stroke="var(--muted)"/></g><g font-family="sans-serif" font-size="13" fill="var(--muted)"><text x="312" y="61">all 40</text><text x="294" y="164">20 pass</text><text x="306" y="273">40 fail</text></g>
+</svg></div>
+<figcaption>An illustrative test increases purchases by grouping all suitable machines with some unsuitable ones. The buyer knows the grouping rule and benefits relative to having no test.</figcaption>
+</figure>
+<p>Emir Kamenica and Matthew Gentzkow's 2011 paper <em>Bayesian Persuasion</em> studies how a sender can influence a rational receiver by choosing the information-generating procedure. The design is chosen before the result; the receiver understands it. Their analysis identifies when persuasion benefits the sender and how to select an optimal signal. Our machine test illustrates the mechanism, without claiming to be the seller's optimal design. <a href="https://doi.org/10.1257/aer.101.6.2590">Kamenica and Gentzkow, <em>Bayesian Persuasion</em> (2011)</a>.</p>
+<aside class="concept" id="concept-bayesian-persuasion">
+<div class="concept-title">Bayesian persuasion</div>
+<p>Influencing a rational decision maker by designing the evidence they will receive. In the basic model, the sender commits to a known signal procedure, while the receiver updates correctly and chooses an action according to their own interests.</p>
+</aside>
+<p>The seller benefits. But so does the buyer, compared with having no test. Across a hundred cases, the buyer obtains forty gains of 100, twenty losses of 100, and forty zeros: an average gain of 20 per case. Perfect testing would have produced an average gain of 40. Thus the same procedure helps the buyer against one comparison and harms the buyer against another.</p>
+<p>Blackwell's result has survived. Perfect information is best for the buyer; partial information is better than none. The seller's power consists in controlling which of those opportunities is offered.</p>
+<h2 id="what-the-average-belief-must-preserve">What the average belief must preserve</h2>
+<p>The test changes behavior without changing the average probability assigned to suitability before its result. A pass occurs sixty percent of the time and implies a two-thirds probability of suitability. A fail occurs forty percent of the time and implies zero. Weight those beliefs by their frequencies: sixty percent times two-thirds is forty percent, exactly the starting probability.</p>
+<aside class="concept" id="concept-bayes-plausibility">
+<div class="concept-title">Bayes plausibility</div>
+<p>For a correctly understood signal, the probabilities assigned after its possible results, averaged using the probabilities of those results, reproduce the prior belief. A designer can redistribute confidence across outcomes but cannot freely raise its average.</p>
+</aside>
+<p>That restriction still leaves room for influence because actions need not move proportionally with belief. The machine buyer does not buy forty percent of a machine at a forty-percent probability. Below one-half, the buyer declines; above one-half, the buyer buys. A seller can increase how often beliefs cross that threshold while allowing the remaining cases to become much less promising.</p>
+<p>This gives a useful distinction between judging a report and judging a reporting system. A particular pass certificate may be authentic and correctly interpreted. To evaluate the system, one must also ask which failures, ambiguities, and distinctions its design permits. An audit that releases every result of a selected test can be fully transparent about its outputs while leaving the selection of the test in interested hands.</p>
+<p>That last observation is an inference from the model, not evidence that any particular audit is manipulated. In practice, test design may be constrained by technology, independent standards, rival information sources, or the buyer's ability to commission another test. Those constraints determine whether the seller's theoretical control exists.</p>
+<h2 id="what-to-arrange-before-learning">What to arrange before learning</h2>
+<p>The two farmers, the certificates, and the designed test initially seem to offer conflicting judgments about knowledge. They are answering different questions. Is a person acquiring an option while everyone else's behavior stays fixed? Are other people revising the contracts they will accept? Is the relevant comparison no evidence, complete evidence, or an independently chosen test?</p>
+<p>My conclusion is that accuracy is an insufficient basis for judging an information system. We also need to know who selects the questions, who receives the answers, and which agreements remain enforceable afterward. These arrangements determine how much people can benefit from the truth.</p>
+<p>For the farmers, the useful intervention is a prior commitment. For the machine buyer, suppressing evidence would remove a benefit; independent testing could increase it. For the owners facing disclosure pressure, the answer depends on whether disclosure improves a consequential choice or merely changes how a fixed burden is assigned. There is no single policy hidden inside the word <em>transparency</em>.</p>
+<p>These are deliberately spare examples. They establish possibilities and expose mechanisms; they do not measure how often each mechanism dominates. Evidence that forecasts enable large productive improvements would weaken the case for delaying them. Evidence that people can secure durable protection before learning would remove the central insurance objection. Evidence that recipients can cheaply obtain independent tests would weaken the sender's power. The relevant empirical work must examine those opportunities, not just prediction accuracy.</p>
+<p>There is also a question of consent that appears only when we specify the time. Asked before the forecast, both farmers favor a binding agreement. Asked afterward, one rejects it. We cannot resolve the disagreement by saying that people should get what they currently choose: the earlier choice included a commitment governing the later one. Whether that commitment stands is part of the institution we are evaluating.</p>
+<p>Nothing has happened to the total harvest. A forecast changes the terms on which two people can deal with each other, and a protection that was available to both ceases to be available to either. They needed to act while they still had a reason to agree.</p>
+<section class="questions" id="questions">
+<h2>After reading</h2>
+<ol>
+<li>Why does “you can always ignore the information” fail for the two farmers, even though neither makes a reasoning error?</li>
+<li>How can a model reproduce total wealth correctly and still miss a loss suffered by every individual?</li>
+<li>Think of a test, rating, or disclosure system you encounter. Who chooses what it reveals, and what would you want settled before its answer arrives?</li>
+</ol>
+</section>
+</article>
+<footer class="colophon"><a href="index.html">Library</a> · Before the Answer Arrives · 2026-09-13</footer>
+</main>
+<script type="application/json" id="press-meta">{"title": "Before the Answer Arrives", "standfirst": "Better information can destroy an agreement everyone wanted, make silence revealing, and leave a loss invisible in the totals. Its value depends on what people can arrange before they know.", "date": "2026-09-13", "series": "Daily Reading", "day": "7", "concepts": ["Blackwell informativeness", "Hirshleifer effect", "information externality", "disclosure unraveling", "representative agent", "Bayesian persuasion", "Bayes plausibility"], "words": 3121, "minutes": 14, "audio": "", "audio_minutes": 0}</script>
+<script>/* Press reader: progress bar, contents drawer, active-section highlight, audio player. No dependencies. */
+(function () {
+  var fill = document.getElementById('progress-fill');
+  var toc = document.getElementById('toc');
+  var toggle = document.getElementById('toc-toggle');
+  var links = toc ? Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+
+  function progress() {
+    if (!fill) return;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    fill.style.width = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + '%';
+  }
+
+  function active() {
+    if (!links.length) return;
+    var y = window.scrollY + window.innerHeight * 0.28;
+    var current = -1;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i] && targets[i].offsetTop <= y) current = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { progress(); active(); ticking = false; });
+  }
+
+  if (toggle && toc) {
+    toggle.addEventListener('click', function () {
+      var open = toc.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    toc.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A' && window.matchMedia('(max-width: 1179px)').matches) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toc.classList.contains('open')) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  progress();
+  active();
+
+  /* ---------------- audio player ---------------- */
+  var player = document.getElementById('player');
+  if (!player) return;
+  var src = player.getAttribute('data-src');
+  var audio = new Audio();
+  audio.preload = 'metadata';
+  audio.src = src;
+  var key = 'press-audio:' + src;
+  var playBtn = player.querySelector('.p-play');
+  var backBtn = player.querySelector('.p-back');
+  var fwdBtn = player.querySelector('.p-fwd');
+  var range = player.querySelector('.p-range');
+  var cur = player.querySelector('.p-cur');
+  var dur = player.querySelector('.p-dur');
+  var seeking = false;
+
+  function fmt(s) {
+    if (!isFinite(s)) return '–:––';
+    s = Math.floor(s);
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    var mm = (h ? String(m).padStart(2, '0') : String(m));
+    return (h ? h + ':' : '') + mm + ':' + String(sec).padStart(2, '0');
+  }
+  function setPlaying(on) {
+    player.classList.toggle('playing', on);
+    playBtn.setAttribute('aria-label', on ? 'Pause' : 'Play');
+  }
+  function skip(delta) {
+    if (!isFinite(audio.duration)) return;
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + delta));
+  }
+
+  audio.addEventListener('loadedmetadata', function () {
+    range.max = audio.duration;
+    dur.textContent = fmt(audio.duration);
+    try {
+      var p = parseFloat(localStorage.getItem(key));
+      if (p > 5 && p < audio.duration - 10) { audio.currentTime = p; range.value = p; cur.textContent = fmt(p); }
+    } catch (e) {}
+  });
+  audio.addEventListener('timeupdate', function () {
+    if (!seeking) { range.value = audio.currentTime; cur.textContent = fmt(audio.currentTime); }
+    try { localStorage.setItem(key, String(audio.currentTime)); } catch (e) {}
+  });
+  audio.addEventListener('play', function () { setPlaying(true); });
+  audio.addEventListener('pause', function () { setPlaying(false); });
+  audio.addEventListener('ended', function () {
+    setPlaying(false);
+    try { localStorage.removeItem(key); } catch (e) {}
+  });
+  audio.addEventListener('error', function () {
+    player.classList.add('error');
+    dur.textContent = 'audio unavailable';
+  });
+
+  playBtn.addEventListener('click', function () { audio.paused ? audio.play() : audio.pause(); });
+  backBtn.addEventListener('click', function () { skip(-15); });
+  fwdBtn.addEventListener('click', function () { skip(15); });
+  range.addEventListener('input', function () { seeking = true; cur.textContent = fmt(parseFloat(range.value)); });
+  range.addEventListener('change', function () { audio.currentTime = parseFloat(range.value); seeking = false; });
+
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === ' ' || e.key === 'k') { e.preventDefault(); playBtn.click(); }
+    else if (e.key === 'j') skip(-15);
+    else if (e.key === 'l') skip(15);
+  });
+
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: document.title, artist: player.getAttribute('data-series') || 'Reading' });
+      navigator.mediaSession.setActionHandler('play', function () { audio.play(); });
+      navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
+      navigator.mediaSession.setActionHandler('seekbackward', function () { skip(-15); });
+      navigator.mediaSession.setActionHandler('seekforward', function () { skip(15); });
+      navigator.mediaSession.setActionHandler('seekto', function (d) { if (d.seekTime != null) audio.currentTime = d.seekTime; });
+    } catch (e) {}
+  }
+})();
+</script>
+</body></html>
