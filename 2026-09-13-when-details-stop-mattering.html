@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>When Details Stop Mattering</title>
+<style>/* Press theme. Default: true black, warm off-white type, hairline rules, one brass accent.
+   Add class "light" to .press for the off-white variant. Nothing moves; nothing glows. */
+.press{
+  --bg:#000000;--panel:#0b0b0b;--panel-2:#111111;--line:#1f1f1f;--line-2:#2c2c2c;
+  --ink:#d9d5cd;--bright:#f4f1ea;--muted:#8f8b83;--faint:#5f5c56;
+  --accent:#c9b592;          /* brass: labels, links, active contents */
+  --accent-2:#a9b4c4;        /* cool slate: numerals, blockquote bar, interpretation */
+  --warm:#d1a24f;            /* amber: speculation, late-arriving cost */
+  --rose:#c98a8a;
+  --sel:#c9b592;--sel-ink:#000;
+  --serif:"Newsreader","Charter","Iowan Old Style","Cambria","Georgia","Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Cascadia Code","JetBrains Mono","Consolas",ui-monospace,monospace;
+  --col:44rem;--toc:15rem;
+  color-scheme:dark;
+  background:var(--bg);
+  color:var(--ink);
+  font:1.125rem/1.72 var(--serif);
+  margin:0;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.press.light{
+  --bg:#f7f5f0;--panel:#f1eee7;--panel-2:#ebe7de;--line:#e0dcd2;--line-2:#cfc9bc;
+  --ink:#2a2823;--bright:#141310;--muted:#6e6a61;--faint:#9a958a;
+  --accent:#8a7248;--accent-2:#5f6f85;--warm:#a8761f;--rose:#a85d5d;
+  --sel:#141310;--sel-ink:#f7f5f0;
+  color-scheme:light;
+}
+body.press{margin:0}
+.press *{box-sizing:border-box}
+.press a{color:var(--bright);text-decoration:none;border-bottom:1px solid var(--accent)}
+.press a:hover{color:var(--accent)}
+.press ::selection{background:var(--sel);color:var(--sel-ink)}
+.press :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+
+/* reading progress */
+.press .progress{position:fixed;inset:0 0 auto 0;height:1px;background:transparent;z-index:30}
+.press .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .1s linear}
+
+/* page column */
+.press .page{max-width:var(--col);margin:0 auto;padding:5rem 1.4rem 7rem}
+@media(min-width:1180px){
+  .press .page{margin-left:calc(50% - var(--col)/2 + 3rem)}
+}
+
+/* masthead */
+.press .masthead{margin:0 0 3.5rem}
+.press .eyebrow{font:500 .7rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
+.press h1{font:400 clamp(2.2rem,5.2vw,3.6rem)/1.08 var(--serif);letter-spacing:-.02em;color:var(--bright);margin:0 0 1.2rem;text-wrap:balance}
+.press .standfirst{font:italic 1.3rem/1.5 var(--serif);color:var(--muted);margin:0 0 1.4rem;text-wrap:pretty}
+.press .meta{font:.76rem/1.5 var(--sans);color:var(--faint);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+
+/* headings */
+.press h2{font:500 .74rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin:4rem 0 1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);scroll-margin-top:2.5rem}
+.press h3{font:400 1.55rem/1.3 var(--serif);color:var(--bright);margin:2.6rem 0 1rem;letter-spacing:-.01em;text-wrap:balance;scroll-margin-top:2.5rem}
+.press h4{font:600 1.05rem/1.4 var(--sans);color:var(--bright);margin:2rem 0 .8rem}
+
+/* prose */
+.press p{margin:0 0 1.35rem;text-wrap:pretty}
+.press strong{color:var(--bright);font-weight:600}
+.press em{color:var(--ink)}
+.press code{font:.86em var(--mono);background:var(--panel-2);padding:.1em .4em;border-radius:3px}
+.press pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1rem 1.2rem;overflow:auto;font:.85rem/1.55 var(--mono);margin:0 0 1.5rem}
+.press pre code{background:none;padding:0;font-size:inherit}
+.press hr{border:0;height:1px;background:var(--line);margin:3rem 0}
+.press ul,.press ol{margin:0 0 1.5rem;padding-left:1.4rem}
+.press li{margin:0 0 .55rem;padding-left:.2rem}
+.press li::marker{color:var(--accent);font-family:var(--sans);font-size:.9em}
+.press blockquote{margin:2.2rem 0;padding:.2rem 0 .2rem 1.4rem;border-left:1px solid var(--accent-2);color:var(--bright);font-size:1.16rem;line-height:1.6}
+.press blockquote p:last-child{margin-bottom:0}
+
+/* tables */
+.press .table-wrap{overflow:auto;margin:1.8rem 0;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.press table{border-collapse:collapse;width:100%;font:.9rem/1.55 var(--sans);font-variant-numeric:tabular-nums}
+.press th,.press td{padding:.8rem .9rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.press th{color:var(--accent);font-weight:600;background:var(--panel-2)}
+.press tbody tr:last-child td{border-bottom:0}
+
+/* figures */
+.press article{counter-reset:fig}
+.press .figure{margin:2.6rem 0;padding:1.4rem 1.4rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:6px;counter-increment:fig}
+.press .figure .svg{margin:0 0 .6rem}
+.press .figure svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.press figcaption{font:.84rem/1.55 var(--sans);color:var(--muted);padding-top:.7rem;border-top:1px solid var(--line)}
+.press figcaption::before{content:"Figure " counter(fig) " · ";color:var(--accent);font-weight:600;letter-spacing:.04em}
+.press pre.mermaid{background:var(--panel);text-align:center}
+
+/* concept card */
+.press .concept{margin:2.2rem 0;padding:1.2rem 1.4rem 1rem;border-left:2px solid var(--accent);background:var(--panel);border-radius:0 4px 4px 0}
+.press .concept-title{font:600 .7rem/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.press .concept-title::before{content:"Concept · ";color:var(--faint)}
+.press .concept p{font-size:1.02rem;line-height:1.62}
+.press .concept p:last-child{margin-bottom:0}
+
+/* callouts with epistemic labels */
+.press .callout{margin:2rem 0;padding:1.05rem 1.3rem .9rem;border-radius:4px;border:1px solid var(--line);background:var(--panel);font-size:1.02rem;line-height:1.62}
+.press .callout::before{content:attr(data-label);display:block;font:600 .68rem/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+.press .callout p:last-child{margin-bottom:0}
+.press .callout.evidence{border-left:2px solid var(--accent)}
+.press .callout.evidence::before{color:var(--accent)}
+.press .callout.interpretation{border-left:2px solid var(--accent-2)}
+.press .callout.interpretation::before{color:var(--accent-2)}
+.press .callout.speculation{border-left:2px solid var(--warm)}
+.press .callout.speculation::before{color:var(--warm)}
+.press .callout.aside,.press .callout.note{border-style:dashed;color:var(--muted);background:none}
+@media(min-width:1500px){
+  .press .callout.aside{float:right;width:17rem;margin:.3rem -19rem 1.2rem 1.6rem;font-size:.92rem;line-height:1.55;border:0;border-left:1px solid var(--line-2);border-radius:0;padding:.2rem 0 .2rem 1rem}
+}
+
+/* displayed rule / formula */
+.press .rule{margin:2.6rem 0;padding:1.6rem 1.4rem;text-align:center;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.press .rule p{font:italic 1.32rem/1.45 var(--serif);color:var(--bright);margin:0;text-wrap:balance}
+.press .rule p + p{margin-top:.6rem;font:.9rem/1.5 var(--sans);color:var(--muted);font-style:normal}
+
+/* questions */
+.press .questions{margin-top:4rem;padding:2rem 1.6rem 1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.press .questions h2{margin:0 0 1.4rem;padding:0;border:0}
+.press .questions ol{list-style:none;padding:0;counter-reset:q}
+.press .questions li{counter-increment:q;position:relative;padding-left:3rem;margin-bottom:1.3rem;font-size:1.04rem;line-height:1.6}
+.press .questions li::before{content:counter(q,decimal-leading-zero);position:absolute;left:0;top:.05rem;font:400 1.6rem/1 var(--serif);color:var(--accent-2);font-variant-numeric:tabular-nums}
+.press .questions li:last-child{margin-bottom:0}
+
+/* contents */
+.press .toc-toggle{position:fixed;top:1rem;right:1rem;z-index:25;font:600 .7rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--bg);border:1px solid var(--line-2);border-radius:999px;padding:.6rem .95rem;cursor:pointer}
+.press .toc-toggle:hover{border-color:var(--accent);color:var(--bright)}
+.press .toc{display:none;position:fixed;top:3.6rem;right:1rem;z-index:24;width:min(22rem,calc(100vw - 2rem));max-height:calc(100vh - 5rem);overflow:auto;padding:1rem 1.2rem 1.1rem;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;box-shadow:0 30px 80px #0009}
+.press.light .toc{box-shadow:0 20px 60px #0002}
+.press .toc.open{display:block}
+.press .toc-label{font:600 .66rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem}
+.press .toc a{display:block;font:.86rem/1.4 var(--sans);color:var(--muted);border:0;padding:.42rem 0 .42rem .8rem;border-left:1px solid transparent;margin-left:-.05rem}
+.press .toc a.lvl3{padding-left:1.8rem;font-size:.8rem}
+.press .toc a:hover{color:var(--bright)}
+.press .toc a.active{color:var(--bright);border-left-color:var(--accent)}
+@media(min-width:1180px){
+  .press .toc-toggle{display:none}
+  .press .toc{display:block;position:fixed;top:5.4rem;left:calc(50% - var(--col)/2 - var(--toc) - 1.5rem);right:auto;width:var(--toc);max-height:calc(100vh - 8rem);padding:0 0 0 .2rem;background:none;border:0;box-shadow:none}
+  .press .toc a{border-left:1px solid var(--line)}
+}
+
+/* audio player: sits under the masthead, sticks to the top while scrolling */
+.press .player{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.6rem;margin:0 0 2.5rem;padding:.7rem 0;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:.78rem/1 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.press .player button{appearance:none;border:1px solid var(--line-2);background:none;color:var(--ink);border-radius:999px;width:2.3rem;height:2.3rem;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:0 0 auto}
+.press .player button:hover{border-color:var(--accent);color:var(--bright)}
+.press .player button svg{width:1rem;height:1rem;fill:currentColor;display:block}
+.press .player .p-play{width:2.7rem;height:2.7rem;border-color:var(--accent);color:var(--bright)}
+.press .player .p-play .i-pause{display:none}
+.press .player.playing .p-play .i-play{display:none}
+.press .player.playing .p-play .i-pause{display:block}
+.press .player .p-skip{position:relative}
+.press .player .p-skip svg{width:1.35rem;height:1.35rem}
+.press .player .p-skip span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 .5rem/1 var(--sans);color:currentColor;padding-top:.1rem}
+.press .player .p-time{flex:0 0 auto;min-width:2.6rem;text-align:center;letter-spacing:.02em}
+.press .player .p-range{flex:1 1 auto;appearance:none;height:2px;background:var(--line-2);border-radius:2px;outline:0;margin:0 .2rem;cursor:pointer;min-width:4rem}
+.press .player .p-range::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range:focus-visible{outline:1px solid var(--accent);outline-offset:6px}
+.press .player .p-label{flex:0 0 auto;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;color:var(--accent);margin-right:.2rem}
+.press .player.error{color:var(--faint)}
+@media(max-width:640px){
+  .press .player{gap:.45rem;margin:0 -.2rem 2rem}
+  .press .player .p-label{display:none}
+  .press .player .p-time{min-width:2.3rem;font-size:.72rem}
+}
+@media print{.press .player{display:none!important}}
+
+/* colophon */
+.press .colophon{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);font:.74rem/1.5 var(--sans);color:var(--faint);letter-spacing:.08em}
+
+/* library */
+.press.library .cards{display:grid;gap:1rem;margin-bottom:3rem}
+.press.library .card{display:block;padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:inherit}
+.press.library .card:hover{border-color:var(--accent)}
+.press.library .card h2{font:400 1.5rem/1.25 var(--serif);color:var(--bright);text-transform:none;letter-spacing:-.01em;margin:.2rem 0 .6rem;padding:0;border:0}
+.press.library .card p{color:var(--muted);font-size:1rem;margin-bottom:.8rem}
+.press.library .card .eyebrow{margin-bottom:.2rem}
+.press.library .concept-row{font:.92rem/1.7 var(--sans);color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--line)}
+.press.library .concept-row b{color:var(--bright);margin-right:.6rem}
+
+/* small screens */
+@media(max-width:640px){
+  .press{font-size:1.05rem;line-height:1.68}
+  .press .page{padding:4rem 1.1rem 5rem}
+  .press .figure{padding:1rem 1rem .8rem;margin:2rem -.3rem}
+  .press .figure .svg{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .press .figure svg{min-width:34rem}
+  .press .questions{padding:1.5rem 1.1rem 1rem}
+  .press blockquote{font-size:1.08rem}
+}
+
+/* print: light and complete */
+@media print{
+  .press{background:#fff;color:#111;font-size:11pt;line-height:1.5;--bright:#000;--muted:#444;--faint:#666;--accent:#6b5a38;--accent-2:#45526a;--warm:#8a6118;--line:#ccc;--line-2:#bbb;--panel:#f6f6f6;--panel-2:#eee}
+  .press .progress,.press .toc,.press .toc-toggle{display:none!important}
+  .press .page{max-width:none;margin:0;padding:0}
+  .press h2,.press h3{break-after:avoid}
+  .press .figure,.press .concept,.press .callout,.press blockquote,.press .questions li{break-inside:avoid}
+  .press a{color:inherit;border:0}
+}
+@media(prefers-reduced-motion:reduce){.press .progress i{transition:none}}
+</style></head>
+<body class="press">
+<div class="progress" aria-hidden="true"><i id="progress-fill"></i></div>
+<button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc">Contents</button>
+<nav class="toc" id="toc" aria-label="Contents"><div class="toc-label">Contents</div><a class="lvl2" href="#the-measurable-coincidence">The measurable coincidence</a><a class="lvl2" href="#why-a-small-neighborhood-stops-being-enough">Why a small neighborhood stops being enough</a><a class="lvl2" href="#change-the-unit-of-description">Change the unit of description</a><a class="lvl2" href="#what-the-agreement-does-and-does-not-say">What the agreement does and does not say</a><a class="lvl2" href="#the-number-that-universality-cannot-give-you">The number that universality cannot give you</a><a class="lvl2" href="#a-similar-graph-is-not-a-shared-cause">A similar graph is not a shared cause</a><a class="lvl2" href="#does-a-warning-announce-the-threshold">Does a warning announce the threshold?</a></nav>
+<main class="page">
+<header class="masthead"><div class="eyebrow">Daily Reading · Day 6 · 2026-09-13</div><h1>When Details Stop Mattering</h1><p class="standfirst">A gas and a magnet can obey the same law near a critical point. That discovery explains when a simple model can cross fields—and why a shared pattern is not enough to predict a collapse.</p><div class="meta">3,437 words · about 15 min</div></header>
+
+<article class="article" id="article">
+<p>In 1976 Richard Hocken and Michael Moldover measured xenon, carbon dioxide, and sulfur hexafluoride extremely close to the temperatures at which each fluid's liquid and gas phases become indistinguishable. Their apparatus followed changes in density through optical measurements. The three substances have different molecules and different critical temperatures. Near their respective critical points, however, the measured changes followed nearly the same mathematical pattern. More remarkably, the pattern was close to one calculated for a model of a magnet: a three-dimensional arrangement of tiny elements that can point one of two ways. There is no xenon hidden in a magnet, and nothing magnetic is required to make carbon dioxide condense. <a href="https://www.nist.gov/publications/ising-critical-exponents-real-fluids-experiment">Hocken and Moldover, <em>Physical Review Letters</em> (1976)</a>.</p>
+<p>It is tempting to call this a resemblance and move on. That would miss the strange part. The experiment did not say merely that several things change sharply when heated. It compared <em>how fast</em> a measurable difference disappears as each system approaches its own special temperature. A model that omits the identities and motions of fluid molecules got that rate approximately right. How can removing so much information leave an explanation intact? And how would we know which information can be removed?</p>
+<p>The answer has become one of physics' strongest accounts of when two different things really are alike. It is also a useful warning about a weaker habit: seeing a common shape in two graphs and assuming that their causes, thresholds, or futures must be the same.</p>
+<h2 id="the-measurable-coincidence">The measurable coincidence</h2>
+<p>Heat a sealed fluid under suitable pressure. Below its critical temperature, dense liquid and thin vapor can coexist, separated by a visible boundary. The nearer the temperature comes to the critical value, the smaller the difference between their densities becomes. At the critical point the distinction vanishes. A magnet undergoes a different change: below a certain temperature, its microscopic magnetic moments can align so that the material has a net magnetization even without an applied field; above it, thermal agitation defeats that collective order. In one system the measured quantity is a difference in density, in the other it is a net direction. Both approach zero as their critical temperatures are approached from the ordered side.</p>
+<p>If you halve the remaining temperature gap, by what factor does the density difference or magnetization shrink? A <em>critical exponent</em> describes the rule relating that shrinking quantity to the distance from the critical temperature. In the relevant three-dimensional class, the exponent for this particular change is about 0.326, appreciably different from the one-half produced by a simpler mean-field calculation. The number is not a temperature and does not say how large the density difference is. It describes the shape of its approach to zero, sufficiently near the point. Hocken and Moldover found exponents close to those of the three-dimensional Ising model in three real fluids. A later high-precision calculation of that model gave 0.32648 for the exponent. <a href="https://pubmed.ncbi.nlm.nih.gov/11970188/">Campostrini and colleagues, <em>Physical Review E</em> (2002)</a>.</p>
+<aside class="concept" id="concept-critical-point">
+<div class="concept-title">Critical point</div>
+<p>A set of conditions at which two phases become continuously indistinguishable. Here the liquid–gas critical point or the continuous loss of a magnet's spontaneous order is meant. In other fields, <em>critical</em> can name a threshold with different mathematics; sharing the word does not establish a shared mechanism.</p>
+</aside>
+<aside class="concept" id="concept-critical-exponent">
+<div class="concept-title">Critical exponent</div>
+<p>A number describing how a measurable property changes as a system approaches a critical point. Two systems can have different critical temperatures and magnitudes but the same exponent: their changes have the same near-critical shape after the appropriate quantities are compared.</p>
+</aside>
+<p>Before explaining the coincidence, distinguish it from an ordinary average. The average height of a large crowd is stable because one person's height tells us little about another's. If nearby parts of a system start to move together over growing distances, adding more parts will not make their fluctuations cancel in the familiar way. That change in dependence, rather than the chemistry of xenon, is where the explanation begins.</p>
+<h2 id="why-a-small-neighborhood-stops-being-enough">Why a small neighborhood stops being enough</h2>
+<p>Imagine the magnetic model as a grid of sites. Each site has an up or down state. Neighbors tend to agree; heat tends to disrupt agreement. Far above the critical temperature, an up-pointing site tells you little about a distant site. Far below it, broad alignment dominates. Near the transition, patches of aligned sites appear within larger patches, with fluctuations at many sizes. No one patch size tells the whole story.</p>
+<p>The <em>correlation length</em> measures roughly how far a fluctuation at one place remains informative about another. It grows as a continuous critical point is approached. In an ideal infinite model it diverges there; in a real sample it eventually runs into the size of the apparatus or other physical limits. In a fluid, density fluctuations at increasing distances scatter light. Near its critical point, a fluid can become visibly cloudy, an effect called critical opalescence. The cloudiness is a consequence of density variations large enough to interact strongly with visible light, not a new substance forming in the vessel. <a href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication958.pdf">NIST's history of critical light scattering</a>; <a href="https://doi.org/10.1103/PhysRevA.12.225">Cannell's light-scattering measurement of correlation length in sulfur hexafluoride</a>.</p>
+<figure id="figure-1" class="figure" data-n="1">
+<div class="svg"><svg viewBox="0 0 720 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two square fields: one has scattered small marks and a short correlation range; the other has nested irregular patches and a much longer range.">
+<g font-family="sans-serif" fill="var(--ink)" font-size="13"><text x="58" y="30" fill="var(--accent)">FAR FROM THE POINT</text><text x="397" y="30" fill="var(--accent)">NEAR THE POINT</text></g>
+<rect x="55" y="49" width="250" height="170" fill="var(--panel-2)" stroke="var(--line-2)"/><rect x="395" y="49" width="250" height="170" fill="var(--panel-2)" stroke="var(--line-2)"/>
+<g fill="var(--accent)"><circle cx="79" cy="75" r="4"/><circle cx="133" cy="86" r="4"/><circle cx="207" cy="68" r="4"/><circle cx="276" cy="98" r="4"/><circle cx="102" cy="149" r="4"/><circle cx="173" cy="131" r="4"/><circle cx="240" cy="172" r="4"/><circle cx="290" cy="199" r="4"/><circle cx="74" cy="196" r="4"/><circle cx="144" cy="199" r="4"/></g>
+<g fill="none" stroke="var(--accent)" stroke-width="2"><path d="M415 76c35-20 69-12 94 13 22 22 55 10 77-4 32-20 55 8 44 28-14 26-50 18-73 25-27 8-27 48-64 50-30 1-33-32-54-27-31 7-49-27-24-48z"/><path d="M438 90c17-9 36 1 43 15 10 17 28 9 38 18 10 11 0 27-19 23-18-4-29 7-44-2-14-9-12-24-28-27"/><path d="M550 85c22-8 28 5 45 1m-32 68c15-11 32-7 47 3"/></g>
+<g font-family="sans-serif" fill="var(--faint)" font-size="12" text-anchor="middle"><text x="180" y="247">short-range dependence</text><text x="520" y="247">dependence across many lengths</text></g>
+</svg></div>
+<figcaption>Far from a continuous critical point, correlations die out over a short distance. Near it, an enlarged patch can contain smaller patches with similar fluctuations. This is a schematic of scale, not a picture of measured molecules or spins.</figcaption>
+</figure>
+<p>The most direct way to calculate a system's overall behavior would be to follow every site or molecule and every interaction among them. Near a critical point this is especially hopeless: replacing a large patch by its average may throw away a fluctuation the size of that patch, and there are patches larger still. A simple calculation that assumes each part experiences only an average environment misses the mutual dependence that has become decisive. This helps explain why the mean-field exponent differs from the measured one in three dimensions. It is not just that the calculation used too few decimal places; it left out a kind of event.</p>
+<aside class="concept" id="concept-correlation-length">
+<div class="concept-title">Correlation length</div>
+<p>The characteristic distance over which the state of one part of a system is related to another's. Near many continuous critical points it becomes very large. This makes fluctuations at several scales important and limits the usefulness of treating local parts as independent.</p>
+</aside>
+<h2 id="change-the-unit-of-description">Change the unit of description</h2>
+<p>Leo Kadanoff proposed a way to make progress in 1966. Divide a magnetic grid into small blocks. Replace each block's many spins by a collective state, then ask how these new, larger units influence their neighbors. Repeat at a larger scale. His blocks were to be large compared with the microscopic spacing but small compared with the growing correlation length, so the procedure could expose what survived when the view widened. Kenneth Wilson developed the method into a quantitative theory of critical phenomena in papers beginning in 1971. His 1982 Nobel lecture describes the central difficulty: behavior near the critical point involves fluctuations from microscopic lengths up to the size of the system. <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.2.263">Kadanoff, <em>Physics Physique Fizika</em> (1966)</a>; <a href="https://www.nobelprize.org/uploads/2018/06/wilson-lecture-2.pdf">Wilson, Nobel lecture (1982)</a>.</p>
+<p>Replacing blocks by averages sounds like the move we just said was dangerous. The difference is that the procedure does not assume the block is independent of its surroundings. It asks what new interactions among the larger blocks result from the smaller ones, then repeats the calculation. The rules themselves change as the scale changes. This is why the method is called a <em>renormalization group</em>: it studies how a description is transformed when its unit of observation grows.</p>
+<figure id="figure-2" class="figure" data-n="2">
+<div class="svg"><svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A grid of small up and down arrows is grouped into four blocks, which become four larger variables, which in turn become one collective variable.">
+<g fill="var(--ink)" font-family="sans-serif" font-size="13"><text x="43" y="30" fill="var(--accent)">MICROSCOPIC STATES</text><text x="313" y="30" fill="var(--accent)">BLOCK STATES</text><text x="577" y="30" fill="var(--accent)">LARGER SCALE</text></g>
+<g fill="var(--faint)" font-family="sans-serif" font-size="18" text-anchor="middle"><text x="75" y="91">↑ ↓ ↑ ↑</text><text x="75" y="122">↑ ↑ ↓ ↑</text><text x="75" y="153">↓ ↑ ↓ ↓</text><text x="75" y="184">↓ ↓ ↑ ↓</text><text x="345" y="103">↑</text><text x="415" y="103">↑</text><text x="345" y="173">↓</text><text x="415" y="173">↓</text></g>
+<g fill="none" stroke="var(--line-2)"><rect x="36" y="58" width="190" height="144"/><path d="M131 58v144M36 130h190"/><rect x="308" y="58" width="144" height="144"/><path d="M380 58v144M308 130h144"/><rect x="568" y="78" width="90" height="104"/></g>
+<g fill="var(--accent)" font-family="sans-serif" font-size="28" text-anchor="middle"><text x="613" y="143">↕</text></g><g fill="none" stroke="var(--accent)" stroke-width="2"><path d="M239 130h48M469 130h78"/></g><g fill="var(--accent)"><path d="M282 125l8 5-8 5zM542 125l8 5-8 5z"/></g>
+<g fill="var(--faint)" font-family="sans-serif" font-size="12" text-anchor="middle"><text x="131" y="234">many local variables</text><text x="380" y="234">fewer collective variables</text><text x="613" y="234">one larger variable</text></g>
+</svg></div>
+<figcaption>Coarse-graining changes the unit of description. A block of many microscopic states becomes one collective variable; the interactions among those new variables must then be recalculated. The step can be repeated while the correlation length remains larger than the blocks.</figcaption>
+</figure>
+<p>Consider what could happen to a feature of the original model under repeated enlargement. A tiny difference in the strength of two local interactions might matter greatly to a chemist examining the material but matter less and less to the exponent of the collective transition. Another feature might persist: whether the system occupies a flat sheet or a three-dimensional volume, whether the collective state has two possible directions or many, and whether interactions reach only nearby parts or much farther. Some differences fade under repeated rescaling; others grow. Wilson's achievement was to turn that distinction into a calculation. Two models can converge toward the same large-scale rule even though their small-scale rules began far apart. They are then in the same <em>universality class</em>.</p>
+<aside class="concept" id="concept-coarse-graining">
+<div class="concept-title">Coarse-graining</div>
+<p>Replacing many fine-scale variables with fewer collective ones while tracking how the rules among the new variables change. In the renormalization-group account, repeated coarse-graining reveals which features fade and which continue to govern behavior at large scales.</p>
+</aside>
+<aside class="concept" id="concept-universality-class">
+<div class="concept-title">Universality class</div>
+<p>A family of systems whose behavior near a continuous critical point has the same scaling laws. Membership depends on features that survive rescaling, commonly including spatial dimension, the symmetry of the collective state, and the range of interactions—not simply on looking similar in one graph.</p>
+</aside>
+<h2 id="what-the-agreement-does-and-does-not-say">What the agreement does and does not say</h2>
+<p>A fluid does not literally contain two-state magnetic sites. But near the liquid–gas critical point, one can describe a region as relatively dense or relatively sparse. Those are the two alternatives that matter to the collective fluctuation. A suitable magnet offers two orientations of its order. In three spatial dimensions, with short-range interactions and the relevant symmetry, their detailed microscopic differences can fade as the calculation approaches the same large-scale rule. This is why a spare magnetic model can correctly describe part of a fluid's behavior without being a realistic molecular portrait of it. Fluid density and magnetization are not identical variables; the correspondence concerns their limiting fluctuations and scaling, with corrections for a fluid's asymmetry. <a href="https://doi.org/10.1103/PhysRevLett.68.193">Bruce and Wilding, <em>Physical Review Letters</em> (1992)</a>.</p>
+<p>The qualification <em>part</em> matters. The theory does not make a fluid magnetic. It does not set its viscosity, its chemical reactions, or even its critical temperature. Nor is the agreement expected at every temperature: a system must be sufficiently close to the continuous critical point for the asymptotic scaling to dominate, while a laboratory has finite size and limited resolution. At ordinary distances from the point, neglected interactions can visibly alter measured behavior. The name <em>irrelevant variable</em> in this theory means that a feature fades under rescaling for a specified near-critical question. It does not mean the feature is unimportant to the material or to another question.</p>
+<aside class="concept" id="concept-relevant-variable">
+<div class="concept-title">Relevant variable</div>
+<p>A feature of a model whose influence grows, rather than fades, as the description is rescaled near a critical point. A change in such a feature can move a system away from a given universality class. <em>Relevant</em> and <em>irrelevant</em> here describe behavior under a particular mathematical transformation, not general importance.</p>
+</aside>
+<p>That distinction changes the usual picture of a good simplification. We often ask whether a model includes enough of the real object's details. Near a critical point, a better question is whether it keeps the details that survive a change of scale. A model can be deliberately false about molecules and still accurate about a measured exponent. It can also be beautifully detailed about molecules and wrong about the exponent if it averages away the long-distance correlations.</p>
+<h2 id="the-number-that-universality-cannot-give-you">The number that universality cannot give you</h2>
+<p>Now suppose you must decide when a connection across a damaged network will fail. Draw a large grid. Each bond between neighboring sites works independently with probability <em>p</em>. As <em>p</em> increases, the grid goes from small isolated groups to a connected group spanning a large region. A similar transition occurs if the bonds form triangles rather than squares. These are simple versions of <em>percolation</em>, the study of connectivity formed from local openings or closures.</p>
+<p>For bond percolation on an infinite square lattice, the critical probability is exactly one-half. On a triangular lattice it is about 0.3473. The extra routes available through each triangular arrangement make a spanning connection possible at a lower fraction of working bonds. Yet the two systems share the scaling behavior of ordinary two-dimensional percolation near their respective thresholds. Studies of several lattices found the same critical exponents even as their threshold probabilities differed. The threshold is a fact about the particular network; the exponent describes how a class of networks behaves <em>near</em> its own threshold. <a href="https://doi.org/10.1103/PhysRevB.40.636">Yonezawa, Sakamoto, and Hori on thresholds</a> and <a href="https://doi.org/10.1103/PhysRevB.40.650">universality, <em>Physical Review B</em> (1989)</a>.</p>
+<figure id="figure-3" class="figure" data-n="3">
+<div class="svg"><svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two rising schematic connectivity curves have threshold markers at probability 0.3473 for a triangular lattice and 0.5 for a square lattice.">
+<g stroke="var(--line-2)" stroke-width="1.5"><path d="M85 205H655M85 205V35"/><path stroke-dasharray="4 5" d="M275 205V50M387 205V50"/></g>
+<g fill="none" stroke-width="3"><path stroke="var(--accent)" d="M91 205C183 204 231 198 258 171S303 66 365 50S488 43 650 43"/><path stroke="var(--ink)" d="M91 205C270 205 343 199 373 170S420 69 482 51S573 43 650 43"/></g>
+<g fill="var(--ink)" font-family="sans-serif" font-size="13"><text x="44" y="32">large connected group</text><text x="243" y="228">0.3473</text><text x="371" y="228">0.5</text><text x="626" y="228">p</text><text x="467" y="92" fill="var(--accent)">triangular</text><text x="521" y="117">square</text></g>
+</svg></div>
+<figcaption>For independent bond percolation, the square and triangular lattices have different threshold probabilities, although ordinary two-dimensional percolation has common near-threshold exponents across these lattices. The curves are schematic: the horizontal positions mark verified thresholds, not measured finite-sample data.</figcaption>
+</figure>
+<p>There is a further difference between the infinite calculation and a real network. In a finite grid, a crossing can appear below the ideal threshold by chance or fail above it. The transition occupies a range of probabilities rather than displaying an infinitely sharp boundary in one observed sample. A statistic measured near the point must be read in light of the system's size. This is a <em>finite-size effect</em>, not a reason to abandon the theory; physicists use how the apparent transition changes with system size to test the theory.</p>
+<p>The uncomfortable implication is that a universal law can be strongest precisely where a practical forecast is still weak. It may tell us the shape of response if we know the system is close to its threshold. It does not, by itself, tell us the threshold of an unfamiliar network, how close the actual system is, or whether its links fail independently. For those questions, the particulars return.</p>
+<aside class="concept" id="concept-finite-size-effect">
+<div class="concept-title">Finite-size effect</div>
+<p>A difference between the sharp behavior predicted for an ideal infinite system and what a limited sample can display. Near a critical point, correlations may reach the sample's boundaries, smoothing or shifting the measured transition. Studying several system sizes can help distinguish this limit from a failure of the proposed law.</p>
+</aside>
+<h2 id="a-similar-graph-is-not-a-shared-cause">A similar graph is not a shared cause</h2>
+<p>The physics of universality has been attractive to people studying other complex systems. A graph of the number of websites with many links, the sizes of blackouts, or the frequency of very large events may seem to form a straight line when both axes use logarithmic scales. Such a pattern can be described by a <em>power law</em>. Critical systems often produce power laws. It is natural to wonder whether a common rule has been found in systems that otherwise look unrelated.</p>
+<p>But the reasoning cannot run backward from one graph to a mechanism. In 1999 Albert-László Barabási and Réka Albert showed that a network which grows as new nodes preferentially attach to already well-connected ones can generate a broad, power-law-like distribution of links. This is a proposed generative process for a network, not the same process as thermal fluctuations in a near-critical fluid. There can also be other processes yielding a similar tail. Before explaining a real network by preferential attachment, we would need evidence that its growth actually works that way. <a href="https://pubmed.ncbi.nlm.nih.gov/10521342/">Barabási and Albert, <em>Science</em> (1999)</a>.</p>
+<p>Even the graph may be less decisive than it looks. Aaron Clauset, Cosma Shalizi, and Mark Newman showed that samples drawn from different distributions can all look roughly straight on a logarithmic plot; they developed tests that compare a claimed power law with alternatives rather than judging by eye. When Anna Broido and Clauset later examined nearly a thousand empirical networks under several definitions, only a small minority met their strongest test of scale-free structure; for most, a log-normal distribution fit as well or better. Their conclusion is not that no network has broad tails. It is that the strongest claim of one ubiquitous network pattern was poorly supported by those data and definitions. <a href="https://doi.org/10.1137/070710111">Clauset, Shalizi, and Newman, <em>SIAM Review</em> (2009)</a>; <a href="https://doi.org/10.1038/s41467-019-08746-5">Broido and Clauset, <em>Nature Communications</em> (2019)</a>.</p>
+<p>This is the turn in the argument. In the magnet and fluid, a shared exponent is the result of a theory about what repeated changes of scale preserve, checked against measurements near a defined critical point. A similar-looking tail in a social or technological network is initially only an observation to explain. It might be real, and it might be useful. It is not yet evidence that the network sits near a critical point or that the microscopic details can safely be discarded. The act of abstraction needs its own evidence.</p>
+<aside class="callout evidence" data-label="What the network studies establish">
+<p>The 2009 study tested methods for identifying power-law tails; the 2019 study compared fits and definitions across observed networks. They do not disprove the existence of scale-free networks or every proposed mechanism for them. They do show why a straight-looking graph is insufficient to establish a power law, much less a universality class.</p>
+</aside>
+<h2 id="does-a-warning-announce-the-threshold">Does a warning announce the threshold?</h2>
+<p>The prospect of a shared law becomes most consequential when the system is a lake, an ecosystem, or a climate process. If different systems show warning signs before a large change, perhaps we could detect danger without understanding every species or physical interaction. One candidate is <em>critical slowing down</em>: when a disturbed system nears certain kinds of loss of stability, it takes longer to recover. Random disturbances then leave longer traces, sometimes producing rising correlations over time or greater variance. The proposed indicators have mathematical reasons in particular models, and controlled experiments have found them in some biological systems. <a href="https://doi.org/10.1038/nature08227">Scheffer and colleagues, <em>Nature</em> (2009)</a>; <a href="https://doi.org/10.1126/science.1219805">Dai and colleagues, <em>Science</em> (2012)</a>.</p>
+<p>That is a different kind of threshold from the fluid's continuous equilibrium critical point. Some abrupt changes arise from a slowly shifting control parameter that weakens the system's ability to return to its old state. Others come from an external shock, a step change in the parameter itself, or random movement between alternative states. The same warning is not required before all of them. Even when slowing is expected in a model, short and noisy observations can make it hard to tell a real signal from chance. Carl Boettiger and Alan Hastings showed how testing a warning method only on historical cases selected because a transition occurred can produce misleading confidence: accidental patterns before those selected events can look like a forecast that would also have worked prospectively. <a href="https://doi.org/10.1098/rsif.2012.0125">Boettiger and Hastings, <em>Journal of the Royal Society Interface</em> (2012)</a>; <a href="https://doi.org/10.1098/rspb.2012.2085">their study of selection and false positives, <em>Proceedings of the Royal Society B</em> (2012)</a>.</p>
+<p>A 2023 analysis of long-term plankton data from nine lakes found several kinds of regime shift, only some fitting the critical-transition category the warning methods were meant to detect. Performance depended strongly on how the data were prepared; no single indicator was reliable across their lake data. This does not make every warning method useless. It tells us that importing a generic warning into an unfamiliar system requires evidence about the kind of transition, the observations available, and the costs of false alarms and missed events. <a href="https://doi.org/10.1038/s41467-023-43744-8">"Early warning signals have limited applicability to empirical lake data," <em>Nature Communications</em> (2023)</a>.</p>
+<aside class="concept" id="concept-critical-slowing-down">
+<div class="concept-title">Critical slowing down</div>
+<p>In certain systems approaching a loss of stability, recovery from a small disturbance takes longer. It can supply an early-warning signal if the proposed transition has that mechanism and the data can distinguish slowing from noise. An abrupt change need not have this warning.</p>
+</aside>
+<p>The apparent paradox is now clearer. Sometimes details stop mattering to the answer we seek: xenon's molecules and a magnet's microscopic construction do not determine their shared near-critical exponent. Sometimes the detail is the answer: the arrangement of bonds sets a percolation threshold; the route by which a lake changes determines whether slowing is expected. What matters is not whether a model is simple. It is whether the proposed simplification preserves what governs the <em>particular question</em>, at the scale and in the regime where the answer will be used.</p>
+<p>We could change the physical account if careful measurements sufficiently near comparable continuous critical points, with finite-size and crossover effects controlled, persistently gave incompatible exponents. We would extend an analogous account to a network or ecosystem if its proposed mechanism, scaling across several observables, and prospective predictions survived serious alternatives. Until then, an observed resemblance is an invitation to investigate, not a license to erase the differences. The most powerful abstractions earn their range by telling us exactly where they stop.</p>
+<section class="questions" id="questions">
+<h2>To keep</h2>
+<ol>
+<li>How can a model with no realistic molecules describe one property of a fluid accurately?</li>
+<li>Why can two networks share near-threshold exponents while becoming connected at different probabilities?</li>
+<li>What additional evidence would you want before treating a similar-looking graph in a lake or social network as a universal warning?</li>
+</ol>
+</section>
+</article>
+<footer class="colophon"><a href="index.html">Library</a> · When Details Stop Mattering · 2026-09-13</footer>
+</main>
+<script type="application/json" id="press-meta">{"title": "When Details Stop Mattering", "standfirst": "A gas and a magnet can obey the same law near a critical point. That discovery explains when a simple model can cross fields—and why a shared pattern is not enough to predict a collapse.", "date": "2026-09-13", "series": "Daily Reading", "day": "6", "concepts": ["critical point", "correlation length", "critical exponent", "coarse-graining", "universality class", "relevant variable", "finite-size effect", "critical slowing down"], "words": 3437, "minutes": 15, "audio": "", "audio_minutes": 0}</script>
+<script>/* Press reader: progress bar, contents drawer, active-section highlight, audio player. No dependencies. */
+(function () {
+  var fill = document.getElementById('progress-fill');
+  var toc = document.getElementById('toc');
+  var toggle = document.getElementById('toc-toggle');
+  var links = toc ? Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+
+  function progress() {
+    if (!fill) return;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    fill.style.width = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + '%';
+  }
+
+  function active() {
+    if (!links.length) return;
+    var y = window.scrollY + window.innerHeight * 0.28;
+    var current = -1;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i] && targets[i].offsetTop <= y) current = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { progress(); active(); ticking = false; });
+  }
+
+  if (toggle && toc) {
+    toggle.addEventListener('click', function () {
+      var open = toc.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    toc.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A' && window.matchMedia('(max-width: 1179px)').matches) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toc.classList.contains('open')) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  progress();
+  active();
+
+  /* ---------------- audio player ---------------- */
+  var player = document.getElementById('player');
+  if (!player) return;
+  var src = player.getAttribute('data-src');
+  var audio = new Audio();
+  audio.preload = 'metadata';
+  audio.src = src;
+  var key = 'press-audio:' + src;
+  var playBtn = player.querySelector('.p-play');
+  var backBtn = player.querySelector('.p-back');
+  var fwdBtn = player.querySelector('.p-fwd');
+  var range = player.querySelector('.p-range');
+  var cur = player.querySelector('.p-cur');
+  var dur = player.querySelector('.p-dur');
+  var seeking = false;
+
+  function fmt(s) {
+    if (!isFinite(s)) return '–:––';
+    s = Math.floor(s);
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    var mm = (h ? String(m).padStart(2, '0') : String(m));
+    return (h ? h + ':' : '') + mm + ':' + String(sec).padStart(2, '0');
+  }
+  function setPlaying(on) {
+    player.classList.toggle('playing', on);
+    playBtn.setAttribute('aria-label', on ? 'Pause' : 'Play');
+  }
+  function skip(delta) {
+    if (!isFinite(audio.duration)) return;
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + delta));
+  }
+
+  audio.addEventListener('loadedmetadata', function () {
+    range.max = audio.duration;
+    dur.textContent = fmt(audio.duration);
+    try {
+      var p = parseFloat(localStorage.getItem(key));
+      if (p > 5 && p < audio.duration - 10) { audio.currentTime = p; range.value = p; cur.textContent = fmt(p); }
+    } catch (e) {}
+  });
+  audio.addEventListener('timeupdate', function () {
+    if (!seeking) { range.value = audio.currentTime; cur.textContent = fmt(audio.currentTime); }
+    try { localStorage.setItem(key, String(audio.currentTime)); } catch (e) {}
+  });
+  audio.addEventListener('play', function () { setPlaying(true); });
+  audio.addEventListener('pause', function () { setPlaying(false); });
+  audio.addEventListener('ended', function () {
+    setPlaying(false);
+    try { localStorage.removeItem(key); } catch (e) {}
+  });
+  audio.addEventListener('error', function () {
+    player.classList.add('error');
+    dur.textContent = 'audio unavailable';
+  });
+
+  playBtn.addEventListener('click', function () { audio.paused ? audio.play() : audio.pause(); });
+  backBtn.addEventListener('click', function () { skip(-15); });
+  fwdBtn.addEventListener('click', function () { skip(15); });
+  range.addEventListener('input', function () { seeking = true; cur.textContent = fmt(parseFloat(range.value)); });
+  range.addEventListener('change', function () { audio.currentTime = parseFloat(range.value); seeking = false; });
+
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === ' ' || e.key === 'k') { e.preventDefault(); playBtn.click(); }
+    else if (e.key === 'j') skip(-15);
+    else if (e.key === 'l') skip(15);
+  });
+
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: document.title, artist: player.getAttribute('data-series') || 'Reading' });
+      navigator.mediaSession.setActionHandler('play', function () { audio.play(); });
+      navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
+      navigator.mediaSession.setActionHandler('seekbackward', function () { skip(-15); });
+      navigator.mediaSession.setActionHandler('seekforward', function () { skip(15); });
+      navigator.mediaSession.setActionHandler('seekto', function (d) { if (d.seekTime != null) audio.currentTime = d.seekTime; });
+    } catch (e) {}
+  }
+})();
+</script>
+</body></html>
