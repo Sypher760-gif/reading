@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What a Belief Costs: Is the Mind Logical, and What Is It For?</title>
+<style>/* Press theme. Default: true black, warm off-white type, hairline rules, one brass accent.
+   Add class "light" to .press for the off-white variant. Nothing moves; nothing glows. */
+.press{
+  --bg:#000000;--panel:#0b0b0b;--panel-2:#111111;--line:#1f1f1f;--line-2:#2c2c2c;
+  --ink:#d9d5cd;--bright:#f4f1ea;--muted:#8f8b83;--faint:#5f5c56;
+  --accent:#c9b592;          /* brass: labels, links, active contents */
+  --accent-2:#a9b4c4;        /* cool slate: numerals, blockquote bar, interpretation */
+  --warm:#d1a24f;            /* amber: speculation, late-arriving cost */
+  --rose:#c98a8a;
+  --sel:#c9b592;--sel-ink:#000;
+  --serif:"Newsreader","Charter","Iowan Old Style","Cambria","Georgia","Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Cascadia Code","JetBrains Mono","Consolas",ui-monospace,monospace;
+  --col:44rem;--toc:15rem;
+  color-scheme:dark;
+  background:var(--bg);
+  color:var(--ink);
+  font:1.125rem/1.72 var(--serif);
+  margin:0;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.press.light{
+  --bg:#f7f5f0;--panel:#f1eee7;--panel-2:#ebe7de;--line:#e0dcd2;--line-2:#cfc9bc;
+  --ink:#2a2823;--bright:#141310;--muted:#6e6a61;--faint:#9a958a;
+  --accent:#8a7248;--accent-2:#5f6f85;--warm:#a8761f;--rose:#a85d5d;
+  --sel:#141310;--sel-ink:#f7f5f0;
+  color-scheme:light;
+}
+body.press{margin:0}
+.press *{box-sizing:border-box}
+.press a{color:var(--bright);text-decoration:none;border-bottom:1px solid var(--accent)}
+.press a:hover{color:var(--accent)}
+.press ::selection{background:var(--sel);color:var(--sel-ink)}
+.press :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+
+/* reading progress */
+.press .progress{position:fixed;inset:0 0 auto 0;height:1px;background:transparent;z-index:30}
+.press .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .1s linear}
+
+/* page column */
+.press .page{max-width:var(--col);margin:0 auto;padding:5rem 1.4rem 7rem}
+@media(min-width:1180px){
+  .press .page{margin-left:calc(50% - var(--col)/2 + 3rem)}
+}
+
+/* masthead */
+.press .masthead{margin:0 0 3.5rem}
+.press .eyebrow{font:500 .7rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
+.press h1{font:400 clamp(2.2rem,5.2vw,3.6rem)/1.08 var(--serif);letter-spacing:-.02em;color:var(--bright);margin:0 0 1.2rem;text-wrap:balance}
+.press .standfirst{font:italic 1.3rem/1.5 var(--serif);color:var(--muted);margin:0 0 1.4rem;text-wrap:pretty}
+.press .meta{font:.76rem/1.5 var(--sans);color:var(--faint);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+
+/* headings */
+.press h2{font:500 .74rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin:4rem 0 1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);scroll-margin-top:2.5rem}
+.press h3{font:400 1.55rem/1.3 var(--serif);color:var(--bright);margin:2.6rem 0 1rem;letter-spacing:-.01em;text-wrap:balance;scroll-margin-top:2.5rem}
+.press h4{font:600 1.05rem/1.4 var(--sans);color:var(--bright);margin:2rem 0 .8rem}
+
+/* prose */
+.press p{margin:0 0 1.35rem;text-wrap:pretty}
+.press strong{color:var(--bright);font-weight:600}
+.press em{color:var(--ink)}
+.press code{font:.86em var(--mono);background:var(--panel-2);padding:.1em .4em;border-radius:3px}
+.press pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1rem 1.2rem;overflow:auto;font:.85rem/1.55 var(--mono);margin:0 0 1.5rem}
+.press pre code{background:none;padding:0;font-size:inherit}
+.press hr{border:0;height:1px;background:var(--line);margin:3rem 0}
+.press ul,.press ol{margin:0 0 1.5rem;padding-left:1.4rem}
+.press li{margin:0 0 .55rem;padding-left:.2rem}
+.press li::marker{color:var(--accent);font-family:var(--sans);font-size:.9em}
+.press blockquote{margin:2.2rem 0;padding:.2rem 0 .2rem 1.4rem;border-left:1px solid var(--accent-2);color:var(--bright);font-size:1.16rem;line-height:1.6}
+.press blockquote p:last-child{margin-bottom:0}
+
+/* tables */
+.press .table-wrap{overflow:auto;margin:1.8rem 0;border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+.press table{border-collapse:collapse;width:100%;font:.9rem/1.55 var(--sans);font-variant-numeric:tabular-nums}
+.press th,.press td{padding:.8rem .9rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.press th{color:var(--accent);font-weight:600;background:var(--panel-2)}
+.press tbody tr:last-child td{border-bottom:0}
+
+/* figures */
+.press article{counter-reset:fig}
+.press .figure{margin:2.6rem 0;padding:1.4rem 1.4rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:6px;counter-increment:fig}
+.press .figure .svg{margin:0 0 .6rem}
+.press .figure svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.press figcaption{font:.84rem/1.55 var(--sans);color:var(--muted);padding-top:.7rem;border-top:1px solid var(--line)}
+.press figcaption::before{content:"Figure " counter(fig) " · ";color:var(--accent);font-weight:600;letter-spacing:.04em}
+.press pre.mermaid{background:var(--panel);text-align:center}
+
+/* concept card */
+.press .concept{margin:2.2rem 0;padding:1.2rem 1.4rem 1rem;border-left:2px solid var(--accent);background:var(--panel);border-radius:0 4px 4px 0}
+.press .concept-title{font:600 .7rem/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.press .concept-title::before{content:"Concept · ";color:var(--faint)}
+.press .concept p{font-size:1.02rem;line-height:1.62}
+.press .concept p:last-child{margin-bottom:0}
+
+/* callouts with epistemic labels */
+.press .callout{margin:2rem 0;padding:1.05rem 1.3rem .9rem;border-radius:4px;border:1px solid var(--line);background:var(--panel);font-size:1.02rem;line-height:1.62}
+.press .callout::before{content:attr(data-label);display:block;font:600 .68rem/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem;color:var(--muted)}
+.press .callout p:last-child{margin-bottom:0}
+.press .callout.evidence{border-left:2px solid var(--accent)}
+.press .callout.evidence::before{color:var(--accent)}
+.press .callout.interpretation{border-left:2px solid var(--accent-2)}
+.press .callout.interpretation::before{color:var(--accent-2)}
+.press .callout.speculation{border-left:2px solid var(--warm)}
+.press .callout.speculation::before{color:var(--warm)}
+.press .callout.aside,.press .callout.note{border-style:dashed;color:var(--muted);background:none}
+@media(min-width:1500px){
+  .press .callout.aside{float:right;width:17rem;margin:.3rem -19rem 1.2rem 1.6rem;font-size:.92rem;line-height:1.55;border:0;border-left:1px solid var(--line-2);border-radius:0;padding:.2rem 0 .2rem 1rem}
+}
+
+/* displayed rule / formula */
+.press .rule{margin:2.6rem 0;padding:1.6rem 1.4rem;text-align:center;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.press .rule p{font:italic 1.32rem/1.45 var(--serif);color:var(--bright);margin:0;text-wrap:balance}
+.press .rule p + p{margin-top:.6rem;font:.9rem/1.5 var(--sans);color:var(--muted);font-style:normal}
+
+/* questions */
+.press .questions{margin-top:4rem;padding:2rem 1.6rem 1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.press .questions h2{margin:0 0 1.4rem;padding:0;border:0}
+.press .questions ol{list-style:none;padding:0;counter-reset:q}
+.press .questions li{counter-increment:q;position:relative;padding-left:3rem;margin-bottom:1.3rem;font-size:1.04rem;line-height:1.6}
+.press .questions li::before{content:counter(q,decimal-leading-zero);position:absolute;left:0;top:.05rem;font:400 1.6rem/1 var(--serif);color:var(--accent-2);font-variant-numeric:tabular-nums}
+.press .questions li:last-child{margin-bottom:0}
+
+/* contents */
+.press .toc-toggle{position:fixed;top:1rem;right:1rem;z-index:25;font:600 .7rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--bg);border:1px solid var(--line-2);border-radius:999px;padding:.6rem .95rem;cursor:pointer}
+.press .toc-toggle:hover{border-color:var(--accent);color:var(--bright)}
+.press .toc{display:none;position:fixed;top:3.6rem;right:1rem;z-index:24;width:min(22rem,calc(100vw - 2rem));max-height:calc(100vh - 5rem);overflow:auto;padding:1rem 1.2rem 1.1rem;background:var(--bg);border:1px solid var(--line-2);border-radius:6px;box-shadow:0 30px 80px #0009}
+.press.light .toc{box-shadow:0 20px 60px #0002}
+.press .toc.open{display:block}
+.press .toc-label{font:600 .66rem/1.5 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.6rem}
+.press .toc a{display:block;font:.86rem/1.4 var(--sans);color:var(--muted);border:0;padding:.42rem 0 .42rem .8rem;border-left:1px solid transparent;margin-left:-.05rem}
+.press .toc a.lvl3{padding-left:1.8rem;font-size:.8rem}
+.press .toc a:hover{color:var(--bright)}
+.press .toc a.active{color:var(--bright);border-left-color:var(--accent)}
+@media(min-width:1180px){
+  .press .toc-toggle{display:none}
+  .press .toc{display:block;position:fixed;top:5.4rem;left:calc(50% - var(--col)/2 - var(--toc) - 1.5rem);right:auto;width:var(--toc);max-height:calc(100vh - 8rem);padding:0 0 0 .2rem;background:none;border:0;box-shadow:none}
+  .press .toc a{border-left:1px solid var(--line)}
+}
+
+/* audio player: sits under the masthead, sticks to the top while scrolling */
+.press .player{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.6rem;margin:0 0 2.5rem;padding:.7rem 0;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:.78rem/1 var(--sans);color:var(--muted);font-variant-numeric:tabular-nums}
+.press .player button{appearance:none;border:1px solid var(--line-2);background:none;color:var(--ink);border-radius:999px;width:2.3rem;height:2.3rem;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:0 0 auto}
+.press .player button:hover{border-color:var(--accent);color:var(--bright)}
+.press .player button svg{width:1rem;height:1rem;fill:currentColor;display:block}
+.press .player .p-play{width:2.7rem;height:2.7rem;border-color:var(--accent);color:var(--bright)}
+.press .player .p-play .i-pause{display:none}
+.press .player.playing .p-play .i-play{display:none}
+.press .player.playing .p-play .i-pause{display:block}
+.press .player .p-skip{position:relative}
+.press .player .p-skip svg{width:1.35rem;height:1.35rem}
+.press .player .p-skip span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 .5rem/1 var(--sans);color:currentColor;padding-top:.1rem}
+.press .player .p-time{flex:0 0 auto;min-width:2.6rem;text-align:center;letter-spacing:.02em}
+.press .player .p-range{flex:1 1 auto;appearance:none;height:2px;background:var(--line-2);border-radius:2px;outline:0;margin:0 .2rem;cursor:pointer;min-width:4rem}
+.press .player .p-range::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);border:0}
+.press .player .p-range:focus-visible{outline:1px solid var(--accent);outline-offset:6px}
+.press .player .p-label{flex:0 0 auto;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;color:var(--accent);margin-right:.2rem}
+.press .player.error{color:var(--faint)}
+@media(max-width:640px){
+  .press .player{gap:.45rem;margin:0 -.2rem 2rem}
+  .press .player .p-label{display:none}
+  .press .player .p-time{min-width:2.3rem;font-size:.72rem}
+}
+@media print{.press .player{display:none!important}}
+
+/* colophon */
+.press .colophon{margin-top:4rem;padding-top:1.2rem;border-top:1px solid var(--line);font:.74rem/1.5 var(--sans);color:var(--faint);letter-spacing:.08em}
+
+/* library */
+.press.library .cards{display:grid;gap:1rem;margin-bottom:3rem}
+.press.library .card{display:block;padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:inherit}
+.press.library .card:hover{border-color:var(--accent)}
+.press.library .card h2{font:400 1.5rem/1.25 var(--serif);color:var(--bright);text-transform:none;letter-spacing:-.01em;margin:.2rem 0 .6rem;padding:0;border:0}
+.press.library .card p{color:var(--muted);font-size:1rem;margin-bottom:.8rem}
+.press.library .card .eyebrow{margin-bottom:.2rem}
+.press.library .concept-row{font:.92rem/1.7 var(--sans);color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--line)}
+.press.library .concept-row b{color:var(--bright);margin-right:.6rem}
+
+/* small screens */
+@media(max-width:640px){
+  .press{font-size:1.05rem;line-height:1.68}
+  .press .page{padding:4rem 1.1rem 5rem}
+  .press .figure{padding:1rem 1rem .8rem;margin:2rem -.3rem}
+  .press .figure .svg{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .press .figure svg{min-width:34rem}
+  .press .questions{padding:1.5rem 1.1rem 1rem}
+  .press blockquote{font-size:1.08rem}
+}
+
+/* print: light and complete */
+@media print{
+  .press{background:#fff;color:#111;font-size:11pt;line-height:1.5;--bright:#000;--muted:#444;--faint:#666;--accent:#6b5a38;--accent-2:#45526a;--warm:#8a6118;--line:#ccc;--line-2:#bbb;--panel:#f6f6f6;--panel-2:#eee}
+  .press .progress,.press .toc,.press .toc-toggle{display:none!important}
+  .press .page{max-width:none;margin:0;padding:0}
+  .press h2,.press h3{break-after:avoid}
+  .press .figure,.press .concept,.press .callout,.press blockquote,.press .questions li{break-inside:avoid}
+  .press a{color:inherit;border:0}
+}
+@media(prefers-reduced-motion:reduce){.press .progress i{transition:none}}
+</style></head>
+<body class="press">
+<div class="progress" aria-hidden="true"><i id="progress-fill"></i></div>
+<button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc">Contents</button>
+<nav class="toc" id="toc" aria-label="Contents"><div class="toc-label">Contents</div><a class="lvl2" href="#1-the-wrong-measuring-stick">1. The wrong measuring stick</a><a class="lvl2" href="#2-seeing-is-already-believing">2. Seeing is already believing</a><a class="lvl2" href="#3-the-family-it-belongs-to">3. The family it belongs to</a><a class="lvl2" href="#4-what-reason-is-for">4. What reason is for</a><a class="lvl2" href="#5-the-turn-the-same-organ-in-reverse">5. The turn: the same organ in reverse</a><a class="lvl2" href="#6-where-the-structure-should-appear-and-does-not">6. Where the structure should appear, and does not</a><a class="lvl2" href="#7-why-people-believe-what-they-believe">7. Why people believe what they believe</a><a class="lvl2" href="#8-what-it-is-then">8. What it is, then</a></nav>
+<main class="page">
+<header class="masthead"><div class="eyebrow">Daily Reading · 2026-09-12</div><h1>What a Belief Costs: Is the Mind Logical, and What Is It For?</h1><p class="standfirst">For fifty years the answer to whether the mind is logical has been a list of its failures. This reading argues that the tests measured the wrong thing, that the mind is a prediction machine which reasons carefully wherever a false belief would cost it, and that most of what people believe was never priced at all.</p><div class="meta">4,409 words · about 19 min</div></header>
+<div class="player" id="player" data-src="audio/2026-09-12-what-a-belief-costs.mp3" data-series="Daily Reading" role="group" aria-label="Audio version"><span class="p-label">Listen · about 28 min</span><button class="p-skip p-back" type="button" aria-label="Back 15 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" fill="currentColor"/></svg><span>15</span></button><button class="p-play" type="button" aria-label="Play"><svg viewBox="0 0 16 16" class="i-play" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg><svg viewBox="0 0 16 16" class="i-pause" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg></button><button class="p-skip p-fwd" type="button" aria-label="Forward 15 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V1l5 5-5 5V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z" fill="currentColor"/></svg><span>15</span></button><span class="p-time p-cur">0:00</span><input class="p-range" type="range" min="0" max="100" step="0.5" value="0" aria-label="Position"><span class="p-time p-dur">–:––</span></div>
+<article class="article" id="article">
+<p>Is the human mind logical? Most educated people can now answer without pausing, and the answer is no. Amos Tversky and Daniel Kahneman spent the 1970s building the case, and the forty years since have turned it into a catalogue: a fast, associative machine that jumps to conclusions, a slow and lazy logician on top who signs off on whatever the fast one decided, and a list of named errors to prove it. You have read the catalogue. So have I.</p>
+<p>I no longer think it answers the question. A good part of it measured the mind against a standard that was never its job. The mind's actual job, from the retina up, is prediction, and leaning on expectation is the price of seeing anything at all. Reason, the slow verbal thing, was built for arguing with other people, which explains both its notorious bias and a competence nobody was looking for. That much is a rehabilitation, and it gets the mind about halfway to rational. Then it stops, and the stopping is the part I care about. The same organ that argues well in a jury argues backward in a coalition; being clever makes it worse; and the cause is not a defect. It is a price. The mind is accurate wherever error is expensive to the believer and expressive wherever error is free. Asking whether it is logical turns out to be like asking whether a market is honest. The question mistakes what the thing is for.</p>
+<h2 id="1-the-wrong-measuring-stick">1. The wrong measuring stick</h2>
+<p>In 1966 Peter Wason, at University College London, laid four cards in front of his subjects: E, K, 4 and 7. The rule: if a card has a vowel on one side, it has an even number on the other. Which cards must be turned over to test it? The correct answer is E and 7, since only a vowel with an odd number behind it can break the rule, and the 4 cannot break it whatever is on its back. Fewer than one person in ten says E and 7. Most say E alone, or E and 4. For twenty years this was the flagship proof that people cannot do elementary logic.</p>
+<p>Then two things happened to it. In 1982 Richard Griggs and James Cox restated the rule as a drinking law: if a person is drinking beer, they must be over nineteen. The cards read beer, coke, 22, 16. Three quarters of subjects turned beer and 16. Leda Cosmides showed in 1989 that the improvement held for any rule shaped as a social contract, a benefit taken and a cost owed, and failed for equally familiar rules that were not contracts. Her claim that the mind carries dedicated machinery for catching cheats is still disputed. The pattern is not.</p>
+<p>The second thing is less known and matters more. In 1994 Mike Oaksford and Nick Chater, at Warwick, asked what a person should do who treats the cards not as a logic exercise but as a chance to learn about the world, at the cost of one card per look. If you assume, as is true of nearly every rule anyone meets, that the properties named are rare (most cards are not vowels, most numbers are not the even one on the rule), the expected information from each card comes out in the order E, 4, 7, K. That is the order in which people choose them, and roughly in the proportions they choose them. The wrong answer to Wason's question is the right answer to a more realistic one. Oaksford and Chater called the method rational analysis: before scoring a behaviour as an error, specify the problem the organism is actually solving, work out the best solution to that problem, and only then compare. Gerd Gigerenzer's group in Berlin did the same to the famous base-rate errors and watched most of them vanish when probabilities were rewritten as counts.</p>
+<aside class="concept" id="concept-rational-analysis">
+<div class="concept-title">Rational analysis</div>
+<p>Before calling a behaviour an error, state the problem the mind is actually solving, with its goals, costs, and environment; find the best solution to that problem; then compare. Many catalogued biases are good solutions to the real problem scored against the wrong one. John Anderson, 1990; Oaksford and Chater, 1994.</p>
+</aside>
+<p>Not everything dissolves. People do anchor on irrelevant numbers, do overweight vivid outcomes, do work harder to avoid a loss than to gain the same amount. The point is narrower: the question had been answered by holding the mind against formal logic on abstract material, which is not the problem it was built for. To see what that problem is, go down a level.</p>
+<h2 id="2-seeing-is-already-believing">2. Seeing is already believing</h2>
+<p>In 1867 Hermann von Helmholtz, in the third volume of his handbook of physiological optics, argued that perception is not a recording but an inference. The eye delivers an ambiguous, flat, inverted, partly missing signal. What you see is the brain's best guess at what in the world would have produced it, formed by what he called unconscious inference from past experience. The idea was unfashionable for a century. It is now the mainstream account of perception, under the name predictive processing.</p>
+<p>The anatomy backs it in a way that surprises most people. The signal from the retina passes through a relay in the thalamus before reaching the visual cortex, and that relay receives far more fibres running down from the cortex than up from the eye, several times over. The brain is not mainly listening to the eye. It is mainly telling the eye what to expect, and what travels upward is largely the difference between the prediction and the data.</p>
+<figure id="figure-1" class="figure" data-n="1">
+<div class="svg"><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three boxes in a row: eye, thalamic relay, cortex. A thin arrow runs from eye to relay labelled signal. A thick arrow runs from cortex down to relay labelled prediction. A thin arrow runs from relay up to cortex labelled error, the difference.">
+  <g font-size="13" fill="var(--ink)">
+    <rect x="40" y="120" width="140" height="60" rx="6" fill="var(--panel-2)" stroke="var(--line-2)"/>
+    <text x="110" y="155" text-anchor="middle">eye</text>
+    <rect x="290" y="120" width="140" height="60" rx="6" fill="var(--panel-2)" stroke="var(--line-2)"/>
+    <text x="360" y="148" text-anchor="middle">thalamic relay</text>
+    <text x="360" y="166" text-anchor="middle" fill="var(--faint)" font-size="11">(lateral geniculate)</text>
+    <rect x="540" y="120" width="140" height="60" rx="6" fill="var(--panel-2)" stroke="var(--line-2)"/>
+    <text x="610" y="155" text-anchor="middle">visual cortex</text>
+    <line x1="180" y1="150" x2="284" y2="150" stroke="var(--line-2)" stroke-width="1.5"/>
+    <path d="M278 145 L286 150 L278 155" fill="none" stroke="var(--line-2)" stroke-width="1.5"/>
+    <text x="232" y="140" text-anchor="middle" fill="var(--faint)" font-size="12">signal</text>
+    <line x1="430" y1="138" x2="534" y2="138" stroke="var(--line-2)" stroke-width="1.5"/>
+    <path d="M528 133 L536 138 L528 143" fill="none" stroke="var(--line-2)" stroke-width="1.5"/>
+    <text x="482" y="126" text-anchor="middle" fill="var(--faint)" font-size="12">error</text>
+    <text x="482" y="112" text-anchor="middle" fill="var(--faint)" font-size="11">(data minus prediction)</text>
+    <path d="M540 166 L436 166" stroke="var(--accent)" stroke-width="7" stroke-linecap="butt"/>
+    <path d="M446 156 L432 166 L446 176" fill="none" stroke="var(--accent)" stroke-width="2"/>
+    <text x="482" y="194" text-anchor="middle" fill="var(--accent)" font-size="12">prediction</text>
+    <text x="482" y="210" text-anchor="middle" fill="var(--faint)" font-size="11">many more fibres down than up</text>
+    <text x="360" y="262" text-anchor="middle" fill="var(--faint)" font-size="12">what you see is the prediction, corrected by the error the eye reports</text>
+  </g>
+</svg></div>
+<figcaption>The direction of traffic in vision. The cortex sends its prediction down to the thalamic relay; the eye sends its signal up; what continues upward is mostly the error between them. The downward path carries far more fibres than the upward one.</figcaption>
+</figure>
+<p>The hollow mask illusion shows what this costs and buys. Look at the inside of a face mask, lit so the shading is visible, and you see an ordinary face, nose toward you. You cannot see it as hollow, even knowing it is, even turning it in your hands. The expectation that faces are convex outweighs the evidence that this one is not. One group can see the mask as it is: patients with schizophrenia. In studies from 2002 onward, and in the imaging work of Danai Dima and colleagues in 2009, healthy subjects were fooled almost every time and the patients, most of the time, were not. The usual explanation is that in these patients the prior carries less weight against the senses, which is also one account of why they hear and see what is not there. Trust the data over the expectation and you will read noise as signal.</p>
+<p>So belief does not begin where perception ends. The mind commits to hypotheses about the world before any signal reaches the parts of it that can talk, weighting expectation against evidence by how reliable each has been. A heavy prior is what lets you recognise a friend in bad light at forty metres, and it is what makes you see a face in a hollow mask, a pattern in a random sequence, and a confirmation in an ambiguous result. Not two systems, one intuitive and one rational. One operation, at different distances from the retina.</p>
+<aside class="concept" id="concept-unconscious-inference">
+<div class="concept-title">Unconscious inference</div>
+<p>Helmholtz, 1867, now called predictive processing: what you see is the brain's best hypothesis about what caused the signal, prior expectation and sensory evidence combined, each weighted by its reliability. More fibres run down to the sensory relays than up from the senses; what travels upward is largely the error.</p>
+</aside>
+<h2 id="3-the-family-it-belongs-to">3. The family it belongs to</h2>
+<p>Now go up a level. What kind of thing is a machine that predicts from expectation and corrects from data? Any predictor that learns from a sample errs in two ways. Bias is the error of a model too simple to capture the true pattern. Variance is the error of a model flexible enough to fit the noise in the sample it saw, which then predicts new cases badly. When observations are few, variance dominates, and a simple rule that ignores most of the information predicts new cases better than a rich model that uses all of it. Herbert Simon called the mind's simplicity a compromise forced by limited time and computation, in 1955. It is not a compromise. Under limited data it is the more accurate strategy, and that is a theorem, the same one behind the shrinkage in the earlier reading on chosen options.</p>
+<figure id="figure-2" class="figure" data-n="2">
+<div class="svg"><svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A chart with prediction error on the vertical axis and amount of data on the horizontal. A brass curve for the simple rule starts moderate and declines slowly to a floor. A pale curve for the rich model starts high and falls steeply, crossing below the brass curve on the right. The crossing point is marked.">
+  <g font-size="13" fill="var(--ink)">
+    <line x1="80" y1="300" x2="680" y2="300" stroke="var(--line-2)"/>
+    <line x1="80" y1="300" x2="80" y2="40" stroke="var(--line-2)"/>
+    <text x="380" y="336" text-anchor="middle" fill="var(--faint)">amount of data learned from</text>
+    <text x="36" y="170" text-anchor="middle" fill="var(--faint)" transform="rotate(-90 36 170)">error on new cases</text>
+    <path d="M90 150 C 200 130, 340 118, 660 112" fill="none" stroke="var(--accent)" stroke-width="2"/>
+    <path d="M90 60 C 170 120, 300 190, 660 235" fill="none" stroke="var(--line-2)" stroke-width="2"/>
+    <text x="150" y="112" fill="var(--accent)" font-size="12">simple rule (ignores most cues)</text>
+    <text x="440" y="270" fill="var(--faint)" font-size="12">rich model (weighs every cue)</text>
+    <circle cx="268" cy="126" r="5" fill="var(--panel-2)" stroke="var(--ink)"/>
+    <line x1="268" y1="126" x2="268" y2="300" stroke="var(--faint)" stroke-dasharray="4 4"/>
+    <text x="268" y="318" text-anchor="middle" fill="var(--faint)" font-size="12">crossing</text>
+    <text x="150" y="240" fill="var(--faint)" font-size="12">left of the crossing:</text>
+    <text x="150" y="256" fill="var(--faint)" font-size="12">less information, better prediction</text>
+  </g>
+</svg></div>
+<figcaption>The bias-variance trade-off. Error on new cases, against the amount of data the predictor learned from. The simple rule ignores information and is wrong by a steady amount; the rich model fits the noise and is badly wrong until the data are plentiful. Left of the crossing, ignoring information is the more accurate choice. Schematic, not measured.</figcaption>
+</figure>
+<p>Gigerenzer's group tested this on rules of the kind the mind uses. In 1999 Jean Czerlinski, Gigerenzer and Daniel Goldstein set a one-cue heuristic called take-the-best against multiple regression, which weighs every cue, across twenty real datasets. Fitted to data it had seen, regression won. Tested on data it had not, the one-cue rule was slightly more accurate. It threw away most of the information and predicted better for it.</p>
+<p>The same structure was built on purpose. In 1960 Rudolf Kálmán published a method for tracking a moving object from noisy measurements: keep a prediction from a model of the motion, take each new reading, and update the prediction by an amount that depends on how uncertain it is compared with the reading. Adapted at NASA, the filter navigated Apollo to the moon. It is, term for term, Helmholtz's account of perception. The operation that makes a hollow mask look convex is the operation that landed on the Sea of Tranquility.</p>
+<aside class="concept" id="concept-bias-variance-trade-off">
+<div class="concept-title">Bias-variance trade-off</div>
+<p>A predictor learning from limited data errs by bias, from being too simple, and by variance, from fitting the noise in its sample. With few observations variance dominates, so a rule that ignores information predicts better than one that uses it all. The mind's heuristics, shrinkage, and the Kálmán filter are one trade-off in three fields.</p>
+</aside>
+<p>Pause here, because something has happened that the popular account never allows. Given the mind's real problems, its real data, and what computing actually costs, we have found it about as rational as it could be. If that were the whole story I would stop, and the advice would be short: set the machine to the right problems, in the right notation, and trust it. I do not think it is the whole story. The second half is about where it fails, and the failure is not where the catalogue looks for it.</p>
+<h2 id="4-what-reason-is-for">4. What reason is for</h2>
+<p>Perception and judgment are prediction. What, then, is reasoning for, the slow, verbal, effortful thing? The standard answer is that it exists to catch the fast machine's errors. If so, it is badly built for the job. It is lazy, which all sides admit. And it has a side: when people reason about something they already believe, they look for reasons that support it and stop when they find some. A truth-finding organ with a thumb on the scale is a strange thing for evolution to have made.</p>
+<p>In 2011 Hugo Mercier and Dan Sperber proposed that reason was never built for solitary truth-finding. It was built for arguing: to produce justifications that persuade others, and to evaluate the justifications others offer. On that account the famous bias is a specification, not a flaw. An advocate's job is to make the best case for their side; the other side's case is the other side's job. And the evaluating half should be demanding, because a mind that accepted every argument it heard would be exploited by every liar it met.</p>
+<p>The evidence fits the advocate better than the overseer. Given Wason's abstract task alone, about one person in ten solves it. When David Moshman and Molly Geil in 1998 gave it to groups of five or six and let them argue, three in four groups solved it, including groups in which no member had the right answer at the start. In 2016 Emmanuel Trouche, Petter Johansson, Lars Hall and Mercier ran a stranger experiment. Subjects answered reasoning problems and wrote out the argument for each answer. Later they were shown arguments, supposedly from other participants, and asked to judge them. One was their own, written minutes earlier. About half did not notice, and of those, more than half rejected their own argument as unconvincing, tending to reject the weak ones and keep the strong, which is what a good judge does. The same mind, on the same argument, was lax as producer and strict as evaluator. That is not a broken truth-finder. It is a division of labour, and it works when the two halves are in different people.</p>
+<aside class="concept" id="concept-argumentative-theory-of-reason">
+<div class="concept-title">Argumentative theory of reason</div>
+<p>Mercier and Sperber, 2011: reasoning evolved to produce arguments that persuade others and to evaluate the arguments others offer, not to find truth alone. It predicts a lax, one-sided producer and a demanding evaluator, which is what experiments find. Reason works in dialogue among people who want the right answer, and rationalises when run alone.</p>
+</aside>
+<h2 id="5-the-turn-the-same-organ-in-reverse">5. The turn: the same organ in reverse</h2>
+<p>The argumentative account rehabilitates reason on one condition: that the people arguing want the right answer. A jury, a laboratory, a trading floor. Here is what happens when they do not.</p>
+<p>In a study first circulated in 2013 and published in 2017, Dan Kahan and colleagues gave about a thousand Americans a table of numbers and asked what it showed. In one version the table recorded patients who had used a skin cream and whether their rash improved or worsened. Getting it right means comparing proportions rather than raw counts, and the numerate did better than the innumerate, as they should. In the other version the identical numbers were relabelled: cities that had banned concealed handguns, and whether crime rose or fell. Now the numerate got it right only when the answer matched their politics. When the table showed the ban reducing crime, numerate liberals read it correctly and numerate conservatives did not; with the labels swapped, the pattern reversed. And the gap between the two sides was widest among the most numerate. Skill at reading data did not correct the bias. It was the bias's instrument.</p>
+<figure id="figure-3" class="figure" data-n="3">
+<div class="svg"><svg viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two small charts side by side. Left, skin cream: two lines rising together with numeracy. Right, gun ban: one line rising with numeracy, the other flat, so the gap widens toward high numeracy.">
+  <g font-size="13" fill="var(--ink)">
+    <text x="200" y="34" text-anchor="middle" font-weight="600">skin cream (no side to protect)</text>
+    <line x1="60" y1="280" x2="340" y2="280" stroke="var(--line-2)"/>
+    <line x1="60" y1="280" x2="60" y2="60" stroke="var(--line-2)"/>
+    <text x="200" y="304" text-anchor="middle" fill="var(--faint)" font-size="12">numeracy, low to high</text>
+    <text x="40" y="170" text-anchor="middle" fill="var(--faint)" font-size="12" transform="rotate(-90 40 170)">share correct</text>
+    <path d="M70 240 C 150 220, 250 130, 330 90" fill="none" stroke="var(--accent)" stroke-width="2"/>
+    <path d="M70 246 C 150 226, 250 138, 330 98" fill="none" stroke="var(--line-2)" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="520" y="34" text-anchor="middle" font-weight="600">gun ban (a side to protect)</text>
+    <line x1="400" y1="280" x2="680" y2="280" stroke="var(--line-2)"/>
+    <line x1="400" y1="280" x2="400" y2="60" stroke="var(--line-2)"/>
+    <text x="540" y="304" text-anchor="middle" fill="var(--faint)" font-size="12">numeracy, low to high</text>
+    <path d="M410 240 C 490 220, 590 130, 670 90" fill="none" stroke="var(--accent)" stroke-width="2"/>
+    <path d="M410 246 C 490 240, 590 236, 670 240" fill="none" stroke="var(--line-2)" stroke-width="2" stroke-dasharray="6 4"/>
+    <line x1="670" y1="96" x2="670" y2="234" stroke="var(--faint)" stroke-dasharray="3 3"/>
+    <text x="662" y="170" text-anchor="end" fill="var(--faint)" font-size="12">the gap</text>
+    <text x="440" y="120" fill="var(--accent)" font-size="12">answer suits my side</text>
+    <text x="440" y="226" fill="var(--faint)" font-size="12">answer does not</text>
+  </g>
+</svg></div>
+<figcaption>Kahan's motivated numeracy result, drawn schematically. On a neutral problem, accuracy rises with numeracy for both political groups. On the same numbers labelled as a gun-control result, accuracy rises with numeracy only when the answer suits the reader's side; the two sides diverge most among the most numerate.</figcaption>
+</figure>
+<p>It is not a one-off. Charles Taber and Milton Lodge found in 2006 that the politically sophisticated were better, not worse, at finding flaws in arguments against their views and excusing flaws in arguments for them. Keith Stanovich and Richard West, who have spent thirty years measuring which reasoning errors intelligence protects against, report that myside bias is the one it does not.</p>
+<p>Why would a mind that argues well in a jury argue backward in a coalition? Kahan's answer is arithmetic. Ask what your belief about the climate does. It does not change the climate; nothing you experience turns on whether you personally have the science right, because your share of the policy is one vote in a hundred million. What your belief does affect is your standing among the people you depend on, and a belief that marks you as an outsider costs friendships, trust and position, promptly. So being wrong about the world costs nothing, being wrong for your group costs something, and the individually rational move is to believe what your group believes and spend your reasoning defending it. The better you reason, the better the defence. Bryan Caplan called this rational irrationality in 2007; Kahan calls it identity-protective cognition. It has the shape of the winner's curse in the earlier reading: individually right, collectively ruinous. When everyone does it, the group's beliefs stop tracking the world, and no one inside has any reason to notice.</p>
+<p>So the first half of this reading was true and incomplete. The mind is rational about the consequences of holding a belief. It is rational about the belief's content only where the two coincide, where being wrong about the world is what costs you. That is its guiding principle. Not truth, not logic, but the cost of error to the believer, counted in whatever the believer actually pays in.</p>
+<aside class="concept" id="concept-identity-protective-cognition">
+<div class="concept-title">Identity-protective cognition</div>
+<p>Kahan's term for reasoning whose job is to keep the reasoner's beliefs aligned with the group whose standing they depend on. A belief on a public question changes nothing about the outcome and much about one's standing, so the tribal belief is the cheaper one, and reasoning ability is spent defending it. Predicts, correctly, that polarisation grows with numeracy.</p>
+</aside>
+<div class="rule">
+<p>The mind is accurate wherever error is expensive to it, and expressive wherever error is free.</p>
+<p>Reasoning ability serves whichever of the two is in charge.</p>
+</div>
+<h2 id="6-where-the-structure-should-appear-and-does-not">6. Where the structure should appear, and does not</h2>
+<p>A rule of this shape makes a prediction: change the price and the belief should change. Go sideways and look.</p>
+<p>In 2015 John Bullock, Alan Gerber, Seth Hill and Gregory Huber asked Americans factual questions on which the parties give different answers: how unemployment had moved under the current president, how many soldiers had died in Iraq. Democrats and Republicans diverged as usual. Then the researchers paid a small sum for each correct answer, and the partisan gap fell by about half. When they also paid a smaller sum for admitting "I don't know", it fell by about eighty per cent. The partisans knew the answer, or knew they did not, all along. The belief they reported for free was a cheer, not a claim.</p>
+<p>Weather forecasters are the other side of the same test. In 1977 Allan Murphy and Robert Winkler examined the rain forecasts of the United States National Weather Service and found them almost perfectly calibrated: when a forecaster said seventy per cent, it rained seventy per cent of the time. Forecasters get their feedback tomorrow, in public, on every forecast. The political experts Philip Tetlock followed for twenty years barely beat chance, and their feedback arrives late, ambiguous, and billed to no one. Same species, same brains, different prices.</p>
+<p>The third case reorganises the word "belief" itself. In 2014 the philosopher Neil Van Leeuwen argued that religious credence is not the same kind of state as factual belief: it does not respond to evidence, it operates in some settings and not others, and it marks who one is. A parent who believes in a healing god still takes the child to the hospital, and feels no contradiction, because the two beliefs are not held in the same place. Sperber had drawn the line in 1997 between intuitive beliefs, which the mind forms itself and acts on, and reflective beliefs, held on the authority of a source, often half understood, and not wired to action the same way. This is why a belief in the danger of vaccines coexists with vaccination, and why the person who says a cabal runs the world lives as though it does not. They are not incoherent. They hold two different kinds of thing, and only one is priced.</p>
+<aside class="concept" id="concept-reflective-belief">
+<div class="concept-title">Reflective belief</div>
+<p>Sperber, 1997: a belief held on the authority of a source rather than formed by one's own perception or inference. Reflective beliefs may be half understood, are insulated from the evidence that would test them, and do not drive action the way intuitive beliefs do. Van Leeuwen made the same case for religious credence in 2014.</p>
+</aside>
+<p>So "most people believe X" is two sentences. The kind of belief that steers a hand is priced and, within the limits of the evidence, accurate. The kind that is asserted is worn, and costs what a badge costs. Most of what appears in surveys, in arguments, and in the catalogue of irrationality is the second kind.</p>
+<h2 id="7-why-people-believe-what-they-believe">7. Why people believe what they believe</h2>
+<p>The last question can now be answered without the words gullible or stupid.</p>
+<p>Almost everything you believe, you believe on someone's word: that the earth is four and a half billion years old, that Australia exists, that the drug your doctor prescribed will help. You could not produce the evidence for any of it. In 1985 the philosopher John Hardwig pointed out that this is true of experts too. He cited a physics paper of 1983 with ninety-nine authors, no one of whom could vouch for the whole, and argued that rational belief in a modern society is mostly rational trust. Why people believe something is almost always why they trust the source.</p>
+<p>The mind is well equipped for that question. Sperber and colleagues in 2010 described the machinery of epistemic vigilance: we track a source's record, competence, interest in deceiving us, and agreement with what we already hold, and discount accordingly. The evidence that this machinery works is the evidence that mass persuasion fails. In 2018 Joshua Kalla and David Broockman pooled forty-nine field experiments on campaign contact in general elections and found an average persuasive effect of zero. The hardest case is propaganda, and in 2015 Maja Adena and colleagues tested it on the Nazi radio network. After 1933 the broadcasts increased denunciations and antisemitic acts in districts with a long history of antisemitism, and reduced them in districts without one. The radio did not create the belief. Where the ground was prepared it licensed it; where it was not, it gave offence. People are not gullible. They are loyal. They believe their trusted sources and resist everyone else, including those telling the truth.</p>
+<p>This closes the loop. Whom do people trust? Those they depend on and belong to. So beliefs track trust, trust tracks belonging, and belonging is the thing that is priced. For every question a person cannot check and need not act on, the group's answer costs nothing to adopt and something to refuse, and the evidence gets a vote only when being wrong will hurt. Most people believe what they believe because someone they had reason to trust told them, and because nothing they do depends on it being true. That is not a failing of most people. It is what all of us do about the thousands of questions we cannot test and never have to act on.</p>
+<aside class="concept" id="concept-epistemic-dependence">
+<div class="concept-title">Epistemic dependence</div>
+<p>Hardwig, 1985: nearly all of anyone's knowledge, a scientist's included, rests on trust in others who could not themselves vouch for the whole. Rational belief is mostly rational trust, and the machinery that allocates trust (Sperber's epistemic vigilance, 2010) explains why persuasion fails and why beliefs follow belonging.</p>
+</aside>
+<aside class="callout interpretation" data-label="Where the position is weakest">
+<p>The rule predicts that where a person's welfare turns on a contested belief, they will get it right. Some do not. Patients refuse effective treatment on grounds of faith or identity, and die. Either the cost of leaving the community really exceeds the cost of death, in which case the rule holds and the price was higher than an outsider can see; or the pricing model is incomplete. The evidence does not yet decide, and the first reading is uncomfortably able to explain anything.</p>
+</aside>
+<h2 id="8-what-it-is-then">8. What it is, then</h2>
+<p>So, is it logical? It has logic where logic pays, and had it long before Aristotle wrote the rules down: in obligations, in counts, in any case where the answer comes back and is charged to you. Logic on abstract material in abstract notation is a recent, trained skill, like reading, and the failures that fill the catalogue are mostly failures of that skill.</p>
+<p>The most accurate picture I can offer is not a logician with bugs, and not an elephant with a rider either. It is a prediction machine with a price list. Near the senses, and wherever feedback is fast and the bill comes to the believer, it is as accurate as the data allow; the same arithmetic navigated Apollo. Far from the senses, where nothing the believer does depends on the answer and asserting it buys standing, its beliefs are chosen the way clothes are, and reasoning is the tailor. Which is why most people believe what they believe. Someone they had reason to trust told them, and they will never have to pay for being wrong.</p>
+<p>I would give this up if any of four measured things had come out the other way: if paying for accuracy did not narrow partisan gaps; if the numerate were less polarised rather than more; if calibration did not follow feedback; if propaganda converted rather than licensed. Each has been measured. What I cannot settle is whether the identity mechanism deserves the word rational, as Kahan says, or whether rational analysis has been stretched to excuse a failure, as Gigerenzer's critics say of the heuristics. The mechanism is the same on either reading, and the word is doing less work than the price is.</p>
+<p>A belief that costs nothing to hold wrong is not held. It is worn.</p>
+<section class="questions" id="questions">
+<h2>Questions to sit with</h2>
+<ol>
+<li><strong>Recall:</strong> Oaksford and Chater showed that the usual "wrong" answer to Wason's task is right on a different reading of the problem. State that reading in one sentence, and the assumption about the world it depends on.</li>
+<li><strong>Connect:</strong> The hollow mask, the take-the-best heuristic, and the Kálmán filter are the same operation. Say what the operation is, and what it weighs against what.</li>
+<li><strong>Apply:</strong> Choose one belief you hold about a public question. What would it cost you to be wrong about it? What would it cost you, among the people you depend on, to change it? If the first is near zero and the second is not, say what that implies about how the belief was chosen.</li>
+<li><strong>Judge:</strong> If identity-protective cognition is rational for the individual, telling people the facts cannot fix it; only changing the price can. Propose one way to change the price on a contested question without coercion, and say who would resist it and why.</li>
+</ol>
+</section>
+</article>
+<footer class="colophon"><a href="index.html">Library</a> · What a Belief Costs: Is the Mind Logical, and What Is It For? · 2026-09-12</footer>
+</main>
+<script type="application/json" id="press-meta">{"title": "What a Belief Costs: Is the Mind Logical, and What Is It For?", "standfirst": "For fifty years the answer to whether the mind is logical has been a list of its failures. This reading argues that the tests measured the wrong thing, that the mind is a prediction machine which reasons carefully wherever a false belief would cost it, and that most of what people believe was never priced at all.", "date": "2026-09-12", "series": "Daily Reading", "day": "", "concepts": ["rational analysis", "unconscious inference", "bias-variance trade-off", "argumentative theory of reason", "identity-protective cognition", "reflective belief", "epistemic dependence"], "words": 4409, "minutes": 19, "audio": "audio/2026-09-12-what-a-belief-costs.mp3", "audio_minutes": 28}</script>
+<script>/* Press reader: progress bar, contents drawer, active-section highlight, audio player. No dependencies. */
+(function () {
+  var fill = document.getElementById('progress-fill');
+  var toc = document.getElementById('toc');
+  var toggle = document.getElementById('toc-toggle');
+  var links = toc ? Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]')) : [];
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+
+  function progress() {
+    if (!fill) return;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    fill.style.width = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + '%';
+  }
+
+  function active() {
+    if (!links.length) return;
+    var y = window.scrollY + window.innerHeight * 0.28;
+    var current = -1;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i] && targets[i].offsetTop <= y) current = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { progress(); active(); ticking = false; });
+  }
+
+  if (toggle && toc) {
+    toggle.addEventListener('click', function () {
+      var open = toc.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    toc.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A' && window.matchMedia('(max-width: 1179px)').matches) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toc.classList.contains('open')) {
+        toc.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  progress();
+  active();
+
+  /* ---------------- audio player ---------------- */
+  var player = document.getElementById('player');
+  if (!player) return;
+  var src = player.getAttribute('data-src');
+  var audio = new Audio();
+  audio.preload = 'metadata';
+  audio.src = src;
+  var key = 'press-audio:' + src;
+  var playBtn = player.querySelector('.p-play');
+  var backBtn = player.querySelector('.p-back');
+  var fwdBtn = player.querySelector('.p-fwd');
+  var range = player.querySelector('.p-range');
+  var cur = player.querySelector('.p-cur');
+  var dur = player.querySelector('.p-dur');
+  var seeking = false;
+
+  function fmt(s) {
+    if (!isFinite(s)) return '–:––';
+    s = Math.floor(s);
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    var mm = (h ? String(m).padStart(2, '0') : String(m));
+    return (h ? h + ':' : '') + mm + ':' + String(sec).padStart(2, '0');
+  }
+  function setPlaying(on) {
+    player.classList.toggle('playing', on);
+    playBtn.setAttribute('aria-label', on ? 'Pause' : 'Play');
+  }
+  function skip(delta) {
+    if (!isFinite(audio.duration)) return;
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + delta));
+  }
+
+  audio.addEventListener('loadedmetadata', function () {
+    range.max = audio.duration;
+    dur.textContent = fmt(audio.duration);
+    try {
+      var p = parseFloat(localStorage.getItem(key));
+      if (p > 5 && p < audio.duration - 10) { audio.currentTime = p; range.value = p; cur.textContent = fmt(p); }
+    } catch (e) {}
+  });
+  audio.addEventListener('timeupdate', function () {
+    if (!seeking) { range.value = audio.currentTime; cur.textContent = fmt(audio.currentTime); }
+    try { localStorage.setItem(key, String(audio.currentTime)); } catch (e) {}
+  });
+  audio.addEventListener('play', function () { setPlaying(true); });
+  audio.addEventListener('pause', function () { setPlaying(false); });
+  audio.addEventListener('ended', function () {
+    setPlaying(false);
+    try { localStorage.removeItem(key); } catch (e) {}
+  });
+  audio.addEventListener('error', function () {
+    player.classList.add('error');
+    dur.textContent = 'audio unavailable';
+  });
+
+  playBtn.addEventListener('click', function () { audio.paused ? audio.play() : audio.pause(); });
+  backBtn.addEventListener('click', function () { skip(-15); });
+  fwdBtn.addEventListener('click', function () { skip(15); });
+  range.addEventListener('input', function () { seeking = true; cur.textContent = fmt(parseFloat(range.value)); });
+  range.addEventListener('change', function () { audio.currentTime = parseFloat(range.value); seeking = false; });
+
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === ' ' || e.key === 'k') { e.preventDefault(); playBtn.click(); }
+    else if (e.key === 'j') skip(-15);
+    else if (e.key === 'l') skip(15);
+  });
+
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({ title: document.title, artist: player.getAttribute('data-series') || 'Reading' });
+      navigator.mediaSession.setActionHandler('play', function () { audio.play(); });
+      navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
+      navigator.mediaSession.setActionHandler('seekbackward', function () { skip(-15); });
+      navigator.mediaSession.setActionHandler('seekforward', function () { skip(15); });
+      navigator.mediaSession.setActionHandler('seekto', function (d) { if (d.seekTime != null) audio.currentTime = d.seekTime; });
+    } catch (e) {}
+  }
+})();
+</script>
+</body></html>
